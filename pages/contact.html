@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Contact Kashish Singh - UX Strategist & Designer. Let's collaborate on your next project.">
+    <title>Contact | Kashish Singh</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/mona-sans@5.2.8/index.min.css" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css?v=1772570643">
+    <style>
+        /* Contact Page Specific Styles */
+        body,
+        html {
+            height: 100%;
+            background-color: var(--color-bg);
+            /* Allow scrolling if content overflows, especially with footer */
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .contact-wrapper {
+            min-height: calc(100vh - 80px);
+            /* Subtract footer height approx */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 0 60px;
+            /* Space for navbar + bottom padding */
+        }
+
+        .contact-container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: stretch;
+            /* Cards same height */
+        }
+
+        .contact-card {
+            background: var(--color-bg-secondary);
+            /* Or white if bg is grey */
+            padding: 3rem;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Left Column - Headline */
+        .contact-headline {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .headline-grey {
+            color: var(--color-text-secondary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .headline-black {
+            color: var(--color-text);
+            display: block;
+        }
+
+        /* Right Column - Details */
+        .contact-right-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contact-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .contact-link {
+            font-size: 1.25rem;
+            color: var(--color-text);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            border-bottom-color: var(--color-text);
+            color: var(--color-text-secondary);
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .social-icon-large {
+            color: var(--color-text);
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .social-icon-large:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .social-icon-large svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Footer Adjustments for Contact Page */
+        .footer {
+            margin-top: auto;
+            /* Push to bottom */
+        }
+
+        @media (max-width: 968px) {
+            .contact-wrapper {
+                padding: 120px 0 60px;
+                min-height: auto;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-card {
+                padding: 2rem;
+                min-height: 300px;
+            }
+
+            .contact-headline {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">Kashish Singh</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li><a href="coming-soon.html" class="nav-link">Case Studies</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="sandbox.html" class="nav-link">Sandbox</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Contact Section -->
+    <div class="contact-wrapper">
+        <div class="contact-container">
+            <div class="contact-grid">
+                <!-- Left Card -->
+                <div class="contact-card">
+                    <h1 class="contact-headline">
+                        <span class="headline-grey">Ready to create something amazing?</span>
+                        <span class="headline-black">Let's talk!</span>
+                    </h1>
+                </div>
+
+                <!-- Right Card -->
+                <div class="contact-card">
+                    <div class="contact-right-content">
+                        <div class="contact-item">
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:hello@itskashish.com" class="contact-link">hello@itskashish.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Phone</span>
+                            <a href="tel:+919082944938" class="contact-link">+91 9082944938</a>
+                        </div>
+
+                        <div class="contact-social">
+                            <a href="mailto:hello@itskashish.com" target="_blank" class="social-icon-large"
+                                aria-label="Email">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                    <path
+                                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/kashish-design/" target="_blank"
+                                class="social-icon-large" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                    <path
+                                        d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-cta">
+          <p class="footer-cta-text">
+            <span class="footer-cta-light">Let's create something</span>
+            <span class="footer-cta-bold">amazing together!</span>
+          </p>
+          <p class="footer-cta-subtext">Architecturing scalable systems for healthcare and enterprise complexity.</p>
+        </div>
+        
+        <div class="footer-right">
+          <div class="footer-nav">
+            <ul class="footer-links">
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="coming-soon.html">Case Studies</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="sandbox.html">Sandbox</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-social">
+            <a href="tel:+919082944938" class="social-icon" aria-label="Phone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </a>
+            <a href="mailto:hello@itskashish.com" class="social-icon" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/kashish-design/" target="_blank" class="social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kashish Singh. All rights reserved.</p>
+        <div class="footer-credit">Handcrafted by <span>Kashish Singh</span></div>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Scripts -->
+    <script src="../js/navigation.js"></script>
+</body>
+
+</html>

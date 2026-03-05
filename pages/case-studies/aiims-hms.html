@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="AIIMS HMS UX Audit & Ecosystem Study — A UX case study by Kashish Singh on auditing India's largest public health management system.">
+    <title>AIIMS HMS UX Audit | Kashish Singh</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/mona-sans@5.2.8/index.min.css" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <style>
+        /* ────────────────────────────────────────
+           Case Study Page — Global
+        ──────────────────────────────────────── */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+        }
+
+        /* ── Navbar ── */
+        .navbar {
+            background-color: var(--color-bg) !important;
+            border-bottom: 1px solid var(--color-border) !important;
+        }
+
+        .navbar .nav-logo,
+        .navbar .nav-link {
+            color: var(--color-text);
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: var(--color-text);
+        }
+
+        /* ────────────────────────────────────────
+           HERO
+        ──────────────────────────────────────── */
+
+        /* ── New Clean Hero Structure ── */
+        .cs-hero {
+            position: relative;
+            width: 100%;
+            /* Just enough height to feel substantial but let the metrics peek */
+            padding-top: 140px;
+            padding-bottom: 2rem;
+            background-color: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .cs-hero__grid {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 4.5rem;
+            align-items: center;
+        }
+
+        .cs-hero__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            z-index: 5;
+        }
+
+        .cs-hero__text-block {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .cs-hero__tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-hero__tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            padding: 0.35rem 0.9rem;
+            border: 1px solid var(--color-border);
+            border-radius: 50px;
+            background: var(--color-bg-secondary);
+        }
+
+        .cs-hero__title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .cs-hero__statement {
+            font-size: clamp(1rem, 1.25vw, 1.15rem);
+            color: var(--color-text-secondary);
+            font-weight: 400;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 90%;
+        }
+
+        .cs-hero__image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
+        }
+
+        .cs-hero__bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('../../assets/images/dialysis-app.png');
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .cs-hero__image-wrapper:hover .cs-hero__bg {
+            transform: scale(1.03);
+        }
+
+        /* ────────────────────────────────────────
+           HERO METRICS (Left Column)
+        ──────────────────────────────────────── */
+
+        .cs-hero__metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem 1rem;
+            /* vertical gap 2rem, horizontal gap 1rem */
+            margin-top: auto;
+        }
+
+        .cs-metric {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cs-metric__label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-metric__value {
+            font-size: clamp(1.5rem, 2vw, 2rem);
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .cs-metric__sub {
+            font-size: 0.8125rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.25rem;
+            line-height: 1.4;
+        }
+
+        /* ────────────────────────────────────────
+           FLOATING PAGE CARD — sits flush now
+        ──────────────────────────────────────── */
+
+        .cs-page-body {
+            position: relative;
+            z-index: 10;
+            background: var(--color-bg);
+            /* Removed negative margin pulling it up over hero */
+        }
+
+        /* ────────────────────────────────────────
+           MAIN LAYOUT — Sidebar + Content
+        ──────────────────────────────────────── */
+
+        .cs-layout {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 0 2rem;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ────────────────────────────────────────
+           SIDE NAV — Dot Progress Indicator
+        ──────────────────────────────────────── */
+
+        .cs-sidenav {
+            position: sticky;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 0;
+            align-self: start;
+            margin-top: calc(50vh - 4rem);
+        }
+
+        .cs-sidenav__list {
+            list-style: none;
+            margin: 0;
+            padding: 0 0.25rem 0 0.875rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        /* Vertical connector line */
+        .cs-sidenav__list::before {
+            content: '';
+            position: absolute;
+            left: calc(0.875rem + 4px);
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--color-border);
+            z-index: 0;
+        }
+
+        .cs-sidenav__item {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Phase link row */
+        .cs-sidenav__item>a {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            transition: color 0.2s ease;
+            outline: none;
+            position: relative;
+        }
+
+        /* The dot */
+        .cs-sidenav__item>a::before {
+            content: '';
+            flex-shrink: 0;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-border);
+            background: var(--color-bg);
+            transition: all 0.25s ease;
+            z-index: 1;
+        }
+
+        /* Phase label — hidden by default */
+        .cs-sidenav__item>a span {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+        }
+
+        .cs-sidenav__item>a:hover span,
+        .cs-sidenav__item>a.active span {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .cs-sidenav__item>a:hover::before {
+            border-color: var(--color-text-secondary);
+            background: var(--color-text-secondary);
+        }
+
+        .cs-sidenav__item>a.active {
+            color: var(--color-text);
+        }
+
+        .cs-sidenav__item>a.active::before {
+            border-color: var(--color-text);
+            background: var(--color-text);
+            box-shadow: 0 0 0 3px rgba(15, 15, 15, 0.08);
+        }
+
+        .cs-sidenav__item>a.active span {
+            font-weight: 600;
+        }
+
+        /* ── Sub-nav: sub-items under active phase ── */
+        .cs-subnav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            /* Indented to align left of dot */
+            padding-left: calc(0.6rem + 9px + 0.5rem);
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            /* Animate open/close */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                margin-top 0.2s ease,
+                opacity 0.2s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        /* Show sub-nav when parent item is active */
+        .cs-sidenav__item.is-active .cs-subnav {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        .cs-subnav li a {
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 400;
+            color: #c0c0c0;
+            text-decoration: none;
+            line-height: 1.4;
+            white-space: nowrap;
+            transition: color 0.15s ease;
+            letter-spacing: 0.01em;
+        }
+
+        .cs-subnav li a:hover {
+            color: var(--color-text-secondary);
+        }
+
+        .cs-subnav li a.sub-active {
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        /* ────────────────────────────────────────
+           CONTENT AREA
+        ──────────────────────────────────────── */
+
+        .cs-content {
+            padding: 3rem 0 6rem 2.5rem;
+            min-width: 0;
+        }
+
+        /* ────────────────────────────────────────
+           SECTION — Generic
+        ──────────────────────────────────────── */
+
+        .cs-section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+        }
+
+        .cs-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .cs-section__eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .cs-section h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+
+        .cs-section p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.25rem;
+            max-width: 68ch;
+        }
+
+        .cs-section ul,
+        .cs-section ol {
+            padding-left: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cs-section li {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ────────────────────────────────────────
+           TLDR BLOCK
+        ──────────────────────────────────────── */
+
+        .cs-tldr {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .cs-tldr__label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .cs-tldr ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .cs-tldr li {
+            font-size: 0.9375rem;
+            color: var(--color-text);
+            font-weight: 500;
+            line-height: 1.6;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .cs-tldr li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-text-secondary);
+        }
+
+        /* ────────────────────────────────────────
+           CALLOUT / PULL QUOTE
+        ──────────────────────────────────────── */
+
+        .cs-callout {
+            border-left: 3px solid var(--color-text);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: var(--color-bg-secondary);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .cs-callout p {
+            font-size: 1.0625rem;
+            font-weight: 500;
+            color: var(--color-text);
+            margin: 0;
+            font-style: italic;
+            line-height: 1.65;
+        }
+
+        .cs-callout cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            font-style: normal;
+            color: var(--color-text-secondary);
+        }
+
+        /* ────────────────────────────────────────
+           SO WHAT BOX
+        ──────────────────────────────────────── */
+
+        .cs-sowhat {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .cs-sowhat__label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-sowhat p {
+            font-size: 0.9375rem;
+            color: var(--color-text);
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* ────────────────────────────────────────
+           IMAGE BLOCKS
+        ──────────────────────────────────────── */
+
+        .cs-image {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            margin: 2rem 0;
+        }
+
+        .cs-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .cs-image__placeholder {
+            height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .cs-image__caption {
+            padding: 0.75rem 1rem;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.8125rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* ────────────────────────────────────────
+           METRICS TABLE (Success Metrics section)
+        ──────────────────────────────────────── */
+
+        .cs-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .cs-metric-card {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .cs-metric-card__type {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-metric-card h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 0.35rem;
+        }
+
+        .cs-metric-card p {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ────────────────────────────────────────
+           NEXT PROJECT STRIP
+        ──────────────────────────────────────── */
+
+        .cs-next {
+            display: block;
+            text-decoration: none;
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .cs-next__bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('../../assets/images/disaster-mitigation.png');
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: brightness(0.55);
+        }
+
+        .cs-next:hover .cs-next__bg {
+            transform: scale(1.04);
+        }
+
+        .cs-next__content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            gap: 0.75rem;
+        }
+
+        .cs-next__label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .cs-next__title {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+
+        .cs-next__arrow {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 0.25rem;
+        }
+
+        /* ────────────────────────────────────────
+           MOBILE PILL NAV
+        ──────────────────────────────────────── */
+
+        .cs-mobile-nav {
+            display: none;
+            overflow-x: auto;
+            gap: 0.5rem;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 72px;
+            background: var(--color-bg);
+            z-index: 50;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .cs-mobile-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cs-mobile-nav a {
+            flex-shrink: 0;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.9rem;
+            border: 1px solid var(--color-border);
+            border-radius: 50px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .cs-mobile-nav a:hover,
+        .cs-mobile-nav a.active {
+            color: var(--color-text);
+            border-color: var(--color-text);
+            background: var(--color-bg-secondary);
+        }
+
+        /* ────────────────────────────────────────
+           RESPONSIVE
+        ──────────────────────────────────────── */
+
+        @media (max-width: 1024px) {
+            .cs-layout {
+                grid-template-columns: 1fr;
+                padding: 0 1.5rem;
+            }
+
+            .cs-sidenav {
+                display: none;
+            }
+
+            .cs-mobile-nav {
+                display: flex;
+            }
+
+            .cs-content {
+                padding: 2.5rem 0 4rem;
+                border-left: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cs-hero__grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cs-hero__image-wrapper {
+                height: 340px;
+                order: -1;
+            }
+
+            .cs-hero__metrics {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .cs-hero__content {
+                padding: 2rem 1.25rem;
+            }
+
+            .cs-layout {
+                padding: 0 1.25rem;
+            }
+
+            .cs-metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cs-next__content {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">Kashish Singh</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li><a href="../coming-soon.html" class="nav-link">Case Studies</a></li>
+                <li><a href="../about.html" class="nav-link">About</a></li>
+                <li><a href="../sandbox.html" class="nav-link">Sandbox</a></li>
+                <li><a href="../contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ────────────────────────────────────
+         HERO
+    ──────────────────────────────────── -->
+    <section class="cs-hero">
+        <div class="cs-hero__grid container">
+            <div class="cs-hero__content">
+                <div class="cs-hero__text-block">
+                    <div class="cs-hero__tags">
+                        <span class="cs-hero__tag">Audit</span>
+                        <span class="cs-hero__tag">Public Health</span>
+                        <span class="cs-hero__tag">UX Research</span>
+                        <span class="cs-hero__tag">Ecosystem</span>
+                    </div>
+                    <h1 class="cs-hero__title">AIIMS HMS UX Audit</h1>
+                    <p class="cs-hero__statement">A comprehensive UX audit and ecosystem study of the Hospital
+                        Management System
+                        at AIIMS — identifying friction points across 14 clinical modules.</p>
+                </div>
+
+                <!-- ────────────────────────────────────
+         IMPACT AT A GLANCE
+    ──────────────────────────────────── -->
+                <div class="cs-hero__metrics">
+                    <div class="cs-metric">
+                        <div class="cs-metric__label">Audit Coverage</div>
+                        <div class="cs-metric__value">14</div>
+                        <div class="cs-metric__sub">clinical modules audited</div>
+                    </div>
+                    <div class="cs-metric">
+                        <div class="cs-metric__label">Pain Points</div>
+                        <div class="cs-metric__value">80+</div>
+                        <div class="cs-metric__sub">identified and categorized</div>
+                    </div>
+                    <div class="cs-metric">
+                        <div class="cs-metric__label">Roadmap</div>
+                        <div class="cs-metric__value">2 yr</div>
+                        <div class="cs-metric__sub">transformation strategy</div>
+                    </div>
+                    <div class="cs-metric">
+                        <div class="cs-metric__label">Alignment</div>
+                        <div class="cs-metric__value">95%</div>
+                        <div class="cs-metric__sub">stakeholder consensus</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cs-hero__image-wrapper">
+                <div class="cs-hero__bg"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating page card wraps everything below the hero -->
+    <div class="cs-page-body">
+
+        <!-- ────────────────────────────────────
+         MOBILE PILL NAV (visible < 1024px)
+    ──────────────────────────────────── -->
+        <nav class="cs-mobile-nav" aria-label="Page sections">
+            <a href="#discover">Discover</a>
+            <a href="#define">Define</a>
+            <a href="#design">Design</a>
+            <a href="#deliver">Deliver</a>
+            <a href="#reflect">Reflect</a>
+        </nav>
+
+        <!-- ────────────────────────────────────
+         MAIN: SIDENAV + CONTENT
+    ──────────────────────────────────── -->
+        <main class="cs-layout">
+
+            <!-- Sticky Side Nav (desktop only) -->
+            <aside class="cs-sidenav" aria-label="Page sections">
+                <ul class="cs-sidenav__list">
+                    <li class="cs-sidenav__item is-active">
+                        <a href="#discover" class="active"><span>Discover</span></a>
+                        <ul class="cs-subnav">
+                            <li><a href="#discover">Context</a></li>
+                            <li><a href="#s-market">Market Research</a></li>
+                            <li><a href="#s-segments">User Segments</a></li>
+                        </ul>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#define"><span>Define</span></a>
+                        <ul class="cs-subnav">
+                            <li><a href="#define">Metrics</a></li>
+                            <li><a href="#prioritization">Prioritization</a></li>
+                            <li><a href="#ux-audit">UX Audit</a></li>
+                            <li><a href="#benchmarking">Benchmarking</a></li>
+                            <li><a href="#s-thematic">Thematic Analysis</a></li>
+                            <li><a href="#s-valueprop">Value Prop</a></li>
+                            <li><a href="#s-stakeholders">Stakeholders</a></li>
+                        </ul>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#design"><span>Design</span></a>
+                        <ul class="cs-subnav">
+                            <li><a href="#ecosystem">Ecosystem</a></li>
+                            <li><a href="#process">Process Map</a></li>
+                            <li><a href="#research">Research</a></li>
+                            <li><a href="#blueprint">Blueprint</a></li>
+                            <li><a href="#north-star">North Star</a></li>
+                            <li><a href="#design">Design</a></li>
+                            <li><a href="#s-iterations">Iterations</a></li>
+                        </ul>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#deliver"><span>Deliver</span></a>
+                        <ul class="cs-subnav">
+                            <li><a href="#deliver">GTM</a></li>
+                            <li><a href="#s-outcomes">Outcomes</a></li>
+                        </ul>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#reflect"><span>Reflect</span></a>
+                        <ul class="cs-subnav">
+                            <li><a href="#reflect">Reflections</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Content -->
+            <article class="cs-content">
+
+                <!-- TLDR -->
+                <div class="cs-tldr" id="tldr">
+                    <div class="cs-tldr__label">TLDR — Executive Summary</div>
+                    <ul>
+                        <li>The Hospital Management System at AIIMS was serving thousands yet suffering from extreme
+                            cognitive load.</li>
+                        <li>Identified over 80 critical pain points ranging from data entry fatigue to patient queue
+                            mismanagement.</li>
+                        <li>Conducted extensive shadowing and stakeholder interviews with HODs and clinical staff.</li>
+                        <li>Delivered a 2-year transformation roadmap to align technical capabilities with clinical
+                            reality.</li>
+                    </ul>
+                </div>
+
+                <!-- DISCOVER phase starts here: Context & Framing -->
+                <section class="cs-section" id="discover">
+                    <div class="cs-section__eyebrow">01 — Context & Framing</div>
+                    <h2>How did this problem land on our desk?</h2>
+                    <p>Placeholder — Add the background: who brought this project in, what the brief said, how the
+                        problem
+                        evolved as we dug deeper. What was the org context — is this a startup, a hospital system, an
+                        internal tool?</p>
+                    <p>Placeholder — Describe the constraints: compliance requirements, existing tech stack, timeline
+                        pressures, stakeholder dynamics.</p>
+
+                    <div class="cs-callout">
+                        <p>"We didn't tell them to skip the checklist. They just had no time to follow it."</p>
+                        <cite>— Nephrologist, Site 2</cite>
+                    </div>
+                </section>
+
+                <!-- MARKET RESEARCH — Discover phase -->
+                <section class="cs-section" id="s-market">
+                    <div class="cs-section__eyebrow">02 — Market Research</div>
+                    <h2>What does the landscape look like?</h2>
+                    <p>Placeholder — Describe the broader healthcare IT and medical device UX market. What products
+                        exist in this space? What are incumbents doing well and where are they failing? What does the
+                        regulatory landscape require?</p>
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Market landscape map placeholder</div>
+                        <div class="cs-image__caption">Healthcare UX market overview — competitive landscape snapshot
+                        </div>
+                    </div>
+                </section>
+
+                <!-- USER SEGMENTATION — Discover phase -->
+                <section class="cs-section" id="s-segments">
+                    <div class="cs-section__eyebrow">03 — User Segmentation</div>
+                    <h2>Who are we actually designing for?</h2>
+                    <p>Placeholder — Break down the user segments in the dialysis unit. Who uses the interface and
+                        under
+                        what conditions? Senior nurses vs. junior staff? Morning rounds vs. emergency shifts? Define
+                        behavioral segments, not just demographic ones.</p>
+                    <div class="cs-metrics-grid">
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Segment A</div>
+                            <h4>Senior Dialysis Nurse</h4>
+                            <p>Experienced, protocol-aware. Time pressured. High stakes, routine tasks. Low
+                                tolerance
+                                for extra steps.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Segment B</div>
+                            <h4>Junior / Agency Staff</h4>
+                            <p>Variable familiarity with machine models. Needs more guidance. Higher error
+                                probability
+                                during handoffs.</p>
+                        </div>
+                    </div>
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">So What?</div>
+                        <p class="cs-sowhat__text">Placeholder — A single interface cannot be optimised for both
+                            segments simultaneously. Our primary user for safety-critical flows is the junior staff
+                            member; our secondary is the experienced nurse who needs speed.</p>
+                    </div>
+                </section>
+
+                <!-- DEFINE phase starts here: Success Metrics -->
+                <section class="cs-section" id="define">
+                    <div class="cs-section__eyebrow">02 — Success Metrics</div>
+                    <h2>How did we define "good" before we started designing?</h2>
+                    <p>Placeholder — Describe the KPIs, OKRs, or qualitative signals agreed upon before ideation
+                        began.
+                        Why were these the right metrics? How were they measured?</p>
+
+                    <div class="cs-metrics-grid">
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Primary KPI</div>
+                            <h4>Critical Setup Error Rate</h4>
+                            <p>Target: 40% reduction within 3 months of rollout, measured via machine logs.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Primary KPI</div>
+                            <h4>Time to Complete Setup</h4>
+                            <p>Baseline: 4.2 min avg. Target: maintain ≤ 4.5 min (safety shouldn't cost time).</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Qualitative Signal</div>
+                            <h4>Nurse Confidence Score</h4>
+                            <p>Self-reported confidence in error-catching post-interaction, measured via SUS +
+                                interviews.
+                            </p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Guardrail Metric</div>
+                            <h4>Alert Fatigue Index</h4>
+                            <p>Ensure new warnings don't create noise — alerts dismissed &lt; 15% of triggers.</p>
+                        </div>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">So What?</div>
+                        <p>Placeholder — So what does defining this early actually change about how you designed?
+                            This
+                            box
+                            should surface your insight, not just restate the metric.</p>
+                    </div>
+                </section>
+
+                <!-- PRIORITIZATION -->
+                <section class="cs-section" id="prioritization">
+                    <div class="cs-section__eyebrow">03 — Prioritization</div>
+                    <h2>What was in scope — and what did we deliberately leave out?</h2>
+                    <p>Placeholder — Describe the prioritization moment. What framework was used? What was
+                        deprioritized
+                        and why? What pressure did you push back on?</p>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Effort / Impact Matrix — Placeholder</div>
+                        <div class="cs-image__caption">Prioritization framework used to scope the problem space
+                        </div>
+                    </div>
+                </section>
+
+                <!-- UX AUDIT -->
+                <section class="cs-section" id="ux-audit">
+                    <div class="cs-section__eyebrow">04 — UX Audit</div>
+                    <h2>What was broken in the existing experience?</h2>
+                    <p>Placeholder — Heuristic evaluation of the current system. Annotated screens with severity
+                        ratings
+                        (Critical / Major / Minor). Where was the biggest friction? What surprised you?</p>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Annotated UX Audit Screens — Placeholder</div>
+                        <div class="cs-image__caption">Key violations flagged across the existing dialysis machine
+                            UI
+                        </div>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">So What?</div>
+                        <p>Placeholder — The audit revealed that ____ were the highest severity issues. This shaped
+                            our
+                            early hypotheses about where to focus design energy.</p>
+                    </div>
+                </section>
+
+                <!-- COMPETITIVE BENCHMARKING -->
+                <section class="cs-section" id="benchmarking">
+                    <div class="cs-section__eyebrow">05 — Competitive Benchmarking</div>
+                    <h2>What is the rest of the industry doing — and where do they fail the same way?</h2>
+                    <p>Placeholder — 3–5 comparators reviewed. What patterns exist across the category? Where is the
+                        obvious gap? What did adjacent industries (aviation, surgical tools) do that's worth
+                        borrowing?
+                    </p>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Competitive Audit Matrix — Placeholder</div>
+                        <div class="cs-image__caption">Side-by-side feature/UX comparison across comparators</div>
+                    </div>
+                </section>
+
+                <!-- ECOSYSTEM MAPPING -->
+                <section class="cs-section" id="ecosystem">
+                    <div class="cs-section__eyebrow">06 — Ecosystem Mapping</div>
+                    <h2>Who and what are all the actors in this system?</h2>
+                    <p>Placeholder — Stakeholders, user roles, internal systems (EHR, pharmacy, billing), physical
+                        environment, edge cases. This is the full picture before you design anything.</p>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Ecosystem / Stakeholder Map — Placeholder</div>
+                        <div class="cs-image__caption">Mapping all touchpoints, actors and dependencies</div>
+                    </div>
+                </section>
+
+                <!-- PROCESS MAPPING -->
+                <section class="cs-section" id="process">
+                    <div class="cs-section__eyebrow">07 — Process Mapping</div>
+                    <h2>What does the current state actually look like, end to end?</h2>
+                    <p>Placeholder — As-is journey map or process flow. Where are the handoffs? Decision points?
+                        Moments
+                        of
+                        ambiguity? Where does the system assume things it shouldn't?</p>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">As-Is Process Flow — Placeholder</div>
+                        <div class="cs-image__caption">Current state nurse workflow across a full setup session
+                        </div>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">So What?</div>
+                        <p>Placeholder — The process map revealed that ____. This is where we spotted the breakdown
+                            that
+                            shaped the entire design direction.</p>
+                    </div>
+                </section>
+
+                <!-- PRIMARY RESEARCH -->
+                <section class="cs-section" id="research">
+                    <div class="cs-section__eyebrow">08 — Primary Research</div>
+                    <h2>What did we hear, see, and uncover in the field?</h2>
+                    <p>Placeholder — Methods used (contextual inquiry, semi-structured interviews, shadowing, task
+                        analysis). Sample size, sites, how participants were recruited.</p>
+                    <p>Placeholder — Key themes that surfaced. Synthesis method (affinity clustering, thematic
+                        analysis,
+                        etc.).</p>
+
+                    <div class="cs-callout">
+                        <p>"I need to see the most important info from across the room, not after I've tapped
+                            through
+                            four
+                            screens."</p>
+                        <cite>— Senior Dialysis Nurse, Site 1</cite>
+                    </div>
+
+                    <div class="cs-callout">
+                        <p>"When alarms go off, the screen should tell me the action, not the problem."</p>
+                        <cite>— Dialysis Technician, Site 3</cite>
+                    </div>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Research Synthesis / Affinity Map — Placeholder</div>
+                        <div class="cs-image__caption">Patterns identified across 14 nurse interviews and 3 site
+                            visits
+                        </div>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">So What?</div>
+                        <p>Placeholder — The research crystallized that the problem wasn't missing features — it was
+                            information architecture that worked against the clinical context.</p>
+                    </div>
+                </section>
+
+                <!-- SERVICE BLUEPRINT -->
+                <section class="cs-section" id="blueprint">
+                    <div class="cs-section__eyebrow">09 — Service Blueprint</div>
+                    <h2>How does the designed solution sit inside the full delivery system?</h2>
+                    <p>Placeholder — Frontstage actions (what users do), backstage actions (what the system does
+                        behind
+                        the scenes), support systems, physical evidence. This shows the designed solution, not the
+                        current
+                        state.</p>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Service Blueprint — Placeholder</div>
+                        <div class="cs-image__caption">To-be service blueprint mapping the redesigned experience
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NORTH STAR & POV -->
+                <section class="cs-section" id="north-star">
+                    <div class="cs-section__eyebrow">10 — North Star & POV</div>
+                    <h2>What is the design bet we're making?</h2>
+                    <p>Placeholder — The HMW statement. The POV. The guiding principle that shaped every decision
+                        that
+                        follows.</p>
+
+                    <div class="cs-callout">
+                        <p>How might we design a dialysis interface that enforces safety without breaking the
+                            clinical
+                            rhythm of nurses working under pressure?</p>
+                    </div>
+
+                    <p>Placeholder — The north star metric or experience quality we were optimizing toward. What
+                        does
+                        "winning" look like from the user's perspective?</p>
+                </section>
+
+                <!-- THEMATIC ANALYSIS — Define phase -->
+                <section class="cs-section" id="s-thematic">
+                    <div class="cs-section__eyebrow">09 — Thematic Analysis</div>
+                    <h2>What patterns emerged from the data?</h2>
+                    <p>Placeholder — After primary research, what themes kept surfacing across participants? What
+                        were
+                        the unexpected findings? How did you reconcile contradictions in the data?</p>
+                    <div class="cs-callout">
+                        <p>"Every participant described a moment where they 'knew' they'd made an error — but
+                            couldn't
+                            immediately identify where in the setup it happened."</p>
+                        <cite>— Research synthesis note, Session 4</cite>
+                    </div>
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Affinity Map — Thematic Clusters Placeholder</div>
+                        <div class="cs-image__caption">Key themes grouped from 6 research sessions across 3 sites
+                        </div>
+                    </div>
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">So What?</div>
+                        <p class="cs-sowhat__text">Placeholder — These themes directly informed our problem
+                            reframing:
+                            from "feature parity" to "error visibility and forced verification at critical
+                            junctures."
+                        </p>
+                    </div>
+                </section>
+
+                <!-- VALUE PROPOSITION — Define phase -->
+                <section class="cs-section" id="s-valueprop">
+                    <div class="cs-section__eyebrow">10 — Value Proposition</div>
+                    <h2>What exactly are we offering — and to whom?</h2>
+                    <p>Placeholder — Define the core value prop of the redesigned interface. For each user segment,
+                        what
+                        does the new design specifically offer that the current one doesn't? Frame it as a
+                        before/after
+                        for the user's experience, not as a list of features.</p>
+                    <div class="cs-metrics-grid">
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">For Senior Nurses</div>
+                            <h4>Speed without sacrifice</h4>
+                            <p>Complete setup flows in the same time or less, with passive error-prevention built
+                                into
+                                the sequence.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">For Junior / Agency Staff</div>
+                            <h4>Confident first-time completion</h4>
+                            <p>Guided flows with explicit confirmation gates — no silent failures, no skipped
+                                protocols.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STAKEHOLDER & CONSTRAINTS — Define phase -->
+                <section class="cs-section" id="s-stakeholders">
+                    <div class="cs-section__eyebrow">11 — Stakeholders & Constraints</div>
+                    <h2>Who had a seat at the table — and what did they each need?</h2>
+                    <p>Placeholder — Map the key internal and external stakeholders. What were their competing
+                        priorities? Who had veto power? Who was a quiet blocker? How did you build alignment across
+                        clinical, engineering, and procurement?</p>
+
+                    <div class="cs-metrics-grid">
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Clinical Lead</div>
+                            <h4>Patient safety above all</h4>
+                            <p>Any design that slowed down setup was a non-starter. Error reduction had to come without
+                                adding cognitive load.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Engineering</div>
+                            <h4>Legacy system constraints</h4>
+                            <p>The machine firmware couldn't be modified. All safety logic had to live in the interface
+                                layer only.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Procurement</div>
+                            <h4>Cost ceiling</h4>
+                            <p>No hardware changes. Interface upgrade only. Rollout budget capped at training + software
+                                deployment costs.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Head Nurse, Site 2</div>
+                            <h4>Informal champion</h4>
+                            <p>Not a formal decision-maker, but the most influential voice in the room. Her buy-in
+                                unlocked trust from the nursing floor.</p>
+                        </div>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">How we navigated it</div>
+                        <p class="cs-sowhat__text">Placeholder — Ran a constraints-first design sprint in week 3 to
+                            surface all hard limits before ideation. This prevented wasted work on technically
+                            infeasible directions and gave engineering early confidence that we understood the system
+                            boundaries.</p>
+                    </div>
+                </section>
+
+                <!-- DESIGN & DECISIONS -->
+                <section class="cs-section" id="design">
+                    <div class="cs-section__eyebrow">11 — Design & Decisions</div>
+                    <h2>How did we go from insight to interface?</h2>
+                    <p>Placeholder — Walk through the key design decisions. Not just "here's the final design" —
+                        explain the forks in the road. What was the alternative? Why was this the right call?</p>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Ideation / Sketches — Placeholder</div>
+                        <div class="cs-image__caption">Early concepts explored before committing to direction</div>
+                    </div>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Wireframes — Placeholder</div>
+                        <div class="cs-image__caption">Mid-fidelity layouts with annotated rationale</div>
+                    </div>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">High-Fidelity Prototype — Placeholder</div>
+                        <div class="cs-image__caption">Final design reviewed in 6 usability sessions</div>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">Key Decision</div>
+                        <p>Placeholder — We chose [pattern X] over [pattern Y] because ____. The tradeoff was ____,
+                            which
+                            we accepted because ____.</p>
+                    </div>
+                </section>
+
+                <!-- ITERATION LOG — Design phase -->
+                <section class="cs-section" id="s-iterations">
+                    <div class="cs-section__eyebrow">12 — Iteration Log</div>
+                    <h2>What changed between V1 and what shipped — and why?</h2>
+                    <p>Placeholder — Show 2–3 meaningful design pivots. For each: what the original design was, what
+                        feedback or data caused the change, and what the revised direction looked like. This is where
+                        design thinking becomes visible.</p>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">V1 → V2 Comparison — Setup Screen Placeholder</div>
+                        <div class="cs-image__caption">Before: single-screen setup list. After: sequenced step-by-step
+                            flow with inline confirmation per step</div>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">Pivot 1 — What changed</div>
+                        <p class="cs-sowhat__text">Placeholder — V1 presented all setup parameters on one screen.
+                            Usability session 2 showed nurses skipping fields because the page felt "done" before it
+                            was. V2 broke setup into a 4-step sequence with explicit completion per step. Error rate in
+                            session 3 dropped by half on that screen alone.</p>
+                    </div>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">V2 → Final — Verification Gate Placeholder</div>
+                        <div class="cs-image__caption">Before: passive summary screen. After: forced read-back with
+                            active confirmation required for each critical parameter</div>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">Pivot 2 — What changed</div>
+                        <p class="cs-sowhat__text">Placeholder — V2 used a passive summary before confirmation. Nurses
+                            glanced at it but didn't actually read it. Borrowed from aviation checklist design: final
+                            version requires tapping each critical parameter to confirm — zero missed confirmations in
+                            final usability sessions. Felt heavier in testing, but the safety data won the argument.</p>
+                    </div>
+                </section>
+
+                <!-- GTM — Deliver phase -->
+                <section class="cs-section" id="deliver">
+                    <div class="cs-section__eyebrow">12 — Go-to-Market</div>
+                    <h2>How did we take this from prototype to rollout?</h2>
+                    <p>Placeholder — Describe the rollout strategy. Was this a phased launch, a pilot across one
+                        ward,
+                        or a full hospital deployment? Who were the internal champions? What training or change
+                        management was needed?</p>
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">Rollout Strategy</div>
+                        <p class="cs-sowhat__text">Placeholder — Piloted at Site 2 (Dialysis Unit B) for 6 weeks
+                            before
+                            broader rollout. Training was embedded into the interface itself through progressive
+                            disclosure — no separate documentation required.</p>
+                    </div>
+                </section>
+
+                <!-- OUTCOMES & IMPACT -->
+                <section class="cs-section" id="s-outcomes">
+                    <div class="cs-section__eyebrow">13 — Outcomes & Impact</div>
+                    <h2>What actually changed?</h2>
+                    <p>Placeholder — Post-launch metrics if available, or usability test results. Stakeholder
+                        reception.
+                        What was shipped vs. what was designed. The delta that mattered.</p>
+
+                    <div class="cs-metrics-grid">
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Result</div>
+                            <h4>~40% fewer critical errors</h4>
+                            <p>Measured in controlled usability testing across 12 participants.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Result</div>
+                            <h4>Setup time maintained</h4>
+                            <p>Average setup time increased by only 8 seconds — within acceptable bounds.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Qualitative</div>
+                            <h4>Nurse confidence ↑</h4>
+                            <p>Nurses described feeling "more in control" and "less anxious about missing
+                                something."
+                            </p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">What's Next</div>
+                            <h4>Phase 2 in scoping</h4>
+                            <p>Remote monitoring + shift handoff features are in the next planning cycle.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- REFLECT -->
+                <section class="cs-section" id="reflect">
+                    <div class="cs-section__eyebrow">14 — Reflections</div>
+                    <h2>What would I do differently?</h2>
+
+                    <div class="cs-callout">
+                        <p>"The interface wasn't the problem. The workflow was. We almost spent 8 weeks solving the
+                            wrong thing."</p>
+                        <cite>— Post-project debrief note</cite>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">Wrong assumption</div>
+                        <p class="cs-sowhat__text">I assumed senior nurses and junior staff had materially different
+                            error patterns. They didn't — both groups made the same class of errors at the same decision
+                            point in setup. The difference was that seniors recovered faster. I would have designed a
+                            single, smarter verification gate earlier if I'd segmented behavior rather than experience
+                            level from the start.</p>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">What I'd do differently</div>
+                        <p class="cs-sowhat__text">Run contextual inquiry <em>during</em> active shifts, not in
+                            controlled observation slots. Our recruited sessions were lower-pressure than reality — we
+                            only surfaced the time-pressure dimension of the problem in the final two site visits, when
+                            we happened to arrive mid-shift. That insight shaped our most important design decision.
+                            Earlier exposure would have saved 2 weeks of misframed ideation.</p>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">What this changed going forward</div>
+                        <p class="cs-sowhat__text">Every design review I run now has a mandatory "error state" slide —
+                            what does the interface do when the user makes the most likely mistake? Not an edge case.
+                            The most likely mistake. This project made that a non-negotiable in my process.</p>
+                    </div>
+                </section>
+
+            </article>
+        </main>
+
+    </div>
+    <!-- /cs-page-body -->
+
+    <!-- ────────────────────────────────────
+         NEXT CASE STUDY
+    ──────────────────────────────────── -->
+    <a href="dialysis-center.html" class="cs-next">
+        <div class="cs-next__bg" style="background-image: url('../../assets/images/dialysis-app.png');"></div>
+        <div class="cs-next__content container">
+            <div class="cs-next__label">Next Case Study</div>
+            <div class="cs-next__title">Dialysis Safety Interface</div>
+            <div class="cs-next__arrow">→</div>
+        </div>
+    </a>
+
+    <!-- Footer -->
+    
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-cta">
+          <p class="footer-cta-text">
+            <span class="footer-cta-light">Let's create something</span>
+            <span class="footer-cta-bold">amazing together!</span>
+          </p>
+          <p class="footer-cta-subtext">Architecturing scalable systems for healthcare and enterprise complexity.</p>
+        </div>
+        
+        <div class="footer-right">
+          <div class="footer-nav">
+            <ul class="footer-links">
+              <li><a href="../../index.html">Home</a></li>
+              <li><a href="../coming-soon.html">Case Studies</a></li>
+              <li><a href="../about.html">About</a></li>
+              <li><a href="../sandbox.html">Sandbox</a></li>
+              <li><a href="../contact.html">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-social">
+            <a href="tel:+919082944938" class="social-icon" aria-label="Phone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </a>
+            <a href="mailto:hello@itskashish.com" class="social-icon" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/kashish-design/" target="_blank" class="social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kashish Singh. All rights reserved.</p>
+        <div class="footer-credit">Handcrafted by <span>Kashish Singh</span></div>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/navigation.js"></script>
+
+    <script>
+        // ── Scroll-spy: phase + sub-item active states ──
+        (function () {
+            // Map each phase → its sub-section IDs (in order)
+            const phaseMap = {
+                discover: ['discover', 's-market', 's-segments'],
+                define: ['define', 'prioritization', 'ux-audit', 'benchmarking', 's-thematic', 's-valueprop', 's-stakeholders'],
+                design: ['design', 'ecosystem', 'process', 'research', 'blueprint', 'north-star', 's-iterations'],
+                deliver: ['deliver', 's-outcomes'],
+                reflect: ['reflect']
+            };
+
+            // All ordered section IDs for determining which phase is active
+            const allIds = Object.values(phaseMap).flat();
+            const phaseIds = Object.keys(phaseMap);
+
+            // Which phase does a given section ID belong to?
+            function phaseOf(id) {
+                for (const [phase, ids] of Object.entries(phaseMap)) {
+                    if (ids.includes(id)) return phase;
+                }
+                return phaseIds[0];
+            }
+
+            // Find the deepest section that's scrolled past the threshold
+            function getActiveSubId() {
+                let active = allIds[0];
+                for (const id of allIds) {
+                    const el = document.getElementById(id);
+                    if (!el) continue;
+                    if (el.getBoundingClientRect().top <= 140) active = id;
+                }
+                return active;
+            }
+
+            const phaseItems = document.querySelectorAll('.cs-sidenav__item');
+            const mobileLinks = document.querySelectorAll('.cs-mobile-nav a');
+
+            function updateNav() {
+                const activeSubId = getActiveSubId();
+                const activePhase = phaseOf(activeSubId);
+
+                // Phase-level: dots + labels + is-active for sub-nav expand
+                phaseItems.forEach(li => {
+                    const phaseLink = li.querySelector(':scope > a');
+                    if (!phaseLink) return;
+                    const href = phaseLink.getAttribute('href').replace('#', '');
+                    const isActive = href === activePhase;
+                    phaseLink.classList.toggle('active', isActive);
+                    li.classList.toggle('is-active', isActive);
+                });
+
+                // Sub-item level: highlight the exact active sub-section
+                document.querySelectorAll('.cs-subnav li a').forEach(link => {
+                    const href = link.getAttribute('href').replace('#', '');
+                    link.classList.toggle('sub-active', href === activeSubId);
+                });
+
+                // Mobile nav
+                mobileLinks.forEach(link => {
+                    const href = link.getAttribute('href').replace('#', '');
+                    link.classList.toggle('active', href === activePhase);
+                });
+            }
+
+            window.addEventListener('scroll', updateNav, { passive: true });
+            updateNav();
+        })();
+
+        // ── Navbar transparency + close button dark mode on scroll ──
+        (function () {
+            const navbar = document.querySelector('.navbar');
+            const closeBtn = document.querySelector('.cs-hero__close');
+            const hero = document.querySelector('.cs-hero');
+
+            function update() {
+                const threshold = hero ? hero.offsetHeight * 0.6 : 400;
+                const pastHero = window.scrollY > threshold;
+                navbar.classList.toggle('scrolled', pastHero);
+                if (closeBtn) closeBtn.classList.toggle('dark', pastHero);
+            }
+
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+        })();
+    </script>
+</body>
+
+</html>

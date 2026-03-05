@@ -1,0 +1,4175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Her - Kashish Singh's creative playground and experiments.">
+    <title>Her | Kashish Singh</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/mona-sans@5.2.8/index.min.css" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css?v=1772570643">
+    <style>
+        /* Her Page Specific Styles */
+        /* Her Page Specific Styles */
+
+
+        .her-main {
+            padding-top: 140px;
+            padding-bottom: 4rem;
+        }
+
+        .her-hero {
+            padding: 0 0 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .her-hero h1 {
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            line-height: 1.3;
+            margin-bottom: 4rem;
+            font-weight: 400;
+            max-width: 700px;
+            text-align: left;
+        }
+
+        .her-hero h1 .highlight {
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        .her-hero h1 .light {
+            color: var(--color-text-secondary);
+        }
+
+        /* Grid Container */
+        .grid-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Grid Section - 2 columns (4 small boxes + 1 large box) */
+        .grid-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            min-height: 320px;
+        }
+
+        /* Wide Grid Section (Row of 3: 50% / 25% / 25%) */
+        .grid-section-wide {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+            /* Spacing from section above */
+        }
+
+        .wide-box {
+            grid-column: span 2;
+            aspect-ratio: 2 / 1;
+            /* Wide rectangle */
+            min-height: 150px;
+            /* Approx small box height */
+        }
+
+        /* Ensure small boxes in this row maintain square aspect if needed, 
+           or just let them fill grid column */
+        .grid-section-wide .grid-item:not(.wide-box) {
+            aspect-ratio: 1 / 1;
+        }
+
+        /* Small boxes grid (2x2) */
+        .small-boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .small-boxes .grid-item {
+            aspect-ratio: 1 / 1;
+        }
+
+        /* Large box (2x2) */
+        .large-box {
+            grid-column: span 1;
+            grid-row: span 1;
+            height: 100%;
+            min-height: 320px;
+            aspect-ratio: 1 / 1;
+            /* Force square */
+        }
+
+        /* Grid Item Styles */
+        .grid-item {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            color: #0f0f0f;
+            /* Force dark text on white cards */
+        }
+
+        .grid-item:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .grid-item-number {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #d0d0d0;
+            margin-bottom: 0.5rem;
+        }
+
+        .grid-item-label {
+            font-size: 0.8125rem;
+            color: var(--color-text-secondary);
+            text-align: center;
+        }
+
+        /* Bio Card Styles */
+        .bio-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .bio-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Aligned to center */
+            margin-bottom: 2rem;
+        }
+
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .hamburger-icon span {
+            width: 20px;
+            height: 2px;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        .profile-pic {
+            width: 24px;
+            /* Reduced size to match hamburger */
+            height: 24px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bio-text {
+            font-family: 'Instrument Sans', sans-serif;
+            /* Ensure font */
+            font-size: 0.8rem;
+            /* Reduced font size */
+            line-height: 1.4;
+            color: #1a1a1a;
+            text-align: left;
+            font-weight: 400;
+        }
+
+        /* Interactive Proverb Box Styles */
+        .proverb-box {
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+            /* Default Light */
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .proverb-box:hover,
+        .proverb-box.has-quote {
+            background: #111;
+            /* Dark on Hover or Active */
+            transform: translateY(-2px);
+            border-color: #333;
+        }
+
+        .proverb-text {
+            color: #999;
+            /* Light grey initially */
+            font-style: italic;
+            font-size: 0.9rem;
+            text-align: center;
+            line-height: 1.5;
+            font-family: 'Instrument Sans', sans-serif;
+            transition: color 0.3s ease;
+            z-index: 2;
+        }
+
+        .proverb-box:hover .proverb-text,
+        .proverb-box.has-quote .proverb-text {
+            color: #fff;
+            /* White on hover or Active */
+            font-style: normal;
+        }
+
+        .proverb-hint {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.6rem;
+            color: #444;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .proverb-box:hover .proverb-hint {
+            opacity: 1;
+            color: #666;
+        }
+
+        /* Music Box Styles */
+        /* Music Box Styles */
+        .music-card {
+            background: white;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            /* Changed */
+            align-items: flex-start;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e5e5e5;
+        }
+
+        .music-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 0.5rem;
+            color: #1ed760;
+            z-index: 2;
+        }
+
+        .music-info {
+            z-index: 2;
+            margin-top: 0.25rem;
+        }
+
+        .music-artist {
+            display: block;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.75rem;
+            /* Reduced */
+            color: #888;
+            /* Grey */
+            margin-bottom: 0.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .music-title {
+            display: block;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.95rem;
+            /* Reduced */
+            font-weight: 500;
+            color: #333;
+            line-height: 1.2;
+        }
+
+        .music-cover {
+            position: absolute;
+            bottom: -60px;
+            /* Peek up */
+            left: 50%;
+            transform: translateX(-50%);
+            /* Centered */
+            width: 150px;
+            /* Larger */
+            height: 150px;
+            border-radius: 50%;
+            background-color: #333;
+            background-image: url('../assets/images/viva_la_vida.png');
+            /* Album Art - PNG */
+            background-size: cover;
+            background-position: center;
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            /* Include translate in initial transform to match keyframes */
+            transform: translateX(-50%) rotate(0deg);
+            animation: spin 4s linear infinite;
+            /* 4s rotation */
+            animation-play-state: paused;
+            /* Wait for hover */
+        }
+
+        /* Rotate on Hover */
+        .music-card:hover .music-cover {
+            animation-play-state: running;
+        }
+
+        /* Inner circle of CD */
+        .music-cover::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            border: 1px solid #eee;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translateX(-50%) rotate(0deg);
+            }
+
+            to {
+                transform: translateX(-50%) rotate(360deg);
+            }
+        }
+
+        /* Equalizer Animation */
+        .equalizer-bar {
+            transform-origin: bottom;
+            animation: equalize 1s ease-in-out infinite;
+            animation-play-state: paused;
+        }
+
+        .music-card:hover .equalizer-bar {
+            animation-play-state: running;
+        }
+
+        .bar-1 {
+            animation-duration: 0.8s;
+        }
+
+        .bar-2 {
+            animation-duration: 0.9s;
+            animation-delay: 0.1s;
+        }
+
+        .bar-3 {
+            animation-duration: 1.1s;
+            animation-delay: 0.2s;
+        }
+
+        .bar-4 {
+            animation-duration: 1.0s;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes equalize {
+
+            0%,
+            100% {
+                transform: scaleY(1);
+            }
+
+            50% {
+                transform: scaleY(0.4);
+            }
+        }
+
+        /* Video Overlay Text */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+            /* Let clicks pass through to video */
+            z-index: 2;
+        }
+
+        .overlay-text {
+            color: white;
+            font-family: 'Instrument Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+            text-align: center;
+            text-transform: uppercase;
+            /* CAPS */
+            opacity: 0;
+            /* Hidden by default */
+            transition: opacity 1.5s ease;
+            /* Slow fade in/out */
+        }
+
+        /* Show text on hover with delay */
+        #box8:hover .overlay-text {
+            opacity: 1;
+            transition-delay: 1s;
+            /* Wait 1s before starting fade in */
+        }
+
+        /* Tall Box (Spans 2 rows vertically) */
+        .tall-box {
+            grid-row: span 2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            .grid-section,
+            .grid-section-wide {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .small-boxes {
+                order: 1;
+            }
+
+            .large-box {
+                order: 2;
+                min-height: 300px;
+            }
+
+            .wide-box {
+                grid-column: span 1;
+                /* Full width on mobile */
+                aspect-ratio: auto;
+                min-height: 200px;
+            }
+
+            .her-main {
+                padding-top: 100px;
+            }
+        }
+
+        /* Flower Game Styles (Box 7) */
+        #box7 {
+            background-color: #fff;
+            /* White background */
+            transition: background-color 1s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e5e5e5;
+            /* Standard border */
+        }
+
+        #box7.game-over {
+            background-color: #000;
+            border-color: #000;
+        }
+
+        .flower-game-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* SVG Simple Flower */
+        #pixel-flower {
+            width: 80%;
+            height: 80%;
+            max-width: 150px;
+            max-height: 150px;
+            /* smooth curves */
+            transition: opacity 0.5s ease;
+            cursor: pointer;
+        }
+
+        .pixel-petal {
+            fill: #fff;
+            /* White petals */
+            stroke: #000;
+            /* Black outline */
+            stroke-width: 2px;
+            /* Bold outline */
+            transition: transform 0.3s ease, opacity 0.3s ease, fill 0.2s;
+            transform-origin: 50px 25px;
+            /* Center of the ellipse geometry */
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="15">✂️</text></svg>'), auto;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .pixel-petal:hover {
+            fill: #000;
+            /* Black on hover (invert) */
+            stroke: #000;
+        }
+
+        /* Center logic */
+        .pixel-center {
+            fill: #fff;
+            /* White center */
+            stroke: #000;
+            stroke-width: 0.5px;
+            pointer-events: none;
+            /* Can't pluck the center yet */
+            transition: opacity 0.5s ease;
+        }
+
+        #box7.game-over .pixel-center {
+            opacity: 0;
+        }
+
+        /* Animations */
+        @keyframes pluck-anim {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(20px, 50px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .plucked {
+            animation: pluck-anim 0.5s forwards;
+            pointer-events: none;
+        }
+
+        /* Text Messages */
+        .game-message {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            color: #000;
+            margin-bottom: 1rem;
+            text-align: center;
+            min-height: 1.5em;
+            /* Prevent layout shift */
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            text-shadow: 2px 2px 0px #fff;
+            pointer-events: none;
+        }
+
+        /* Show message on container hover, unless game over */
+        #box7:not(.game-over):hover .game-message {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ouch-feedback {
+            position: absolute;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            color: #000;
+            font-weight: bold;
+            text-shadow: none;
+            pointer-events: none;
+            animation: floatUp 0.8s forwards;
+            z-index: 10;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-30px) scale(1.2);
+            }
+        }
+
+        /* Game Over Screen */
+        .game-over-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s ease;
+            /* Wrapper becomes visible instantly to allow children to animate */
+            z-index: 5;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        #box7.game-over .game-over-screen {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .final-message {
+            font-family: 'Instrument Sans', sans-serif;
+            /* Clean font */
+            font-size: 0.9rem;
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+            /* Delay 0.5s (after circle fades) */
+        }
+
+        #box7.game-over .final-message {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bloom-btn {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            padding: 0.8rem 1.2rem;
+            background: #fff;
+            color: #000;
+            border: 4px solid #333;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 #333;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 1s ease 2s, transform 1s ease 2s;
+            /* Delay 2s (after quote appears) */
+        }
+
+        #box7.game-over .bloom-btn {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .bloom-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #333;
+        }
+
+        .bloom-btn:hover {
+            background: #FFD700;
+        }
+
+        /* Box 10 - Oscillating Ball (Refined) */
+        #box10 {
+            position: relative;
+            background-color: #fff;
+            cursor: pointer;
+            overflow: hidden;
+            border: 1px solid #e5e5e5;
+        }
+
+        .ball-wrapper-x {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            /* Ball Size */
+            left: 50%;
+            transform: translateX(-50%);
+            /* Centered initially */
+        }
+
+        .ball-wrapper-y {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 20px;
+            /* Ball Size */
+            top: 50%;
+            transform: translateY(-50%);
+            /* Centered initially */
+        }
+
+        #pixel-ball {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            border-radius: 50%;
+            position: relative;
+            /* For pseudo-element */
+            transition: transform 0.1s linear;
+        }
+
+        /* Pulse & Glow Keyframes (Black Version) */
+        @keyframes pulse-black {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes glow-black {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+            }
+        }
+
+        /* Hover Effect - Radiate like "Live" dot */
+        #box10:hover #pixel-ball {
+            animation: pulse-black 2s ease-in-out infinite;
+            transform: scale(1.1);
+            /* Keep the slight growth */
+        }
+
+        #box10:hover #pixel-ball::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: transparent;
+            /* Don't cover ball */
+            animation: glow-black 2s ease-in-out infinite;
+            z-index: -1;
+            /* Behind ball */
+        }
+
+        /* Active State Animations */
+        #box10.active .ball-wrapper-x {
+            left: 0;
+            transform: none;
+            animation: bounceX 1.5s linear infinite alternate;
+            /* Faster */
+        }
+
+        #box10.active .ball-wrapper-y {
+            top: 0;
+            transform: none;
+            animation: bounceY 1.2s linear infinite alternate;
+            /* Faster */
+        }
+
+        #box10.active #pixel-ball {
+            /* Optional: Color pulse on impact? - Hard to sync. visual squash is enough. */
+        }
+
+        @keyframes bounceX {
+            0% {
+                left: 0;
+                transform: scaleX(0.7);
+                /* Squash */
+                animation-timing-function: ease-out;
+            }
+
+            10% {
+                transform: scaleX(1);
+                animation-timing-function: linear;
+            }
+
+            90% {
+                transform: scaleX(1);
+                animation-timing-function: ease-in;
+            }
+
+            100% {
+                left: calc(100% - 20px);
+                transform: scaleX(0.7);
+                /* Squash */
+            }
+        }
+
+        @keyframes bounceY {
+            0% {
+                top: 0;
+                transform: scaleY(0.7);
+                /* Squash */
+                animation-timing-function: ease-out;
+            }
+
+            10% {
+                transform: scaleY(1);
+                animation-timing-function: linear;
+            }
+
+            90% {
+                transform: scaleY(1);
+                animation-timing-function: ease-in;
+            }
+
+            100% {
+                top: calc(100% - 20px);
+                transform: scaleY(0.7);
+                /* Squash */
+            }
+        }
+
+        /* Pop Quote Style */
+        .pop-quote {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            color: #000;
+            text-align: center;
+            width: 90%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 10;
+        }
+
+        .pop-quote.visible {
+            opacity: 1;
+        }
+
+        /* Shake Animation */
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+        }
+
+        @keyframes shake {
+
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+
+        /* Box 11 - Pixel Balloon Game */
+        #box11 {
+            position: relative;
+            background-color: #fff;
+            /* White */
+            border: 1px solid #e5e5e5;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        #balloon-game-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            /* Let clicks pass to balloons/box */
+        }
+
+        /* Enable pointer events on balloons so they can be clicked */
+        .pixel-balloon {
+            pointer-events: auto;
+        }
+
+        /* Custom Pin Cursor on Hover */
+        #box11:hover {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="0" y="28" font-size="28">📌</text></svg>') 0 28, auto;
+        }
+
+        .pixel-balloon {
+            position: absolute;
+            bottom: -60px;
+            /* Start below */
+            width: 40px;
+            height: 50px;
+            animation: floatUp linear forwards;
+            transition: transform 0.1s;
+            cursor: inherit;
+            /* Use box cursor */
+            image-rendering: pixelated;
+        }
+
+        .pixel-balloon:active {
+            transform: scale(0.9);
+        }
+
+        @keyframes floatUp {
+            0% {
+                bottom: -60px;
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            25% {
+                transform: translateX(5px);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateX(-5px);
+                opacity: 1;
+            }
+
+            75% {
+                transform: translateX(5px);
+                opacity: 1;
+            }
+
+            95% {
+                opacity: 1;
+            }
+
+            100% {
+                bottom: 100%;
+                /* Fly off top */
+                transform: translateX(0);
+                opacity: 0;
+            }
+        }
+
+        .designer-thought {
+            position: fixed !important;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #000 !important;
+            background: #fff !important;
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid #111;
+            box-shadow: 2px 2px 0px #111;
+            pointer-events: none;
+            text-align: center;
+            white-space: nowrap;
+            z-index: 2147483647 !important;
+            animation: fadeFloat 1s forwards;
+            opacity: 0;
+            transform: translate(-50%, 10px);
+        }
+
+        @keyframes fadeFloat {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 10px);
+            }
+
+            20% {
+                opacity: 1;
+                transform: translate(-50%, -10px);
+            }
+
+            80% {
+                opacity: 1;
+                transform: translate(-50%, -15px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -25px);
+            }
+        }
+
+        .box11-success {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            font-weight: 500;
+            color: #000;
+            padding: 20px;
+            z-index: 20;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .box11-success.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+
+
+        /* Box 4 - Fortune Cookie */
+        #box4 {
+            position: relative;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Hammer Cursor */
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 12l-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9'/%3E%3Cpath d='M17.64 15L22 10.64'/%3E%3Cpath d='M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25V3h-5.25c-.85 0-1.65.33-2.25.93L10 5.18'/%3E%3C/svg%3E") 16 16, pointer;
+            overflow: hidden;
+            padding: 20px;
+            /* Add padding to container */
+        }
+
+        /* Hammer Strike (Rotated) on Click */
+        #box4:active {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg transform='rotate(-20 12 12)'%3E%3Cpath d='M15 12l-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9'/%3E%3Cpath d='M17.64 15L22 10.64'/%3E%3Cpath d='M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25V3h-5.25c-.85 0-1.65.33-2.25.93L10 5.18'/%3E%3C/g%3E%3C/svg%3E") 16 16, pointer;
+        }
+
+        .cookie-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.1s;
+            z-index: 2;
+        }
+
+        /* Fortune Paper Strip */
+        .fortune-paper {
+            position: absolute;
+            background-color: #fff;
+            padding: 8px 12px;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.75rem;
+            color: #d00000;
+            /* Typical red ink */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 85%;
+            z-index: 1;
+            /* Behind cookie initially? or appearing from inside? */
+            /* Let's have it appear on top or slide out */
+            opacity: 0;
+            transform: translateY(10px) scale(0.9);
+            transition: all 0.4s ease-out;
+            pointer-events: none;
+            border: 1px solid #e0e0e0;
+        }
+
+        .fortune-paper.visible {
+            opacity: 1;
+            transform: translateY(35px) scale(1);
+            /* Slide down below/on top of cracked cookie */
+            z-index: 3;
+        }
+
+        /* Box 14 - Flipping Calendar */
+        #box14 {
+            position: relative;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            perspective: 1000px;
+            /* For 3D Flip */
+        }
+
+        /* Box 15 - Message in a Bottle */
+        /* Box 13 - Message in a Bottle */
+        #box13 {
+            position: relative;
+            background-color: #ffffff;
+            /* White to match image background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .jar-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.2s;
+            z-index: 1;
+        }
+
+        /* Message Label */
+        .message-label {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(0);
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #000;
+            background: #ffffff;
+            padding: 8px 16px;
+            border-radius: 100px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2;
+            pointer-events: none;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+
+        #box13:hover .message-label {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        .message-label.sent {
+            background: #000;
+            color: #fff;
+        }
+
+        .jar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #box13:hover .jar-container {
+            transform: scale(1.02);
+            /* Slight scale only, no rotate */
+        }
+
+        /* CSS Jar Fallback */
+        .glass-jar {
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-top: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-jar::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 10%;
+            width: 80%;
+            height: 10px;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Falling Note Animation Color */
+        .paper-note {
+            width: 14px;
+            height: 10px;
+            position: absolute;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 1px;
+        }
+
+        .paper-note.red {
+            background: #ef5350;
+            /* Red */
+            bottom: 10px;
+            left: 20px;
+            transform: rotate(45deg);
+        }
+
+        .paper-note.pink {
+            background: #f48fb1;
+            /* Pink */
+            left: 35px;
+            bottom: 15px;
+            transform: rotate(15deg);
+        }
+
+        .paper-note.white {
+            background: #ffffff;
+            /* White */
+            left: 15px;
+            bottom: 25px;
+            transform: rotate(-10deg);
+        }
+
+        /* --- Box 14: Flip Calendar --- */
+        #box14 {
+            perspective: 1000px;
+            /* For 3D Flip */
+            background-color: #f0f0f0;
+            /* Desk surface color */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-container {
+            position: relative;
+            width: 85%;
+            height: 85%;
+        }
+
+        .cal-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform-origin: top center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1), opacity 0.6s;
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            box-sizing: border-box;
+            /* Stack order handled by JS z-index */
+        }
+
+        /* Ring Binding Visual */
+        .cal-binding {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            display: flex;
+            justify-content: space-evenly;
+            z-index: 10;
+        }
+
+        .cal-ring {
+            width: 6px;
+            height: 20px;
+            background: linear-gradient(90deg, #ccc, #888, #ccc);
+            border-radius: 4px;
+        }
+
+        /* Page Content */
+        .cal-photo {
+            flex: 2;
+            background-color: #eee;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cal-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(0.2) contrast(1.1);
+            /* Retro feel */
+        }
+
+        .cal-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cal-note {
+            font-family: 'Courier New', Courier, monospace;
+            /* Placeholder for handwritten */
+            font-size: 0.75rem;
+            color: #444;
+            line-height: 1.3;
+        }
+
+        .cal-date {
+            align-self: flex-end;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Flipped State */
+        .cal-page.flipped {
+            transform: rotateX(-180deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* --- Box 12: Pixel Eye Widget --- */
+        #box12 {
+            background-color: #f5f5f5;
+            /* Light grey bg */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .eye-container {
+            display: flex;
+            gap: 10px;
+            background: #000;
+            padding: 15px 20px;
+            border-radius: 50%;
+            /* Circular container like the ref */
+            width: 120px;
+            height: 120px;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .eye {
+            width: 30px;
+            height: 45px;
+            background: #fff;
+            border-radius: 10px;
+            position: relative;
+            image-rendering: pixelated;
+        }
+
+        .pupil {
+            width: 14px;
+            height: 14px;
+            background: #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* Limit movement range */
+        }
+
+        /* Sticky Note Overlay */
+        .note-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            /* Semi-transparent to see image */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+
+        .note-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sticky-note {
+            width: 80%;
+            /* Smaller relative to box */
+            height: 70%;
+            max-width: 180px;
+            background: #fff3e0;
+            /* Light Orange/Cream */
+            padding: 20px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            font-family: 'Instrument Sans', sans-serif;
+            transform: none;
+            /* No rotation */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sticky-note textarea {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            resize: none;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .send-btn {
+            align-self: flex-end;
+            background: #fff;
+            color: #000;
+            border: 1px solid #ccc;
+            padding: 4px 8px;
+            /* Smaller padding */
+            cursor: pointer;
+            font-size: 0.75rem;
+            /* Smaller font */
+            border-radius: 4px;
+            font-family: 'Instrument Sans', sans-serif;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .send-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* Animation for sent note */
+        .falling-note {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff4081;
+            /* Pink */
+            z-index: 5;
+            animation: fallIntoJar 1s forwards;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fallIntoJar {
+            0% {
+                top: 10%;
+                left: 50%;
+                opacity: 1;
+                transform: translate(-50%, 0) rotate(0deg);
+            }
+
+            100% {
+                top: 60%;
+                left: 50%;
+                opacity: 0;
+                transform: translate(-50%, 0) rotate(360deg) scale(0.2);
+            }
+        }
+
+        /* Jar Bounce Animation */
+        @keyframes jarBounce {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            30% {
+                transform: scale(1.05) rotate(3deg);
+            }
+
+            50% {
+                transform: scale(0.95) rotate(-3deg);
+            }
+
+            70% {
+                transform: scale(1.02) rotate(1deg);
+            }
+        }
+
+        .jar-bounce {
+            animation: jarBounce 0.6s ease-out;
+        }
+
+        /* Love Particles */
+        .love-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUpFade 2s forwards;
+            font-size: 1.2rem;
+            z-index: 10;
+        }
+
+        @keyframes floatUpFade {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 0) scale(0.5);
+            }
+
+            20% {
+                opacity: 1;
+                transform: translate(-50%, -20px) scale(1.2);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(calc(-50% + var(--x-offset, 0px)), -100px) scale(1);
+            }
+        }
+
+        .photo-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-card {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background-color: #fff;
+            padding: 10px 10px 30px 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1), opacity 0.5s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 2px;
+        }
+
+        /* Photo Placeholder */
+        .photo-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.8rem;
+            overflow: hidden;
+        }
+
+        .photo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Date Label */
+        .photo-date {
+            margin-top: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Flipped State */
+        .photo-card.flipped {
+            transform: translateX(100px) rotateZ(20deg) rotateY(180deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Stack specific rotations for messiness */
+        .photo-card:nth-child(n) {
+            transform: rotate(2deg);
+        }
+
+        .photo-card:nth-child(2n) {
+            transform: rotate(-1deg);
+        }
+
+        .photo-card:nth-child(3n) {
+            transform: rotate(3deg);
+        }
+
+        /* --- Box 17: Current Read Book Widget --- */
+        #box17 {
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1.5rem;
+            position: relative;
+            text-align: left;
+            border: 1px solid #e5e5e5;
+            /* Match Box 7 border */
+        }
+
+        .book-widget-top {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        /* 3D Book Scene */
+        .book-scene {
+            perspective: 800px;
+            width: 45px;
+            height: 65px;
+        }
+
+        .book-obj {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transform: rotateY(-15deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+
+        #box17:hover .book-obj {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+
+        .book-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #003388;
+            border-radius: 2px 4px 4px 2px;
+            transform: translateZ(-6px);
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .book-pages {
+            position: absolute;
+            width: calc(100% - 4px);
+            height: calc(100% - 4px);
+            top: 2px;
+            left: 4px;
+            background: #f5f5f5;
+            border-radius: 0 3px 3px 0;
+            transform: translateZ(-3px);
+        }
+
+        .book-pages::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05) 20%, transparent 40%, rgba(0, 0, 0, 0.05) 60%, transparent 80%, rgba(0, 0, 0, 0.05));
+        }
+
+        .book-cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #0047ba;
+            border-radius: 2px 4px 4px 2px;
+            transform-origin: left center;
+            transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transform-style: preserve-3d;
+            z-index: 5;
+            overflow: hidden;
+            box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Inner cover */
+        .book-cover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            transform: rotateY(180deg) translateZ(1px);
+            backface-visibility: hidden;
+            border-radius: 4px 2px 2px 4px;
+            z-index: 1;
+        }
+
+        /* Hover Action */
+        #box17:hover .book-cover {
+            transform: rotateY(-140deg);
+        }
+
+        /* Arrow Icon */
+        .external-icon {
+            color: #888;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        #box17:hover .external-icon {
+            transform: translate(2px, -2px);
+            color: #333;
+        }
+
+        /* Text Area */
+        .book-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .book-label {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .book-title {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111;
+            line-height: 1.3;
+        }
+
+        /* --- Box 18: Blue City Reveal --- */
+        #box18 {
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: crosshair;
+            background: #fff;
+        }
+
+        .jodhpur-base {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(60%) saturate(60%) contrast(1.1);
+            /* Subtle, desaturated sepia base */
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .jodhpur-color {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+            pointer-events: none;
+            /* Magic mask: a radial gradient that acts as a magnifying glass */
+            -webkit-mask-image: radial-gradient(circle 80px at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
+            mask-image: radial-gradient(circle 80px at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
+            opacity: 0;
+            /* Hidden until hover */
+            transition: opacity 0.3s ease;
+        }
+
+        #box18:hover .jodhpur-color {
+            opacity: 1;
+        }
+
+        /* Overlay Text */
+        .jodhpur-label {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            z-index: 3;
+            pointer-events: none;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- Box 6: Interactive Avatar --- */
+        .avatar-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #avatar-bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #avatar-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .avatar-interaction-container {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 320px;
+            transition: opacity 0.4s ease;
+        }
+
+        .glass-pill-btn {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 40px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            width: 100%;
+            color: #111;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .glass-pill-btn:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .chevron-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .glass-dropdown-menu {
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-dropdown-menu.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .avatar-q-btn {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 15px 20px;
+            text-align: left;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #222;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .avatar-q-btn:last-child {
+            border-bottom: none;
+        }
+
+        .avatar-q-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #000;
+        }
+
+        .avatar-answer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .avatar-answer-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #avatar-answer-text {
+            color: #fff;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            min-height: 80px;
+            /* Prevent button jumping */
+
+            /* Add frosted glass strictly behind the text */
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .avatar-reset-btn {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .avatar-reset-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            color: #000;
+        }
+
+        /* --- Soap Bubble Interaction --- */
+        .soap-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05) 50%, transparent 80%);
+            box-shadow:
+                inset 0 0 10px rgba(255, 255, 255, 0.5),
+                inset 10px 0 30px rgba(255, 0, 255, 0.15),
+                inset -10px 0 30px rgba(0, 255, 255, 0.15),
+                0 0 10px rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            /* So they don't block clicks */
+            z-index: 9999;
+            animation: floatUp ease-in-out forwards;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translate(calc(-50% + 20px), calc(-50% - 100px)) scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translate(calc(-50% - 20px), calc(-50% - 200px)) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* --- Box 19: Two Truths & A Lie --- */
+        .truths-container {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .truth-card {
+            flex: 1;
+            background: transparent;
+            min-height: 180px;
+            /* Force larger minimum height to prevent spilling */
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .truth-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .truth-card.flipped .truth-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .truth-card-front,
+        .truth-card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 16px 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            font-family: 'Instrument Sans', sans-serif !important;
+            /* Explicit Box 6 Typography */
+            overflow-y: auto;
+            /* Allow scroll if absolutely necessary, but padding/height should prevent */
+            scrollbar-width: none;
+        }
+
+        .truth-card-front::-webkit-scrollbar,
+        .truth-card-back::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Front Aesthetic (inspired by Box 6 unselected button state) */
+        .truth-card-front {
+            background-color: #f7f7f7;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        .truth-card:hover .truth-card-front {
+            background-color: #ececec;
+        }
+
+        .truth-card-front .truth-number {
+            font-family: 'Instrument Serif', serif !important;
+            font-size: 1.0rem;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .truth-card-front p {
+            /* Inheriting size feel from Box 6 font explicitly */
+            font-family: 'Instrument Sans', sans-serif !important;
+            font-size: 0.75rem;
+            line-height: 1.35;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* Back Aesthetic */
+        .truth-card-back {
+            color: #111;
+            transform: rotateY(180deg);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .truth-card-back p {
+            font-family: 'Instrument Sans', sans-serif !important;
+            font-size: 0.7rem;
+            line-height: 1.35;
+            margin: 0;
+            color: #444;
+        }
+
+        .truth-result {
+            font-family: 'Instrument Serif', serif !important;
+            font-size: 1.0rem;
+            margin-bottom: 6px;
+        }
+
+        .truth-card-back.truth {
+            background-color: #e4efe5;
+            border-color: #c0decd;
+        }
+
+        .truth-card-back.truth .truth-result {
+            color: #195e34;
+        }
+
+        .truth-card-back.lie {
+            background-color: #fcedec;
+            border-color: #f4c4c4;
+        }
+
+        .truth-card-back.lie .truth-result {
+            color: #a82424;
+        }
+
+        /* --- Box 15: Vertical Before/After Slider --- */
+        .ba-slider-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            cursor: ew-resize;
+            /* Horizontal resize cursor */
+            user-select: none;
+            background: #f0f0f0;
+            touch-action: pan-y;
+            /* Prevent horizontal scrolling while dragging */
+        }
+
+        .ba-bg,
+        .ba-fg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            /* Let container handle drag */
+        }
+
+        .ba-bg img,
+        .ba-fg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        /* Foreground starts clipped to 90% (Right-aligned) */
+        .ba-fg {
+            clip-path: polygon(0 0, 90% 0, 90% 100%, 0 100%);
+            z-index: 2;
+        }
+
+        /* Vertical Divider */
+        .ba-divider {
+            position: absolute;
+            top: 0;
+            left: 90%;
+            width: 4px;
+            height: 100%;
+            background: #fff;
+            transform: translateX(-50%);
+            z-index: 3;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .ba-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .ba-slider-container:active .ba-handle {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+
+        .ba-handle svg {
+            width: 16px;
+            height: 16px;
+            margin: 0 -2px;
+            opacity: 0.9;
+        }
+
+        .ba-text-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            right: 30px;
+            z-index: 5;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        #ba-text {
+            font-family: 'Instrument Sans', sans-serif !important;
+            font-size: 1.5rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+            margin: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* --- Box 14: Email Widget --- */
+        .email-widget {
+            position: relative;
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .email-widget:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .email-widget:active {
+            transform: translateY(0);
+        }
+
+        .email-widget .email-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #888;
+            transition: color 0.3s ease;
+        }
+
+        .email-widget .email-icon svg,
+        .email-widget .email-check svg,
+        .email-widget .email-copy svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .email-widget .email-check,
+        .email-widget .email-copy {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #888;
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .email-widget .email-check {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .email-widget .email-copy {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .email-widget.copied .email-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .email-widget.copied .email-copy {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .email-widget .email-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .email-widget .email-title {
+            font-family: 'Instrument Sans', sans-serif !important;
+            font-size: 1.1rem;
+            color: #111;
+            margin: 0 0 4px 0;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .email-widget .email-subtitle {
+            font-family: 'Instrument Sans', sans-serif !important;
+            font-size: 0.9rem;
+            color: #777;
+            margin: 0;
+            word-break: break-all;
+            transition: color 0.3s ease;
+        }
+
+        /* --- Box 14: Copied State --- */
+        .email-widget.copied {
+            background-color: #111 !important;
+            border-color: #111 !important;
+        }
+
+        .email-widget.copied .email-title,
+        .email-widget.copied .email-subtitle {
+            color: #fff !important;
+        }
+
+        .email-widget.copied .email-check {
+            color: #fff !important;
+        }
+
+        .email-widget.copied .email-icon {
+            color: rgba(255, 255, 255, 0.4) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">Kashish Singh</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li><a href="coming-soon.html" class="nav-link">Case Studies</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="sandbox.html" class="nav-link">Sandbox</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+    <main class="her-main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="her-hero">
+                <h1>
+                    <span class="light">Because Jack Torrance in The Shining said,</span>
+                    <span class="highlight">"All work and no play makes Jack a dull boy."</span>
+                </h1>
+            </section>
+
+            <!-- Grid Container -->
+            <div class="grid-container">
+
+                <!-- Section 1: 4 small boxes LEFT + 1 large box RIGHT -->
+                <div class="grid-section">
+                    <!-- Small boxes (01-04) -->
+                    <div class="small-boxes">
+                        <!-- Box 01 - Bio Card -->
+                        <div class="grid-item bio-card">
+                            <div class="bio-header">
+                                <div class="hamburger-icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="profile-pic">
+                                    <img src="../assets/images/profile.png" alt="Kashish Singh">
+                                </div>
+                            </div>
+                            <div class="bio-text">
+                                Auditing Hospitals in the day, Experimenting with Agentic AI by night
+                            </div>
+                        </div>
+                        <div class="grid-item proverb-box" id="item-02">
+                            <p class="proverb-text" id="daily-proverb">Words of Wisdom Loading...</p>
+                            <span class="proverb-hint">Click to shuffle</span>
+                        </div>
+                        <div class="grid-item music-card" id="item-03">
+                            <div class="music-header">
+                                <!-- Spotify Icon -->
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                    <path
+                                        d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.38C8.82 5.88 15.96 6.24 19.8 8.521c.54.3.72.96.42 1.5-.3.54-.96.72-1.5.42z" />
+                                </svg>
+                                <!-- Sound Bars Icon -->
+                                <svg class="equalizer-icon" viewBox="0 0 24 24" width="16" height="16" fill="#ccc">
+                                    <rect class="equalizer-bar bar-1" x="0" y="6" width="3" height="12" rx="1"></rect>
+                                    <rect class="equalizer-bar bar-2" x="5" y="2" width="3" height="20" rx="1"></rect>
+                                    <rect class="equalizer-bar bar-3" x="10" y="8" width="3" height="8" rx="1"></rect>
+                                    <rect class="equalizer-bar bar-4" x="15" y="4" width="3" height="16" rx="1"></rect>
+                                </svg>
+                            </div>
+                            <div class="music-info">
+                                <span class="music-artist">Coldplay</span>
+                                <span class="music-title">Viva La Vida</span>
+                            </div>
+                            <div class="music-cover">
+                                <!-- Album Art set via CSS -->
+                            </div>
+                            <audio id="audio-viva" loop>
+                                <source src="../assets/audio/viva_la_vida.mp3" type="audio/mpeg">
+                            </audio>
+                        </div>
+                        <div class="grid-item" id="box4">
+                            <img src="../assets/images/fortune-whole.png" alt="Fortune Cookie" class="cookie-img"
+                                id="cookie-img">
+                            <div class="fortune-paper" id="fortune-paper">Future looks bright</div>
+                        </div>
+                    </div>
+
+                    <!-- Large box (05) - VIDEO -->
+                    <div class="grid-item large-box video-box" id="box5">
+                        <video class="box-video" loop muted>
+                            <source src="../videos/box5.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+
+                <!-- Section: Wide Row (Box 19 [Wide] + 20 + 21) -->
+                <div class="grid-section-wide">
+                    <div class="grid-item wide-box" id="box19"
+                        style="padding: 2rem 1.5rem 1.5rem 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; background: #fafafa; overflow: hidden;">
+                        <div
+                            style="display: flex; justify-content: center; align-items: center; text-align: center; margin-bottom: 0px;">
+                            <div>
+                                <h3
+                                    style="font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 1.1rem; color: #111; margin: 0 0 4px 0; line-height: 1;">
+                                    Two Truths & A Lie</h3>
+                                <p
+                                    style="font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: #666; margin: 0;">
+                                    Get to know me. Click a card to flip it!</p>
+                            </div>
+                        </div>
+                        <div class="truths-container">
+                            <!-- Card 1 -->
+                            <div class="truth-card" onclick="this.classList.toggle('flipped')">
+                                <div class="truth-card-inner">
+                                    <div class="truth-card-front">
+                                        <div class="truth-number">1</div>
+                                        <p>Founded a magazine and led a team of 40+</p>
+                                    </div>
+                                    <div class="truth-card-back truth">
+                                        <div class="truth-result"
+                                            style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                            TRUTH</div>
+                                        <p>Founded FYI, an architectural magazine bridging industry and students.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="truth-card" onclick="this.classList.toggle('flipped')">
+                                <div class="truth-card-inner">
+                                    <div class="truth-card-front">
+                                        <div class="truth-number">2</div>
+                                        <p>Spent 100Hrs (and counting!) in clinical immersion</p>
+                                    </div>
+                                    <div class="truth-card-back truth">
+                                        <div class="truth-result"
+                                            style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                            TRUTH</div>
+                                        <p>Yep! I spent over 100 hours deeply immersed in a hospital for research.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="truth-card" onclick="this.classList.toggle('flipped')">
+                                <div class="truth-card-inner">
+                                    <div class="truth-card-front">
+                                        <div class="truth-number">3</div>
+                                        <p>Excellent at tying shoelaces.</p>
+                                    </div>
+                                    <div class="truth-card-back lie">
+                                        <div class="truth-result"
+                                            style="font-family: 'Instrument Sans', sans-serif !important; font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                            THE LIE</div>
+                                        <p>I am notoriously terrible at tying shoelaces. Thank goodness for slip-ons!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item" id="box20"
+                        style="position: relative; padding: 0; overflow: hidden; background: #fafafa; display: flex; align-items: center; justify-content: center; text-align: center; cursor: crosshair;">
+                        <!-- The Revealed Message -->
+                        <div class="scratch-reveal-content" style="z-index: 1; padding: 20px; user-select: none;">
+                            <h3
+                                style="font-family: 'Instrument Serif', serif; font-size: 1.8rem; margin-bottom: 5px; color: #111;">
+                                Spoiler alert!</h3>
+                            <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; color: #555;">(I'm
+                                currently running on 3 cups of coffee and sheer willpower ☕️)</p>
+                        </div>
+
+                        <!-- The Canvas for Scratch Overlay -->
+                        <canvas id="scratch-canvas"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; touch-action: none;"></canvas>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const canvas = document.getElementById('scratch-canvas');
+                                const ctx = canvas.getContext('2d');
+                                const revealContent = document.querySelector('.scratch-reveal-content');
+                                let isDrawing = false;
+                                let isCleared = false;
+
+                                const funMessages = [
+                                    { title: "Spoiler alert!", text: "(I'm currently running on 3 cups of coffee and sheer willpower ☕️)" },
+                                    { title: "Secret talent:", text: "(Overthinking everything and making it aesthetic 🌀)" },
+                                    { title: "Plot twist:", text: "(I'm actually just 3 raccoons inside a trench coat 🦝)" },
+                                    { title: "Error 404:", text: "(Sleep cycle not found 🥲)" },
+                                    { title: "Confession:", text: "(I have 43 tabs open right now and I need all of them 💻)" }
+                                ];
+
+                                function pickRandomMessage() {
+                                    const msg = funMessages[Math.floor(Math.random() * funMessages.length)];
+                                    revealContent.innerHTML = `
+                                        <h3 style="font-family: 'Instrument Serif', serif; font-size: 1.8rem; margin-bottom: 5px; color: #111;">${msg.title}</h3>
+                                        <p style="font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; color: #555;">${msg.text}</p>
+                                    `;
+                                }
+
+                                function resetCanvas() {
+                                    canvas.width = canvas.offsetWidth;
+                                    canvas.height = canvas.offsetHeight;
+                                    ctx.globalCompositeOperation = 'source-over';
+                                    isCleared = false;
+                                    pickRandomMessage();
+                                    fillMetallicGradient();
+                                }
+
+                                function fillMetallicGradient() {
+                                    // Silver/Metallic Gradient
+                                    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                                    gradient.addColorStop(0, '#e0e0e0');
+                                    gradient.addColorStop(0.3, '#ffffff');
+                                    gradient.addColorStop(0.5, '#cccccc');
+                                    gradient.addColorStop(0.7, '#f5f5f5');
+                                    gradient.addColorStop(1, '#a6a6a6');
+
+                                    ctx.fillStyle = gradient;
+                                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                                    // Add "Scratch me!" text centered
+                                    ctx.font = "italic 16px 'Instrument Sans', sans-serif";
+                                    ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+                                    ctx.textAlign = "center";
+                                    ctx.textBaseline = "middle";
+                                    ctx.fillText("Scratch me!", canvas.width / 2, canvas.height / 2);
+                                }
+
+                                window.addEventListener('resize', () => {
+                                    if (!isCleared) resetCanvas();
+                                });
+
+                                // Initial Setup
+                                setTimeout(resetCanvas, 100);
+
+                                function getMousePos(e) {
+                                    const rect = canvas.getBoundingClientRect();
+                                    let clientX, clientY;
+
+                                    if (e.touches && e.touches.length > 0) {
+                                        clientX = e.touches[0].clientX;
+                                        clientY = e.touches[0].clientY;
+                                    } else {
+                                        clientX = e.clientX;
+                                        clientY = e.clientY;
+                                    }
+
+                                    return {
+                                        x: clientX - rect.left,
+                                        y: clientY - rect.top
+                                    };
+                                }
+
+                                function scratch(e) {
+                                    if (!isDrawing) return;
+                                    if (e.cancelable) e.preventDefault(); // Prevent scrolling on touch devices while scratching
+
+                                    const pos = getMousePos(e);
+                                    ctx.globalCompositeOperation = 'destination-out';
+                                    ctx.beginPath();
+                                    ctx.arc(pos.x, pos.y, 25, 0, Math.PI * 2, false); // Brush size
+                                    ctx.fill();
+
+                                    checkScratchPercentage();
+                                }
+
+                                function checkScratchPercentage() {
+                                    // Check if enough is scratched to auto-clear
+                                    if (isCleared) return;
+                                    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+                                    let transparentPixels = 0;
+                                    for (let i = 3; i < pixels.length; i += 4) {
+                                        if (pixels[i] === 0) transparentPixels++;
+                                    }
+                                    const pct = (transparentPixels / (pixels.length / 4)) * 100;
+
+                                    // If 40% scratched, clear it and prepare to reset on click
+                                    if (pct > 40) {
+                                        isCleared = true;
+                                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                        // Make canvas act as a reset button
+                                        setTimeout(() => {
+                                            canvas.style.cursor = 'pointer';
+                                            canvas.addEventListener('click', function resetOnClick() {
+                                                canvas.style.cursor = 'crosshair';
+                                                resetCanvas();
+                                                canvas.removeEventListener('click', resetOnClick);
+                                            }, { once: true });
+                                        }, 500);
+                                    }
+                                }
+
+                                canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
+                                canvas.addEventListener('mousemove', scratch);
+                                canvas.addEventListener('mouseup', () => isDrawing = false);
+                                canvas.addEventListener('mouseleave', () => isDrawing = false);
+
+                                canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, { passive: false });
+                                canvas.addEventListener('touchmove', scratch, { passive: false });
+                                canvas.addEventListener('touchend', () => isDrawing = false);
+                            });
+                        </script>
+                    </div>
+                    <div class="grid-item" id="box21"
+                        style="position: relative; padding: 0; overflow: hidden; background: #fff; border: 1px solid #e5e5e5; display: flex; align-items: center; justify-content: center;">
+
+                        <!-- Canvas floods the whole box -->
+                        <canvas id="globe-canvas"
+                            style="position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; opacity: 0; transition: opacity 0.5s ease;"></canvas>
+
+                        <!-- Radial Gradient Overlay -->
+                        <div
+                            style="pointer-events: none; position: absolute; inset: 0; background: radial-gradient(circle at 50% 200%, rgba(0,0,0,0.2), rgba(255,255,255,0)); z-index: 3;">
+                        </div>
+
+                        <!-- Typewriter Label -->
+                        <div id="globe-label"
+                            style="pointer-events: none; position: absolute; bottom: 1.25rem; left: 1.25rem; z-index: 10; font-family: 'Instrument Sans', sans-serif; font-size: 0.8rem; font-weight: 500; color: #111; letter-spacing: 0.02em; opacity: 0; transition: opacity 0.3s ease; background: rgba(255,255,255,0.55); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.7); border-radius: 100px; padding: 0.35rem 0.9rem; white-space: nowrap;">
+                        </div>
+
+                        <script>
+                            (function () {
+                                const box = document.getElementById('box21');
+                                const label = document.getElementById('globe-label');
+                                const text = 'Where the work landed...';
+                                let typed = false;
+
+                                function typewrite() {
+                                    if (typed) return;
+                                    typed = true;
+                                    label.style.opacity = '1';
+                                    let i = 0;
+                                    const interval = setInterval(() => {
+                                        label.textContent = text.slice(0, i + 1);
+                                        i++;
+                                        if (i >= text.length) clearInterval(interval);
+                                    }, 45);
+                                }
+
+                                box.addEventListener('mouseenter', typewrite, { once: true });
+                            })();
+                        </script>
+
+
+                        <!-- Globe Logic -->
+                        <script type="module">
+                            import createGlobe from 'https://esm.sh/cobe';
+
+                            const canvas = document.getElementById("globe-canvas");
+                            let phi = 0;
+                            let pointerInteracting = null;
+                            let pointerInteractionMovement = 0;
+                            let r = 0;
+
+                            function updatePointerInteraction(value) {
+                                pointerInteracting = value;
+                                canvas.style.cursor = value ? "grabbing" : "grab";
+                            }
+
+                            function updateMovement(clientX) {
+                                if (pointerInteracting !== null) {
+                                    const delta = clientX - pointerInteracting;
+                                    pointerInteractionMovement = delta;
+                                    r = delta / 200;
+                                }
+                            }
+
+                            const globe = createGlobe(canvas, {
+                                devicePixelRatio: 2,
+                                width: canvas.offsetWidth * 2,
+                                height: canvas.offsetHeight * 2,
+                                phi: 0,
+                                theta: 0.3,
+                                dark: 0,
+                                diffuse: 0.4,
+                                mapSamples: 16000,
+                                mapBrightness: 1.2,
+                                baseColor: [1, 1, 1],
+                                markerColor: [251 / 255, 100 / 255, 21 / 255],
+                                glowColor: [1, 1, 1],
+                                markers: [
+                                    { location: [29.3759, 47.9774], size: 0.08 },  // Kuwait City
+                                    { location: [25.2854, 51.5310], size: 0.08 },  // Doha, Qatar
+                                    { location: [25.2048, 55.2708], size: 0.09 },  // Dubai
+                                    { location: [52.4862, -1.8904], size: 0.08 },  // Birmingham, UK
+                                    { location: [52.5200, 13.4050], size: 0.08 },  // Berlin, Germany
+                                    { location: [32.0853, 34.7818], size: 0.08 },  // Tel Aviv
+                                    { location: [12.9716, 77.5946], size: 0.09 },  // Bangalore
+                                    { location: [17.3850, 78.4867], size: 0.09 },  // Hyderabad
+                                    { location: [19.0760, 72.8777], size: 0.11 },  // Mumbai
+                                    { location: [26.2389, 73.0243], size: 0.09 },  // Jodhpur
+                                    { location: [1.3521, 103.8198], size: 0.08 },   // Singapore
+                                    { location: [42.7325, -84.5555], size: 0.08 }, // Lansing, Michigan
+                                    { location: [40.7608, -111.8910], size: 0.08 },// Salt Lake City, Utah
+                                ],
+                                onRender: (state) => {
+                                    if (!pointerInteracting) phi += 0.005;
+                                    state.phi = phi + r;
+                                    // Dynamically read live size each frame
+                                    state.width = canvas.offsetWidth * 2;
+                                    state.height = canvas.offsetHeight * 2;
+                                }
+                            });
+
+                            // Fade in after init
+                            setTimeout(() => { canvas.style.opacity = '1'; }, 100);
+
+                            // Interaction
+                            canvas.addEventListener('pointerdown', (e) => {
+                                updatePointerInteraction(e.clientX - pointerInteractionMovement);
+                            });
+                            window.addEventListener('pointerup', () => updatePointerInteraction(null));
+                            canvas.addEventListener('pointerout', () => updatePointerInteraction(null));
+                            window.addEventListener('mousemove', (e) => updateMovement(e.clientX));
+                            canvas.addEventListener('touchmove', (e) => {
+                                if (e.touches[0]) updateMovement(e.touches[0].clientX);
+                            }, { passive: true });
+                        </script>
+                    </div>
+                </div>
+
+                <!-- Section 2: 1 large box LEFT + 4 small boxes RIGHT -->
+                <div class="grid-section">
+
+                    <!-- Large box (06) - Pixar Interactive Avatar -->
+                    <div class="grid-item large-box" id="box6"
+                        style="padding: 0; position: relative; overflow: hidden; background: #fafafa;">
+                        <!-- Background Container -->
+                        <div class="avatar-bg-container">
+                            <img id="avatar-bg-image" src="../assets/images/avatar.png" alt="Kashish Avatar">
+                            <!-- Video stays hidden/paused until a question is clicked -->
+                            <video id="avatar-video" loop muted playsinline style="opacity: 0; pointer-events: none;">
+                                <source src="" type="video/mp4">
+                            </video>
+                        </div>
+
+                        <!-- Typing Answer Overlay (Hidden by default) -->
+                        <div class="avatar-answer-overlay" id="avatar-answer-overlay">
+                            <p id="avatar-answer-text"></p>
+                            <button id="avatar-reset-btn" class="avatar-reset-btn">← Ask another</button>
+                        </div>
+
+                        <!-- Hover Sound -->
+                        <audio id="avatar-hover-audio" preload="auto">
+                            <source src="../assets/audio/hover.mp3" type="audio/mpeg">
+                        </audio>
+
+                        <!-- Glassmorphism Dropdown Menu Container -->
+                        <div class="avatar-interaction-container" id="avatar-interaction-container">
+                            <!-- Floating Pill Button -->
+                            <button class="glass-pill-btn" id="glass-pill-btn">
+                                <span>Hey there, go ahead and ask me a question!</span>
+                                <svg class="chevron-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div class="glass-dropdown-menu" id="glass-dropdown-menu">
+                                <button class="avatar-q-btn" data-video="tuesday.mp4"
+                                    data-answer="Mapping complex systems into digestible insights.">How you'd find me on
+                                    a random Tuesday night?</button>
+                                <button class="avatar-q-btn" data-video="ick.mp4"
+                                    data-answer="Interfaces that look like a Dribbble post but collapse the second a real user inputs messy data.">What's
+                                    my biggest design ick?</button>
+                                <button class="avatar-q-btn" data-video="team.mp4"
+                                    data-answer="I will happily roll up my sleeves and do the heavy lifting to untangle the messiest parts of a system.">My
+                                    default setting in a team?</button>
+                                <button class="avatar-q-btn" data-video="thinking.mp4"
+                                    data-answer="Learning about Tech-Design-Business Synergy.">What keeps me up at
+                                    night?</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Small boxes (07-10) -->
+                    <div class="small-boxes">
+                        <!-- Box 07 - FLOWER GAME -->
+                        <div class="grid-item" id="box7">
+                            <div class="flower-game-container">
+                                <div class="game-message" id="flower-msg">Don't pluck the petals!</div>
+
+                                <!-- Simple 5-Petal Flower SVG -->
+                                <svg id="pixel-flower" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+
+                                    <!-- Petals (Wrapped in Groups for Rotation) -->
+                                    <g transform="rotate(0, 50, 50)">
+                                        <ellipse class="pixel-petal" data-id="1" cx="50" cy="25" rx="10" ry="20" />
+                                    </g>
+                                    <g transform="rotate(72, 50, 50)">
+                                        <ellipse class="pixel-petal" data-id="2" cx="50" cy="25" rx="10" ry="20" />
+                                    </g>
+                                    <g transform="rotate(144, 50, 50)">
+                                        <ellipse class="pixel-petal" data-id="3" cx="50" cy="25" rx="10" ry="20" />
+                                    </g>
+                                    <g transform="rotate(216, 50, 50)">
+                                        <ellipse class="pixel-petal" data-id="4" cx="50" cy="25" rx="10" ry="20" />
+                                    </g>
+                                    <g transform="rotate(288, 50, 50)">
+                                        <ellipse class="pixel-petal" data-id="5" cx="50" cy="25" rx="10" ry="20" />
+                                    </g>
+
+                                    <!-- Center Circle -->
+                                    <circle class="pixel-center" cx="50" cy="50" r="12" />
+
+                                </svg>
+
+                                <div class="game-over-screen">
+                                    <p class="final-message">Every ending marks a beginning.</p>
+                                    <button class="bloom-btn" id="bloom-btn">Bloom Again</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-item video-box" id="box8">
+                            <video class="box-video" loop muted>
+                                <source src="../videos/box8.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-overlay">
+                                <span class="overlay-text">Masala</span>
+                                <span class="overlay-text">Cutting</span>
+                                <span class="overlay-text">Twice a day</span>
+                            </div>
+                        </div>
+                        <div class="grid-item video-box" id="box9">
+                            <video class="box-video" loop muted>
+                                <source src="../videos/box9.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="grid-item" id="box10">
+                            <!-- Wrappers for Independent Axis Animation -->
+                            <div class="ball-wrapper-x">
+                                <div class="ball-wrapper-y">
+                                    <div id="pixel-ball"></div>
+                                </div>
+                            </div>
+                            <!-- Pop Quote Overlay -->
+                            <div class="pop-quote" id="pop-quote"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Wide Row (Box 17 + 18 + 16 [Wide]) -->
+                <div class="grid-section-wide">
+                    <a href="https://www.goodreads.com/book/show/9809.Invisible_Cities" target="_blank"
+                        class="grid-item" id="box17" style="text-decoration: none;">
+                        <div class="book-widget-top">
+                            <div class="book-scene">
+                                <div class="book-obj">
+                                    <div class="book-back"></div>
+                                    <div class="book-pages"></div>
+                                    <div class="book-cover">
+                                        <img src="../assets/images/pop-book.jpg" alt="The Making of Prince of Persia"
+                                            onerror="this.style.display='none'">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="external-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <div class="book-label">Current read</div>
+                            <div class="book-title">Invisible Cities<br>by Italo Calvino</div>
+                        </div>
+                    </a>
+                    <div class="grid-item" id="box18">
+                        <!-- Black and White Base -->
+                        <img src="../assets/images/jodhpur1.jpg" alt="Jodhpur" class="jodhpur-base" id="jodhpur-base">
+                        <!-- Full Color Reveal Layer -->
+                        <img src="../assets/images/jodhpur1.jpg" alt="Jodhpur Color" class="jodhpur-color"
+                            id="jodhpur-color">
+                        <!-- White Overlay Screen -->
+                        <div class="jodhpur-overlay">
+                            <span>Jodhpur through my lens</span>
+                        </div>
+                    </div>
+                    <div class="grid-item wide-box video-box" id="box16">
+                        <video class="box-video" poster="../assets/images/box16-thumbnail.png" preload="auto"
+                            playsinline loop muted>
+                            <source src="../videos/box16.mov" type="video/quicktime">
+                            <source src="../videos/box16.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+
+                <!-- Section 3: 4 small boxes LEFT + 1 large box RIGHT -->
+                <div class="grid-section">
+                    <!-- Small boxes (11-14) -->
+                    <div class="small-boxes">
+                        <!-- Box 11 - Pixel Balloon Game -->
+                        <div class="grid-item" id="box11">
+                            <div id="balloon-game-container"></div>
+                        </div>
+                        <div class="grid-item" id="box12">
+                            <div class="eye-container">
+                                <div class="eye">
+                                    <div class="pupil"></div>
+                                </div>
+                                <div class="eye">
+                                    <div class="pupil"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-item" id="box13">
+                            <div class="jar-container" id="jar-container">
+                                <img src="../assets/images/jar-static.png" alt="Message Jar" class="jar-img">
+                            </div>
+                            <!-- Message Label (Top centered, hidden until hover) -->
+                            <div class="message-label" id="msg-label">Leave a Note</div>
+
+                            <!-- Overlay -->
+                            <div class="note-overlay" id="note-overlay">
+                                <div class="sticky-note">
+                                    <textarea placeholder="Leave a note..."></textarea>
+                                    <button class="send-btn" id="send-note-btn">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-item email-widget" id="box14">
+                            <!-- Email Icon (Top Left) -->
+                            <div class="email-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+
+                            <!-- Default Copy Icon (Top Right) -->
+                            <div class="email-copy" id="email-copy">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </div>
+
+                            <!-- Success State Checkmark (Top Right - Hidden initially) -->
+                            <div class="email-check" id="email-check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+
+                            <!-- Text Content (Bottom Left) -->
+                            <div class="email-text">
+                                <p class="email-title" id="email-title">Email me</p>
+                                <p class="email-subtitle" id="email-subtitle">work.kashishsingh@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <!-- Email Widget Script -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const box14 = document.getElementById('box14');
+                                const emailTitle = document.getElementById('email-title');
+                                const emailSubtitle = document.getElementById('email-subtitle');
+                                const emailAddress = 'work.kashishsingh@gmail.com';
+                                let copyTimeout;
+
+                                box14.addEventListener('click', async () => {
+                                    try {
+                                        await navigator.clipboard.writeText(emailAddress);
+
+                                        // Visual Feedback
+                                        box14.classList.add('copied');
+                                        emailTitle.textContent = 'Copied email';
+                                        emailSubtitle.textContent = 'To clipboard';
+
+                                        // Reset after 3 seconds
+                                        clearTimeout(copyTimeout);
+                                        copyTimeout = setTimeout(() => {
+                                            box14.classList.remove('copied');
+                                            emailTitle.textContent = 'Email me';
+                                            emailSubtitle.textContent = emailAddress;
+                                        }, 3000);
+
+                                    } catch (err) {
+                                        console.error('Failed to copy text: ', err);
+                                        // Fallback or error state could be added here
+                                    }
+                                });
+                            });
+                        </script>
+                    </div>
+
+                    <!-- Large box (15) - The Closer (Vertical Slider Interaction) -->
+                    <div class="grid-item large-box" id="box15" style="padding:0; position:relative; overflow:hidden;">
+                        <!-- Slider Container -->
+                        <div class="ba-slider-container" id="ba-slider-container">
+                            <!-- Background Image (Right side normally) -->
+                            <div class="ba-bg">
+                                <img id="ba-bg-img" src="../assets/images/15-2.png" alt="Right Image">
+                            </div>
+
+                            <!-- Foreground Image (Left side) -->
+                            <div class="ba-fg" id="ba-fg">
+                                <img id="ba-fg-img" src="../assets/images/15-1.png" alt="Left Image">
+                            </div>
+
+                            <!-- Vertical Divider Line + Handle -->
+                            <div class="ba-divider" id="ba-divider">
+                                <div class="ba-handle">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2">
+                                        <polyline points="15 18 9 12 15 6"></polyline>
+                                    </svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2">
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Text Overlay -->
+                            <div class="ba-text-overlay">
+                                <p id="ba-text">From chaos...</p>
+                            </div>
+                        </div>
+
+                        <!-- Scrubber Logic -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const container = document.getElementById('ba-slider-container');
+                                const divider = document.getElementById('ba-divider');
+                                const fgClipper = document.getElementById('ba-fg');
+                                const textElem = document.getElementById('ba-text');
+
+                                const bgImg = document.getElementById('ba-bg-img');
+                                const fgImg = document.getElementById('ba-fg-img');
+
+                                const images = [
+                                    "../assets/images/15-1.png",
+                                    "../assets/images/15-2.png",
+                                    "../assets/images/15-3.png",
+                                    "../assets/images/15-4.png",
+                                    "../assets/images/15-5.png",
+                                    "../assets/images/15-6.png"
+                                ];
+
+                                const messages = [
+                                    "From chaos...",
+                                    "...to clarity.",
+                                    "I untangle the messy parts of design.",
+                                    "And turn them into seamless experiences.",
+                                    "Ready to collaborate for your next big project?",
+                                    "Let's connect and make it happen!"
+                                ];
+
+                                let isDragging = false;
+                                let nextLoadIndex = 2; // Next image to load from array
+                                let msgIndex = 0;      // Current message index
+                                let waitingForEdge = 'left'; // User must drag Left first
+
+                                const updateSlider = (clientX) => {
+                                    const rect = container.getBoundingClientRect();
+                                    let progress = (clientX - rect.left) / rect.width;
+
+                                    // Clamp bounds
+                                    if (progress < 0) progress = 0;
+                                    if (progress > 1) progress = 1;
+
+                                    const percentage = progress * 100;
+
+                                    // Visual update
+                                    divider.style.left = `${percentage}%`;
+                                    fgClipper.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+
+                                    // Edge hit logic
+                                    if (percentage >= 98 && (waitingForEdge === 'right' || waitingForEdge === 'both')) {
+                                        // Hit RIGHT edge. Foreground is 100% visible.
+                                        bgImg.src = images[nextLoadIndex];
+                                        msgIndex = (msgIndex + 1) % messages.length;
+                                        updateText(messages[msgIndex]);
+
+                                        nextLoadIndex = (nextLoadIndex + 1) % images.length;
+                                        waitingForEdge = 'left'; // User must drag Left next
+                                    }
+                                    else if (percentage <= 2 && (waitingForEdge === 'left' || waitingForEdge === 'both')) {
+                                        // Hit LEFT edge. Background is 100% visible.
+                                        fgImg.src = images[nextLoadIndex];
+                                        msgIndex = (msgIndex + 1) % messages.length;
+                                        updateText(messages[msgIndex]);
+
+                                        nextLoadIndex = (nextLoadIndex + 1) % images.length;
+                                        waitingForEdge = 'right'; // User must drag Right next
+                                    }
+                                };
+
+                                const updateText = (newText) => {
+                                    textElem.style.opacity = '0';
+                                    textElem.style.transform = 'translateY(-10px)';
+                                    setTimeout(() => {
+                                        textElem.textContent = newText;
+                                        textElem.style.opacity = '1';
+                                        textElem.style.transform = 'translateY(0)';
+                                    }, 200);
+                                };
+
+                                // Mouse Events
+                                container.addEventListener('mousedown', (e) => {
+                                    isDragging = true;
+                                    updateSlider(e.clientX);
+                                });
+
+                                window.addEventListener('mousemove', (e) => {
+                                    if (!isDragging) return;
+                                    updateSlider(e.clientX);
+                                });
+
+                                window.addEventListener('mouseup', () => {
+                                    isDragging = false;
+                                });
+
+                                // Touch Events
+                                container.addEventListener('touchstart', (e) => {
+                                    isDragging = true;
+                                    updateSlider(e.touches[0].clientX);
+                                }, { passive: true });
+
+                                window.addEventListener('touchmove', (e) => {
+                                    if (!isDragging) return;
+                                    updateSlider(e.touches[0].clientX);
+                                }, { passive: true });
+
+                                window.addEventListener('touchend', () => {
+                                    isDragging = false;
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+        </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-cta">
+          <p class="footer-cta-text">
+            <span class="footer-cta-light">Let's create something</span>
+            <span class="footer-cta-bold">amazing together!</span>
+          </p>
+          <p class="footer-cta-subtext">Architecturing scalable systems for healthcare and enterprise complexity.</p>
+        </div>
+        
+        <div class="footer-right">
+          <div class="footer-nav">
+            <ul class="footer-links">
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="coming-soon.html">Case Studies</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="sandbox.html">Sandbox</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-social">
+            <a href="tel:+919082944938" class="social-icon" aria-label="Phone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </a>
+            <a href="mailto:hello@itskashish.com" class="social-icon" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/kashish-design/" target="_blank" class="social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kashish Singh. All rights reserved.</p>
+        <div class="footer-credit">Handcrafted by <span>Kashish Singh</span></div>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Scripts -->
+    <script src="../js/navigation.js"></script>
+    <script>
+        // Video hover controls
+        function setupVideoHover(boxId) {
+            const videoBox = document.getElementById(boxId);
+            if (!videoBox) return;
+
+            const video = videoBox.querySelector('.box-video');
+            const overlay = videoBox.querySelector('.video-overlay');
+
+            if (!video) return;
+
+            // Mute by default
+            video.muted = true;
+
+            videoBox.addEventListener('mouseenter', function () {
+                video.muted = false; // Unmute on hover
+                video.play().catch(err => {
+                    console.log('Video play failed:', err);
+                });
+
+                // Trigger Overlay Animation
+                if (overlay) {
+                    overlay.classList.add('active');
+                }
+            });
+
+            videoBox.addEventListener('mouseleave', function () {
+                video.pause(); // Pause at current position
+                video.muted = true; // Mute when not hovering
+
+                // Reset Overlay Animation
+                if (overlay) {
+                    overlay.classList.remove('active');
+                }
+            });
+        }
+
+        // Initialize video boxes
+        document.addEventListener('DOMContentLoaded', () => {
+            setupVideoHover('box5');
+            // setupVideoHover('box6'); // Box 6 is now a placeholder, no video
+            setupVideoHover('box8');
+            setupVideoHover('box9');
+            setupVideoHover('box16');
+            setupVideoHover('box20');
+
+            // --- Box 18: Blue City Reveal & Photo Cycle Logic ---
+            const box18 = document.getElementById('box18');
+            const jBase = document.getElementById('jodhpur-base');
+            const jColor = document.getElementById('jodhpur-color');
+
+            if (box18 && jBase && jColor) {
+                const jodhpurImages = ['jodhpur1.jpg', 'jodhpur2.jpg', 'jodhpur3.jpg', 'jodhpur4.jpg', 'jodhpur5.jpg', 'jodhpur6.jpg'];
+                let currentJodhpurIdx = 0;
+
+                // Magic Lens Hover
+                box18.addEventListener('mousemove', (e) => {
+                    const rect = box18.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+                    jColor.style.setProperty('--x', `${x}%`);
+                    jColor.style.setProperty('--y', `${y}%`);
+                });
+
+                // Click to Cycle Photos
+                box18.addEventListener('click', () => {
+                    currentJodhpurIdx = (currentJodhpurIdx + 1) % jodhpurImages.length;
+                    const newSrc = `../assets/images/${jodhpurImages[currentJodhpurIdx]}`;
+                    jBase.src = newSrc;
+                    jColor.src = newSrc;
+                });
+            }
+
+            // --- Box 6: Interactive Avatar Logic ---
+            const pillBtn = document.getElementById('glass-pill-btn');
+            const dropdownMenu = document.getElementById('glass-dropdown-menu');
+            const avatarVideo = document.getElementById('avatar-video');
+            const avatarBgImage = document.getElementById('avatar-bg-image');
+            const answerOverlay = document.getElementById('avatar-answer-overlay');
+            const answerText = document.getElementById('avatar-answer-text');
+            const resetBtn = document.getElementById('avatar-reset-btn');
+            const chevron = pillBtn ? pillBtn.querySelector('.chevron-icon') : null;
+            const interactionContainer = document.getElementById('avatar-interaction-container');
+
+            let typingInterval;
+
+            if (pillBtn && dropdownMenu) {
+                // Toggle Dropdown
+                pillBtn.addEventListener('click', () => {
+                    dropdownMenu.classList.toggle('active');
+                    if (chevron) {
+                        chevron.style.transform = dropdownMenu.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
+                    }
+                });
+
+                // Handle Box 6 Global Hover Audio
+                const box6 = document.getElementById('box6');
+                const hoverAudio = document.getElementById('avatar-hover-audio');
+
+                if (box6 && hoverAudio) {
+                    box6.addEventListener('mouseenter', () => {
+                        hoverAudio.play().catch(e => console.log('Audio play failed:', e));
+                    });
+
+                    box6.addEventListener('mouseleave', () => {
+                        hoverAudio.pause();
+                    });
+                }
+
+                // Handle Question Clicks
+                const qBtns = document.querySelectorAll('.avatar-q-btn');
+
+                qBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const videoSrc = btn.getAttribute('data-video');
+                        const answer = btn.getAttribute('data-answer');
+
+                        // Hide Menu & Pill
+                        dropdownMenu.classList.remove('active');
+                        if (chevron) chevron.style.transform = 'rotate(0)';
+                        interactionContainer.style.opacity = '0';
+                        interactionContainer.style.pointerEvents = 'none';
+
+                        // Show Video, Hide Image Background
+                        avatarBgImage.style.opacity = '0';
+                        avatarVideo.style.opacity = '1';
+                        avatarVideo.style.pointerEvents = 'auto';
+                        avatarVideo.src = `../videos/${videoSrc}`;
+                        avatarVideo.play();
+
+                        // Show Answer Overlay and Type Text
+                        answerOverlay.classList.add('active');
+                        answerText.innerHTML = ''; // clear text
+
+                        clearInterval(typingInterval);
+                        let i = 0;
+                        typingInterval = setInterval(() => {
+                            if (i < answer.length) {
+                                answerText.innerHTML += answer.charAt(i);
+                                i++;
+                            } else {
+                                clearInterval(typingInterval);
+                            }
+                        }, 30); // 30ms per character typing speed
+                    });
+                });
+
+                // Handle Reset
+                resetBtn.addEventListener('click', () => {
+                    // Stop Video, Show Idle Image Background
+                    avatarVideo.pause();
+                    avatarVideo.style.opacity = '0';
+                    avatarVideo.style.pointerEvents = 'none';
+                    avatarBgImage.style.opacity = '1';
+
+                    // Hide Overlay
+                    answerOverlay.classList.remove('active');
+
+                    // Show Menu/Pill back
+                    interactionContainer.style.opacity = '1';
+                    interactionContainer.style.pointerEvents = 'auto';
+                });
+            }
+
+            // --- Music Player Logic ---
+            const musicBox = document.getElementById('item-03');
+            const musicAudio = document.getElementById('audio-viva');
+
+            if (musicBox && musicAudio) {
+                musicAudio.volume = 0.5; // Set volume
+
+                musicBox.addEventListener('mouseenter', () => {
+                    musicAudio.play().catch(e => console.log('Audio play failed:', e));
+                });
+
+                musicBox.addEventListener('mouseleave', () => {
+                    musicAudio.pause();
+                    musicAudio.currentTime = 0; // Reset to start (optional) or pause? User said "like its playing". Usually pause. 
+                    // Let's pause. reset might be annoying.
+                });
+            }
+
+            // --- Design Code Shuffle ---
+
+            const designProverbs = [
+                "\"Good design is as little design as possible.\" — Dieter Rams",
+                "\"Form follows function.\" — Louis Sullivan",
+                "\"Design is intelligence made visible.\" — Alina Wheeler",
+                "\"Simplicity is the ultimate sophistication.\" — Leonardo da Vinci",
+                "\"Design is not just what it looks like. Design is how it works.\" — Steve Jobs",
+                "\"Recognizing the need is the primary condition for design.\" — Charles Eames",
+                "\"Digital design is like painting, except the paint never dries.\" — Neville Brody",
+                "\"Whitespace is like air: it is necessary for design to breathe.\"",
+                "\"Make it simple, but significant.\" — Don Draper",
+                "\"Accessible design is good design.\"",
+                "\"Styles come and go. Good design is a language, not a style.\" — Massimo Vignelli"
+            ];
+
+            const proverbBox = document.getElementById('item-02');
+            const proverbText = document.getElementById('daily-proverb');
+            let hasLoaded = false; // Flag to track if we've loaded the first quote
+
+            if (proverbBox && proverbText) {
+
+                // Shuffle/Glitch Effect
+                const shuffleText = (finalText) => {
+                    let iterations = 0;
+                    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+
+                    const interval = setInterval(() => {
+                        proverbText.textContent = finalText
+                            .split('')
+                            .map((letter, index) => {
+                                if (index < iterations) {
+                                    return finalText[index];
+                                }
+                                return characters[Math.floor(Math.random() * characters.length)];
+                            })
+                            .join('');
+
+                        if (iterations >= finalText.length) {
+                            clearInterval(interval);
+                        }
+
+                        iterations += 1;
+                    }, 22); // Tuned to 22ms (Faster than 35, slower than 15)
+                }
+
+                const generateQuote = () => {
+                    const randomQuote = designProverbs[Math.floor(Math.random() * designProverbs.length)];
+                    shuffleText(randomQuote);
+                    hasLoaded = true;
+                    // Ensure robust class addition
+                    if (!proverbBox.classList.contains('has-quote')) {
+                        proverbBox.classList.add('has-quote');
+                    }
+                };
+
+                // Hover Interaction
+                proverbBox.addEventListener('mouseenter', () => {
+                    if (!hasLoaded) {
+                        generateQuote();
+                    } else {
+                        // Optional: Glitch effect on hover (scramble current text)
+                        // shuffleText(proverbText.textContent); 
+                    }
+                });
+
+                // Click Interaction
+                proverbBox.addEventListener('click', () => {
+                    generateQuote();
+                });
+            }
+
+            // --- Flower Game Logic (Box 7) ---
+            const initFlowerGame = () => {
+                const gameBox = document.getElementById('box7');
+                const petals = document.querySelectorAll('.pixel-petal');
+                const bloomBtn = document.getElementById('bloom-btn');
+                const flowerMsg = document.getElementById('flower-msg');
+                let pluckedCount = 0;
+                const totalPetals = petals.length;
+
+                const messages = [
+                    "Don't pluck the petals!", // 0 (Initial - not used in update)
+                    "I said Don't!",
+                    "Hey, that tickles!",
+                    "I need those for photosynthesis...",
+                    "You're very persistent.",
+                    "Is there a prize inside?",
+                    "Getting chilly...",
+                    "Last petal standing!"
+                ];
+
+                if (!gameBox) return;
+
+                petals.forEach(petal => {
+                    petal.addEventListener('click', (e) => {
+                        if (petal.classList.contains('plucked')) return;
+
+                        // Pluck visual
+                        petal.classList.add('plucked');
+                        pluckedCount++;
+
+                        // Update Message
+                        if (pluckedCount < totalPetals) {
+                            flowerMsg.textContent = messages[pluckedCount] || "Stop it!";
+                            // Shake effect for emphasis?
+                            flowerMsg.style.transform = "translateY(0) translateX(2px)";
+                            setTimeout(() => flowerMsg.style.transform = "translateY(0) translateX(-2px)", 50);
+                            setTimeout(() => flowerMsg.style.transform = "translateY(0)", 100);
+                        }
+
+                        // Feedback "Ouch!"
+                        showFeedback(e.clientX, e.clientY);
+
+                        // Check Game Over
+                        if (pluckedCount >= totalPetals) {
+                            setTimeout(() => {
+                                gameBox.classList.add('game-over');
+                            }, 500);
+                        }
+                    });
+                });
+
+                function showFeedback(x, y) {
+                    const feedback = document.createElement('div');
+                    feedback.classList.add('ouch-feedback');
+                    feedback.innerText = "Ouch!";
+
+                    // Position relative to viewport, but we need it absolute in body or fixed?
+                    // Let's use Fixed to be safe on top of everything, then remove.
+                    feedback.style.position = 'fixed'; // Safe bet
+                    feedback.style.left = x + 'px';
+                    feedback.style.top = y + 'px';
+
+                    document.body.appendChild(feedback);
+
+                    // Clean up
+                    setTimeout(() => {
+                        feedback.remove();
+                    }, 800);
+                }
+
+                // Reset Game
+                if (bloomBtn) {
+                    bloomBtn.addEventListener('click', () => {
+                        // Remove game over state
+                        gameBox.classList.remove('game-over');
+
+                        // Reset petals
+                        petals.forEach(petal => {
+                            petal.classList.remove('plucked');
+                        });
+
+                        pluckedCount = 0;
+                        flowerMsg.textContent = messages[0]; // Reset message
+                    });
+                }
+                const box10 = document.getElementById('box10');
+                if (box10) {
+                    const ball = box10.querySelector('#pixel-ball');
+                    const wrapperX = box10.querySelector('.ball-wrapper-x');
+                    const wrapperY = box10.querySelector('.ball-wrapper-y');
+                    const quoteDisplay = box10.querySelector('#pop-quote');
+                    let currentScale = 1;
+                    let isPopping = false;
+
+                    const quirkyQuotes = [
+                        "Final_Final_v12.psd",
+                        "Make the logo bigger?",
+                        "Lorem Ipsum Dolor AHHH",
+                        "Can we try another font?",
+                        "Exporting... 99%...",
+                        "Pixel perfect paranoia",
+                        "Did you save?",
+                        "Just one more tweak...",
+                        "Clipping Mask Error",
+                        "Design.exe stopped working"
+                    ];
+
+                    const grow = () => {
+                        if (isPopping || !box10.classList.contains('active')) return;
+                        currentScale += 0.3; // Growth rate per bounce
+                        ball.style.transform = `scale(${currentScale})`;
+
+                        // Speed Ramp - Faster as it grows
+                        // Base duration: X=1.5s, Y=1.2s. Reduce by ratio.
+                        const maxScale = 12;
+                        const ratio = Math.min(currentScale / maxScale, 1);
+                        const speedFactor = 1 - (ratio * 0.7); // Down to 30% duration
+
+                        wrapperX.style.animationDuration = `${1.5 * speedFactor}s`;
+                        wrapperY.style.animationDuration = `${1.2 * speedFactor}s`;
+
+                        // Pop Threshold
+                        if (currentScale > maxScale) {
+                            pop();
+                        }
+                    };
+
+                    const pop = () => {
+                        isPopping = true;
+
+                        // Explosion visual
+                        ball.style.transition = "transform 0.1s ease, opacity 0.1s ease";
+                        ball.style.transform = `scale(20)`;
+                        ball.style.opacity = "0";
+                        box10.classList.add('shake');
+
+                        // Show Quote
+                        setTimeout(() => {
+                            const randomQuote = quirkyQuotes[Math.floor(Math.random() * quirkyQuotes.length)];
+                            quoteDisplay.textContent = randomQuote;
+                            quoteDisplay.classList.add('visible');
+                        }, 100);
+
+                        // Reset Sequence
+                        setTimeout(() => {
+                            // Reset Box State
+                            box10.classList.remove('active');
+                            box10.classList.remove('shake');
+                            quoteDisplay.classList.remove('visible');
+
+                            // Reset Ball Styles
+                            ball.style.transition = "none";
+                            ball.style.transform = "scale(1)";
+                            ball.style.opacity = "1";
+                            currentScale = 1;
+
+                            // Reset Animation Speeds
+                            wrapperX.style.animationDuration = "1.5s";
+                            wrapperY.style.animationDuration = "1.2s";
+
+                            isPopping = false;
+                        }, 3000); // How long quote stays visible
+                    };
+
+                    // Listen for bounces (animation loops)
+                    wrapperX.addEventListener('animationiteration', grow);
+                    wrapperY.addEventListener('animationiteration', grow);
+
+                    box10.addEventListener('click', () => {
+                        if (isPopping) return;
+                        box10.classList.toggle('active');
+                        // Manual toggle reset
+                        if (!box10.classList.contains('active')) {
+                            currentScale = 1;
+                            ball.style.transform = "scale(1)";
+                            wrapperX.style.animationDuration = "1.5s";
+                            wrapperY.style.animationDuration = "1.2s";
+                        }
+                    });
+                }
+            };
+
+            const initBalloonGame = () => {
+                const box11 = document.getElementById('box11');
+                const container = document.getElementById('balloon-game-container');
+                if (!box11 || !container) return;
+
+                const baseThoughts = [
+                    "I write", "research", "I empathy", "I map systems", "I design",
+                    "I collaborate", "I prototype", "I deliver", "I critique", "I care"
+                ];
+
+                // Shuffle the words
+                const thoughts = [...baseThoughts].sort(() => Math.random() - 0.5);
+                let poppedCount = 0;
+
+                const balloonColors = ['#FF0000', '#DC143C', '#B22222', '#FF4500', '#FF6347'];
+
+                const createBalloonSVG = (color) => {
+                    const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" viewBox="0 0 20 25" shape-rendering="crispEdges">
+  <path d="M6 1 h8 v1 h2 v2 h1 v6 h-1 v3 h-2 v1 h-2 v1 h-4 v-1 h-2 v-1 h-2 v-3 h-1 v-6 h1 v-2 h2 v-1 Z" fill="${color}" />
+  <path d="M6 1 h8 M14 2 h2 M16 4 h1 M17 10 h-1 M16 13 h-2 M14 14 h-2 M12 15 h-4 M8 14 h-2 M6 13 h-2 M4 10 h-1 M3 4 h1 M4 2 h2" fill="none" stroke="black" stroke-width="0.5" />
+  <rect x="9" y="15" width="2" height="1" fill="black" />
+  <path d="M10 16 v5" stroke="black" stroke-width="1" stroke-dasharray="2,1" />
+  <rect x="5" y="3" width="2" height="2" fill="rgba(255,255,255,0.5)" />
+</svg>`;
+                    return `data:image/svg+xml;base64,${btoa(svgString)}`;
+                };
+
+                // Create success message overlay
+                const successOverlay = document.createElement('div');
+                successOverlay.classList.add('box11-success');
+                successOverlay.innerHTML = `I swiftly respond to emails.<br>Write Now!`;
+                box11.appendChild(successOverlay);
+
+                const spawnBalloonWithInfiniteLoop = (thoughtText) => {
+                    const balloon = document.createElement('div');
+                    balloon.classList.add('pixel-balloon');
+
+                    // Loop animation infinitely instead of recreating elements
+                    balloon.style.animationIterationCount = "infinite";
+
+                    // Random styling
+                    const color = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+                    balloon.style.backgroundImage = `url('${createBalloonSVG(color)}')`;
+                    balloon.style.backgroundRepeat = 'no-repeat';
+                    balloon.style.backgroundSize = 'contain';
+
+                    // Random position and duration
+                    const left = Math.random() * 80 + 10;
+                    const duration = Math.random() * 3 + 3; // 3s to 6s
+
+                    balloon.style.left = `${left}%`;
+                    balloon.style.animationDuration = `${duration}s`;
+
+                    let isPopped = false;
+
+                    balloon.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (isPopped) return;
+                        isPopped = true;
+
+                        // Visual Pop
+                        balloon.style.transition = "transform 0.1s, opacity 0.1s";
+                        balloon.style.transform = "scale(1.5)";
+                        balloon.style.opacity = "0";
+
+                        setTimeout(() => balloon.remove(), 100);
+
+                        // Show Thought
+                        const thought = document.createElement('div');
+                        thought.classList.add('designer-thought');
+                        thought.innerText = thoughtText;
+
+                        // Reliable positioning based on balloon element
+                        const rect = balloon.getBoundingClientRect();
+                        thought.style.position = 'fixed';
+                        thought.style.left = `${rect.left + rect.width / 2}px`;
+                        thought.style.top = `${rect.top}px`;
+                        thought.style.transform = 'translate(-50%, -10px)';
+
+                        document.body.appendChild(thought);
+                        setTimeout(() => thought.remove(), 1000);
+
+                        // Check completion
+                        poppedCount++;
+                        if (poppedCount === baseThoughts.length) {
+                            setTimeout(() => {
+                                successOverlay.classList.add('visible');
+                            }, 500);
+                        }
+                    });
+
+                    container.appendChild(balloon);
+                };
+
+                // Spawn exactly 10 balloons staggered over time
+                thoughts.forEach((thoughtText, index) => {
+                    setTimeout(() => spawnBalloonWithInfiniteLoop(thoughtText), index * 800);
+                });
+            };
+
+            initFlowerGame();
+            initBalloonGame();
+
+            // --- Fortune Cookie Logic (Box 4) ---
+            const initFortuneCookie = () => {
+                const box4 = document.getElementById('box4');
+                const cookieImg = document.getElementById('cookie-img');
+                const fortunePaper = document.getElementById('fortune-paper');
+
+                if (!box4 || !cookieImg || !fortunePaper) return;
+
+                let isCracked = false;
+
+                const fortunes = [
+                    "A well-audited dashboard is in your future; the data will finally make sense.",
+                    "Your most tangled legacy systems will soon be untangled with elegant logic.",
+                    "You will soon hand off a complex problem and actually be able to breathe easy.",
+                    "A designer with a founder's mindset is about to enter your orbit.",
+                    "Your toughest business constraints will soon become your best features.",
+                    "Clinical precision is about to elevate your next major product launch.",
+                    "A highly scalable, unbreakable design system is in your immediate future.",
+                    "Your most intimidating design backlog is about to shrink rapidly.",
+                    "Those messy edge cases will soon be handled without a single crisis.",
+                    "Your product's structural foundation is about to get a masterful upgrade."
+                ];
+
+                box4.addEventListener('click', () => {
+                    if (!isCracked) {
+                        // Crack it
+                        cookieImg.src = "../assets/images/fortune-cracked.png";
+
+                        // Pick Fortune
+                        const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+                        fortunePaper.textContent = randomFortune;
+
+                        // Show Paper
+                        fortunePaper.classList.add('visible');
+
+                        isCracked = true;
+                    } else {
+                        // Reset
+                        cookieImg.src = "../assets/images/fortune-whole.png";
+                        fortunePaper.classList.remove('visible');
+
+                        isCracked = false;
+                    }
+                });
+            };
+            initFortuneCookie();
+
+            // --- Music Player Logic (Box 3) ---
+            const initMusicPlayerHover = () => {
+                const box3 = document.getElementById('item-03');
+                const audioViva = document.getElementById('audio-viva');
+                if (box3 && audioViva) {
+                    let isPlaying = false;
+
+                    const playAudio = () => {
+                        audioViva.play().then(() => {
+                            isPlaying = true;
+                        }).catch(e => {
+                            console.log("Audio play prevented strictly by browser autoplay policy until user interaction.", e);
+                        });
+                    };
+
+                    box3.addEventListener('mouseenter', playAudio);
+
+                    box3.addEventListener('mouseleave', () => {
+                        if (isPlaying) {
+                            audioViva.pause();
+                            audioViva.currentTime = 0; // Reset sound on leave
+                            isPlaying = false;
+                        }
+                    });
+
+                    // Required fallback because browser blocks hover audio until the user clicks *somewhere* on the page
+                    box3.addEventListener('click', () => {
+                        if (!isPlaying) playAudio();
+                    });
+                }
+            };
+            initMusicPlayerHover();
+
+            // --- Message in a Bottle Logic (Box 13) ---
+            const initMessageJar = () => {
+                const box13 = document.getElementById('box13');
+                const overlay = document.getElementById('note-overlay');
+                const sendBtn = document.getElementById('send-note-btn');
+                const textarea = overlay.querySelector('textarea');
+                const container = document.getElementById('jar-container');
+
+                if (!box13 || !overlay || !sendBtn) return;
+
+                // Open Overlay
+                box13.addEventListener('click', (e) => {
+                    if (e.target === overlay || e.target.closest('.sticky-note')) return;
+                    overlay.classList.add('active');
+                    textarea.focus();
+                });
+
+                // Close on background click
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        overlay.classList.remove('active');
+                    }
+                });
+
+                // Send Note
+                sendBtn.addEventListener('click', () => {
+                    const message = textarea.value.trim();
+                    if (message) {
+                        // 1. Close Overlay
+                        overlay.classList.remove('active');
+                        textarea.value = ''; // Clear
+
+                        // 2. Animate "falling" note
+                        const fallingNote = document.createElement('div');
+                        fallingNote.classList.add('falling-note');
+                        box13.appendChild(fallingNote); // Append to glass jar container? No, box13 is better context
+
+                        // 3. Trigger Jar Bounce & Particles (Excitement!)
+                        setTimeout(() => {
+                            // Bounce
+                            const jarContainer = document.getElementById('jar-container');
+                            if (jarContainer) {
+                                jarContainer.classList.add('jar-bounce');
+                                setTimeout(() => jarContainer.classList.remove('jar-bounce'), 600);
+                            }
+
+                            // Particles
+                            for (let i = 0; i < 6; i++) {
+                                const particle = document.createElement('div');
+                                particle.classList.add('love-particle');
+                                particle.textContent = i % 2 === 0 ? '❤️' : '✨';
+                                particle.style.left = '50%';
+                                particle.style.top = '50%';
+                                // Random X offset for spread
+                                const randomX = (Math.random() * 60 - 30) + 'px';
+                                particle.style.setProperty('--x-offset', randomX);
+                                particle.style.animationDelay = (Math.random() * 0.3) + 's';
+                                box13.appendChild(particle);
+                                setTimeout(() => particle.remove(), 2000);
+                            }
+
+                            fallingNote.remove();
+                        }, 1000); // Wait for fall animation (1s)
+
+                        // 4. Update Label
+                        const label = box13.querySelector('#msg-label');
+                        if (label) {
+                            label.textContent = "Message Received";
+                            label.classList.add('sent'); // Dark style
+                            label.style.opacity = '1';
+
+                            // Reset after delay
+                            setTimeout(() => {
+                                label.style.opacity = '';
+                                label.classList.remove('sent');
+                                label.textContent = "Leave a Note";
+                            }, 3000);
+                        }
+
+                        console.log("Message dropped:", message);
+
+                        // TODO: Send to backend (EmailJS later)
+                        console.log("Message sent:", message);
+                    }
+                });
+            };
+            initMessageJar();
+
+            // --- Flipping Calendar Logic (Box 4) ---
+            const initCalendar = () => {
+                const stackContainer = document.getElementById('calendar-stack');
+                if (!stackContainer) return;
+
+                const photos = [
+                    { date: "OCT 14", label: "Placeholder" },
+                    { date: "OCT 15", label: "Placeholder" },
+                    { date: "OCT 16", label: "Placeholder" },
+                    { date: "OCT 17", label: "Placeholder" },
+                    { date: "OCT 18", label: "Placeholder" }
+                ];
+
+                // Create cards
+                photos.forEach((photo, index) => {
+                    const card = document.createElement('div');
+                    card.classList.add('photo-card');
+                    card.style.zIndex = photos.length - index; // Top first
+
+                    card.innerHTML = `
+                        <div class="photo-img">
+                             <span>${photo.label}</span>
+                        </div>
+                        <div class="photo-date">${photo.date}</div>
+                    `;
+
+                    // Click to flip
+                    card.addEventListener('click', () => {
+                        card.classList.add('flipped');
+
+                        // Move to bottom after animation to cycle?
+                        // For now, let's just let them fly away. 
+                        // If we want infinite, we append to bottom after delay.
+                        setTimeout(() => {
+                            stackContainer.insertBefore(card, stackContainer.firstChild);
+                            card.classList.remove('flipped');
+                            card.style.zIndex = 0; // Temp, logic needs to reset Z-indices or just rely on DOM order
+                            resetZIndexes();
+                        }, 600); // Wait for transition
+                    });
+
+                    stackContainer.appendChild(card);
+                });
+
+                function resetZIndexes() {
+                    const cards = Array.from(stackContainer.children);
+                    cards.forEach((card, i) => {
+                        card.style.zIndex = i + 1; // Base Z-index on new order (bottom is 0, top is max)
+                    });
+                }
+            };
+            // initCalendar(); // Disabled legacy placeholder logic
+
+            // --- Pixel Eye Logic (Box 12) ---
+            const initPixelEye = () => {
+                const box12 = document.getElementById('box12');
+                if (!box12) return;
+
+                const eyes = box12.querySelectorAll('.eye');
+
+                document.addEventListener('mousemove', (e) => {
+                    eyes.forEach(eye => {
+                        const rect = eye.getBoundingClientRect();
+                        const eyeCenterX = rect.left + rect.width / 2;
+                        const eyeCenterY = rect.top + rect.height / 2;
+
+                        const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
+                        const maxDist = 8;
+                        const dist = Math.min(Math.hypot(e.clientX - eyeCenterX, e.clientY - eyeCenterY), maxDist);
+
+                        const pupilX = Math.cos(angle) * dist;
+                        const pupilY = Math.sin(angle) * dist;
+
+                        const pupil = eye.querySelector('.pupil');
+                        pupil.style.transform = `translate(calc(-50% + ${pupilX}px), calc(-50% + ${pupilY}px))`;
+                    });
+                });
+            };
+            initPixelEye();
+
+            // --- Box 15: Share/Collaborate Ticket Logic ---
+            const initCollaborateTicket = () => {
+                const ticket = document.getElementById('collab-ticket');
+                const successMsg = document.getElementById('copy-success');
+
+                if (!ticket) return;
+
+                ticket.addEventListener('click', () => {
+                    // 1. Stamp Effect
+                    ticket.classList.add('stamped');
+
+                    // 2. Copy Email
+                    const email = "work.kashishsingh@gmail.com";
+                    navigator.clipboard.writeText(email).then(() => {
+                        // 3. Show Success Msg
+                        successMsg.classList.add('visible');
+                        successMsg.textContent = "Email Copied! Ready to build?";
+
+                        // Reset after delay
+                        setTimeout(() => {
+                            ticket.classList.remove('stamped');
+                            successMsg.classList.remove('visible');
+                        }, 3000);
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        // Fallback
+                        successMsg.textContent = "Click 'Contact' to email me!";
+                        successMsg.classList.add('visible');
+                    });
+                });
+
+                // 3D Tilt Effect
+                const container = document.querySelector('.ticket-container');
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * -10; // Max 10deg
+                    const rotateY = ((x - centerX) / centerX) * 10;
+
+                    ticket.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    ticket.style.transform = 'rotateX(0) rotateY(0)';
+                });
+                // --- Soap Bubbles on Background Click ---
+                document.addEventListener('click', function (e) {
+                    // Check if the click was inside a .grid-item or .navbar
+                    if (e.target.closest('.grid-item') || e.target.closest('.navbar') || e.target.closest('.cv-button') || e.target.closest('.mobile-menu-toggle')) {
+                        return; // Ignore clicks inside boxes or UI elements
+                    }
+
+                    createBubble(e.pageX, e.pageY);
+                });
+
+                function createBubble(x, y) {
+                    const bubble = document.createElement('div');
+                    bubble.classList.add('soap-bubble');
+
+                    // Random size between 15px and 120px for high variance
+                    const size = Math.random() * 105 + 15;
+                    bubble.style.width = `${size}px`;
+                    bubble.style.height = `${size}px`;
+
+                    // Position at click coordinates
+                    bubble.style.left = `${x}px`;
+                    bubble.style.top = `${y}px`;
+
+                    // Randomize animation duration based somewhat on size (bigger bubbles float slightly slower)
+                    const speedVariance = Math.random() * 2 + 2;
+                    bubble.style.animationDuration = `${speedVariance + (size / 40)}s`;
+
+                    document.body.appendChild(bubble);
+
+                    // Remove bubble after animation ends
+                    setTimeout(() => {
+                        bubble.remove();
+                    }, (speedVariance + (size / 40)) * 1000);
+                }
+
+            };
+            initCollaborateTicket();
+
+        }); // End DOMContentLoaded
+    </script>
+</body>
+
+</html>

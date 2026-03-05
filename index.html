@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Kashish Singh - UX Strategist & Designer. Humanizing complexity through strategic AI and inclusive AX.">
+  <title>Kashish Singh | UX Strategist & Designer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/mona-sans@5.2.8/index.min.css" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css?v=1772570643">
+  <style>
+    /* Homepage specific styles */
+    .hero-split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 2rem;
+      align-items: end;
+      min-height: calc(100vh - 80px);
+      padding-top: 60px;
+      padding-bottom: 2rem;
+    }
+
+    .hero-content {
+      text-align: left;
+      padding-bottom: 6rem;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 600px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 150px;
+      background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1);
+      transition: transform 0.3s ease-out;
+    }
+
+    /* Green online indicator dot */
+    .online-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .green-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #22c55e;
+      border-radius: 50%;
+      position: relative;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .green-dot::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background-color: #22c55e;
+      border-radius: 50%;
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      }
+
+      50% {
+        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+      }
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-tag {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      letter-spacing: 0.02em;
+      transition: all 0.3s ease;
+    }
+
+    .hero-tag:hover {
+      color: var(--color-text);
+    }
+
+    .hero-tag-separator {
+      color: var(--color-border);
+      font-weight: 300;
+    }
+
+    .featured-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .featured-header h2 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .view-all {
+      color: var(--color-text-secondary);
+      font-size: 0.9375rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 6rem;
+    }
+
+    .project-card {
+      border-radius: 20px;
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .project-info {
+      padding: 1.5rem;
+    }
+
+    .project-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--color-text);
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .project-tag {
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+    }
+
+    .services-section {
+      padding: 6rem 0;
+      background-color: var(--color-bg-secondary);
+    }
+
+    .services-intro {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+
+    .services-intro h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: var(--transition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      border-color: var(--color-text);
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Operational Standards Section */
+    .standards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .standard-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .standard-card:hover {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .standard-card:hover .standard-title,
+    .standard-card:hover .standard-number {
+      color: var(--color-bg);
+    }
+
+    .standard-card:hover .standard-subtitle {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .standard-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .standard-number {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+
+    .standard-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      transition: color 0.3s ease;
+    }
+
+    .standard-subtitle {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 1rem;
+      line-height: 1.6;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+
+
+    @media (max-width: 768px) {
+      .standards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-split {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero-image {
+        height: 400px;
+        order: -1;
+      }
+
+      .project-grid,
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Featured Case Study Section - Editorial Style */
+    .featured-section {
+      padding: 100px 0;
+    }
+
+    .featured-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 3rem;
+      display: block;
+    }
+
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 0;
+      background: var(--color-bg-secondary);
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      text-decoration: none;
+      transition: transform var(--duration-medium) var(--ease-premium);
+      margin-bottom: 2rem;
+    }
+
+    .featured-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .featured-image-wrapper {
+      position: relative;
+      height: 540px;
+      overflow: hidden;
+    }
+
+    .featured-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--duration-slow) var(--ease-premium);
+    }
+
+    .featured-card:hover .featured-image-wrapper img {
+      transform: scale(1.04);
+    }
+
+    .featured-content {
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--color-bg-secondary);
+      position: relative;
+    }
+
+    .featured-meta-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .featured-title {
+      font-size: 2.25rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .featured-tags {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .featured-description {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--color-text-secondary);
+      margin: 1.5rem 0 2.5rem 0;
+      max-width: 40ch;
+    }
+
+    .featured-cta-arrow {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--color-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text);
+      transition: all var(--duration-medium) var(--ease-premium);
+      border: 1px solid var(--color-border);
+      position: absolute;
+      bottom: 4rem;
+      right: 4rem;
+    }
+
+    .featured-card:hover .featured-cta-arrow {
+      background-color: var(--color-text);
+      color: var(--color-bg);
+      transform: translate(2px, -2px);
+      border-color: var(--color-text);
+    }
+
+    .featured-cta-arrow svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .featured-card {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-image-wrapper {
+        height: 400px;
+      }
+
+      .featured-content {
+        padding: 3rem;
+      }
+
+      .featured-cta-arrow {
+        bottom: 3rem;
+        right: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Kashish Singh</a>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+      <ul class="nav-menu">
+        <li><a href="pages/coming-soon.html" class="nav-link">Case Studies</a></li>
+        <li><a href="pages/about.html" class="nav-link">About</a></li>
+        <li><a href="pages/sandbox.html" class="nav-link">Sandbox</a></li>
+        <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section style="padding: 0;">
+    <div class="container">
+      <div class="hero-split">
+        <div class="hero-content">
+          <p class="hero-tagline online-indicator">
+            <span class="green-dot"></span>
+            Graduating as a Master of Design by May '26 | IIT J
+          </p>
+          <h1>Architecturing scalable systems for healthcare and enterprise complexity</h1>
+          <div class="hero-tags">
+            <span class="hero-tag">Product Design</span>
+            <span class="hero-tag-separator">|</span>
+            <span class="hero-tag">UX Strategy</span>
+            <span class="hero-tag-separator">|</span>
+            <span class="hero-tag">Business Alignment</span>
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <a href="pages/404.html" class="btn">Download CV</a>
+            <a href="pages/coming-soon.html" class="btn btn-secondary">See Case Studies</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="assets/images/profile.png" alt="Kashish Singh">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Case Study -->
+  <section class="featured-section">
+    <div class="container">
+      <span class="featured-label">Featured Case Study</span>
+      <a href="pages/coming-soon.html" class="featured-card">
+        <div class="featured-image-wrapper">
+          <img src="assets/images/dialysis-app.png" alt="Dialysis Care Management System">
+        </div>
+        <div class="featured-content">
+          <div class="featured-meta-left">
+            <h2 class="featured-title">Dialysis Safety Interface</h2>
+            <p class="featured-tags">NURSE WORKFLOW • ERROR PREVENTION</p>
+          </div>
+          <p class="featured-description">Streamlining complex clinical workflows for dialysis centers, reducing
+            cognitive load for healthcare providers.</p>
+          <div class="featured-cta-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M5 19L19 5M19 5v10M19 5H9" />
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="pages/coming-soon.html" class="featured-card">
+        <div class="featured-image-wrapper">
+          <img src="assets/images/ctvs-icu.jpeg" alt="Digital Charting for CTVS ICU">
+        </div>
+        <div class="featured-content">
+          <div class="featured-meta-left">
+            <h2 class="featured-title">Digital Charting for CTVS ICU</h2>
+            <p class="featured-tags">ICU WORKFLOW • CRITICAL CARE</p>
+          </div>
+          <p class="featured-description">Optimizing life-critical documentation for cardiothoracic surgery recovery —
+            reducing charting time while increasing data accuracy.</p>
+          <div class="featured-cta-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M5 19L19 5M19 5v10M19 5H9" />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Operational Standards Section -->
+
+  <!-- Operational Standards Section -->
+  <section class="section" style="padding: 8rem 0;">
+    <div class="container">
+      <div class="services-intro" style="margin-bottom: 3rem;">
+        <h2>Every project is built on a foundation of intentional design principles that ensure scalability, clarity,
+          and user-centered thinking</h2>
+        <p>The operational standards I uphold in every project</p>
+      </div>
+
+      <div class="standards-grid">
+        <!-- Standard 1 -->
+        <div class="standard-card">
+          <div class="standard-number">01</div>
+          <h3 class="standard-title">0-TO-1 ARCHITECTURE</h3>
+          <p class="standard-subtitle">Transforming ambiguous problem spaces into scalable, deterministic product logic.
+          </p>
+        </div>
+
+        <!-- Standard 2 -->
+        <div class="standard-card">
+          <div class="standard-number">02</div>
+          <h3 class="standard-title">STRATEGIC SENSEMAKING</h3>
+          <p class="standard-subtitle">Decoding complex ecosystem data to identify high-value intervention points.</p>
+        </div>
+
+        <!-- Standard 3 -->
+        <div class="standard-card">
+          <div class="standard-number">03</div>
+          <h3 class="standard-title">COGNITIVE ERGONOMICS</h3>
+          <p class="standard-subtitle">Mitigating cognitive overload in high-stress, safety-critical environments.</p>
+        </div>
+
+        <!-- Standard 4 -->
+        <div class="standard-card">
+          <div class="standard-number">04</div>
+          <h3 class="standard-title">DEFENSIVE DESIGN</h3>
+          <p class="standard-subtitle">Pre-empting human error through rigid, fail-safe system constraints.</p>
+        </div>
+
+        <!-- Standard 5 -->
+        <div class="standard-card">
+          <div class="standard-number">05</div>
+          <h3 class="standard-title">BUSINESS ALIGNMENT</h3>
+          <p class="standard-subtitle">Synchronizing user needs with core business KPIs and operational ROI.</p>
+        </div>
+
+        <!-- Standard 6 -->
+        <div class="standard-card">
+          <div class="standard-number">06</div>
+          <h3 class="standard-title">SYSTEMIC EMPATHY</h3>
+          <p class="standard-subtitle">Designing resilient, inclusive flows for diverse literacy and accessibility
+            needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Testimonials Section -->
+  <section class="section" style="padding: 2rem 0 8rem;">
+    <div class="container">
+      <div class="services-intro" style="margin-bottom: 2rem;">
+        <h2>I believe good products are an outcome of trust, delivery and dependency</h2>
+        <p>Testimonials</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card testimonial-card-featured">
+          <p class="testimonial-text">"Kashish is an exceptional and proactive researcher and designer. She
+            demonstrated amazing communication skills and a remarkable depth of subject knowledge. Her motivation and
+            problem-solving abilities were evident throughout our discussion, making for a productive experience. I look
+            forward to seeing her continued growth."</p>
+          <div class="testimonial-author">
+            <strong>Kishan Salian</strong>
+            <span>Laerdal Bangalore</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Working with Kashish felt like having a safety net. She is incredibly
+            hardworking and brought a level of rigour to the project that I rarely see, likely from her
+            years as an architect. Yet, she was never rigid—she was always accommodating of our feedback and
+            ready to pivot when needed."</p>
+          <div class="testimonial-author">
+            <strong>Aahan Bagdai</strong>
+            <span>Architectural Client</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Kashish is a dependable team player who consistently delivers quality
+            work and keeps everyone aligned. Her patience, calm, and respectful approach foster a positive
+            environment. She maintains strong consistency, making her a truly valuable member of the team."</p>
+          <div class="testimonial-author">
+            <strong>Srijith D Raj</strong>
+            <span>SealSafe Team Member</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-cta">
+          <p class="footer-cta-text">
+            <span class="footer-cta-light">Let's create something</span>
+            <span class="footer-cta-bold">amazing together!</span>
+          </p>
+          <p class="footer-cta-subtext">Architecturing scalable systems for healthcare and enterprise complexity.</p>
+        </div>
+
+        <div class="footer-right">
+          <div class="footer-nav">
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="pages/coming-soon.html">Case Studies</a></li>
+              <li><a href="pages/about.html">About</a></li>
+              <li><a href="pages/sandbox.html">Sandbox</a></li>
+              <li><a href="pages/contact.html">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-social">
+            <a href="tel:+919082944938" class="social-icon" aria-label="Phone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                </path>
+              </svg>
+            </a>
+            <a href="mailto:hello@itskashish.com" class="social-icon" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/kashish-design/" target="_blank" class="social-icon"
+              aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kashish Singh. All rights reserved.</p>
+        <div class="footer-credit">Handcrafted by <span>Kashish Singh</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/navigation.js"></script>
+  <script>
+    // Scroll zoom effect for hero image
+    window.addEventListener('scroll', function () {
+      const heroImage = document.querySelector('.hero-image img');
+      if (!heroImage) return;
+
+      const scrollPosition = window.scrollY;
+      const maxScroll = 500; // Maximum scroll distance for full zoom
+      const maxZoom = 1.1; // Maximum zoom scale (10% larger)
+
+      // Calculate zoom based on scroll position
+      const zoomFactor = Math.min(scrollPosition / maxScroll, 1);
+      const scale = 1 + (zoomFactor * (maxZoom - 1));
+
+      heroImage.style.transform = `scale(${scale})`;
+    });
+  </script>
+</body>
+
+</html>

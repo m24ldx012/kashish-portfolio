@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="About Kashish Singh - UX Strategist, Designer, and Master of Design student specializing in healthcare and enterprise systems.">
+    <title>About | Kashish Singh</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/mona-sans@5.2.8/index.min.css" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css?v=1772570643">
+
+    <style>
+        /* About Page Specific Styles */
+        .about-hero {
+            padding: 8rem 0 3rem;
+        }
+
+        .about-hero h1 {
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            line-height: 1.3;
+            margin-bottom: 4rem;
+            font-weight: 400;
+            max-width: 850px;
+            text-align: left;
+        }
+
+        .about-hero h1 .highlight {
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        .about-hero h1 .light {
+            color: var(--color-text-secondary);
+        }
+
+        .about-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .about-info-card {
+            background: var(--color-bg-secondary);
+            border-radius: 24px;
+            padding: 2.5rem;
+            height: fit-content;
+        }
+
+        .about-info-card .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-info-card .profile-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .about-info-card .profile-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-info-card .profile-info h3 {
+            font-size: 1rem;
+            margin: 0 0 0.125rem 0;
+            font-weight: 600;
+        }
+
+        .about-info-card .profile-info .subtitle {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .about-info-card>p {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            margin: 0;
+        }
+
+        .about-hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/3;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background-color: var(--color-bg-secondary);
+        }
+
+        .about-hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-section {
+            padding: 3rem 0;
+        }
+
+        .about-content-grid {
+            display: flex;
+            gap: 2rem;
+            max-width: none;
+        }
+
+        .about-label {
+            flex: 0 0 25%;
+            font-size: 1.125rem;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            margin: 0;
+            padding-top: 0.5rem;
+        }
+
+        .about-content {
+            flex: 1;
+            max-width: none;
+        }
+
+        .about-content .about-lead {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .about-content .about-lead strong {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-section h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            font-weight: 600;
+        }
+
+        .about-section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+        }
+
+        /* Work Experiences Table */
+        .work-experiences-content {
+            max-width: none;
+        }
+
+        .work-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .work-table-row {
+            background-color: transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .work-table-row:not(.active):hover {
+            background-color: rgba(0, 0, 0, 0.02);
+            opacity: 0.8;
+        }
+
+        .work-table-row.active {
+            background-color: transparent;
+        }
+
+        .work-table-row.active .work-table-cell {
+            color: var(--color-text);
+            font-weight: 500 !important;
+            border-bottom: none;
+        }
+
+        .work-table-cell {
+            padding: 1.5rem 1.75rem;
+            text-align: left;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .work-table-row:last-child .work-table-cell {
+            border-bottom: none;
+        }
+
+        .work-table-details {
+            /* We don't hide the row itself, we hide the inner div */
+            display: table-row;
+        }
+
+        .work-table-details td {
+            /* Remove all padding from the td, move it to the inner div */
+            padding: 0;
+            border-bottom: 1px solid var(--color-border);
+            border-top: none;
+            transition: border-bottom-color 0.4s ease;
+        }
+
+        /* Hide the border when not active */
+        .work-table-row:not(.active)+.work-table-details td {
+            border-bottom-color: transparent;
+        }
+
+        /* Ensure the last item never has a border at the bottom of the table */
+        .work-table-row:last-child+.work-table-details td {
+            border-bottom: none !important;
+        }
+
+        .details-wrapper {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .work-table-details.active .details-wrapper {
+            grid-template-rows: 1fr;
+        }
+
+        .details-content {
+            overflow: hidden;
+            padding: 0 1.75rem;
+            color: var(--color-text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .details-content strong {
+            color: var(--color-text);
+            font-weight: 500;
+        }
+
+        .work-table-details.active .details-content {
+            /* Give it padding only when open so it doesn't mess up height 0 calculation */
+            padding-top: 0.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .details-content ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .details-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .details-content li:last-child {
+            margin-bottom: 0;
+        }
+
+        .work-table-cell:first-child {
+            font-weight: 400;
+            color: var(--color-text);
+            width: 60%;
+        }
+
+        .work-table-cell:last-child {
+            color: var(--color-text-secondary);
+            text-align: right;
+            width: 40%;
+            vertical-align: top;
+        }
+
+        .work-org {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .work-period {
+            display: block;
+            font-size: 0.8125rem;
+            color: var(--color-text-secondary);
+            opacity: 0.7;
+            margin-top: 0.15rem;
+        }
+
+        /* Stacks Grid (Certifications) */
+        .stacks-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stack-card {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stack-card-featured {
+            background-color: var(--color-text);
+            border-color: var(--color-text);
+        }
+
+        .stack-card-featured .stack-info h3 {
+            color: var(--color-bg);
+            font-weight: 600;
+        }
+
+        .stack-card-featured .stack-info p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .stack-card-featured .stack-icon-wrapper {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .stack-icon-wrapper {
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+
+        .stack-icon {
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+        }
+
+        .stack-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .stack-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--color-text);
+        }
+
+        .project-card {
+            background: var(--color-bg-secondary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            background-color: #333333 !important;
+        }
+
+        .project-card h3 {
+            color: var(--color-text);
+        }
+
+        .project-card span {
+            color: var(--color-text-secondary);
+        }
+
+        .project-card:hover h3,
+        .project-card:hover span {
+            color: var(--color-bg) !important;
+        }
+
+        .stack-info p {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Philosophy & Stats Section */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .philosophy-card {
+            background: var(--color-bg);
+            padding: 3rem;
+            border-radius: 20px;
+        }
+
+        .philosophy-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .philosophy-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        .stats-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: var(--color-bg);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-text {
+            font-size: 1rem;
+            color: var(--color-text);
+            font-weight: 400;
+        }
+
+        .stat-icon {
+            font-size: 1.25rem;
+            background: var(--color-text);
+            color: var(--color-bg);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+        /* Tools Ribbon */
+        .tools-ribbon {
+            overflow: hidden;
+            background: var(--color-bg);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            padding: 2rem 0;
+            margin: 2rem 0;
+        }
+
+        .ribbon-track {
+            display: flex;
+            width: 100%;
+        }
+
+        .ribbon-content {
+            display: flex;
+            gap: 4rem;
+            animation: scroll 30s linear infinite;
+            white-space: nowrap;
+            align-items: center;
+        }
+
+        .tool-icon {
+            height: 32px;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .tool-icon:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-33.33%);
+            }
+        }
+
+        .tools-ribbon:hover .ribbon-content {
+            animation-play-state: paused;
+        }
+
+        @media (max-width: 968px) {
+            .about-hero {
+                padding: 3rem 0 2rem;
+            }
+
+            .about-section {
+                padding: 2rem 0;
+            }
+
+            .about-hero h1 {
+                margin-bottom: 3rem;
+                text-align: left;
+            }
+
+            .about-hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-hero-image-wrapper {
+                height: 400px;
+                order: -1;
+            }
+
+            .about-content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stacks-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .work-table-cell {
+                padding: 1.25rem 0.5rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .about-hero-image-wrapper {
+                height: auto;
+            }
+
+            .about-info-card {
+                padding: 2rem;
+            }
+
+            .stacks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .work-table-cell:last-child {
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">Kashish Singh</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li><a href="coming-soon.html" class="nav-link">Case Studies</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="sandbox.html" class="nav-link">Sandbox</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>
+                <span class="light">Hi! I'm Kashish Singh. I design digital solutions to turn dense</span>
+                <span class="highlight">system complexity into seamless human experiences.</span>
+            </h1>
+
+            <div class="about-hero-grid">
+                <!-- Bio Content Block (no longer a background card) -->
+                <div style="display: flex; flex-direction: column; justify-content: flex-start; height: 100%;">
+                    <div class="profile-header"
+                        style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                        <div class="profile-icon"
+                            style="width: 48px; height: 48px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
+                            <img src="../images/profile-transparent.png" alt="Kashish Singh"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="profile-info">
+                            <h3
+                                style="font-size: 1.125rem; margin: 0 0 0.25rem 0; font-weight: 600; color: var(--color-text);">
+                                Kashish Singh</h3>
+                            <p class="subtitle"
+                                style="color: var(--color-text-secondary); font-size: 0.9375rem; margin: 0;">M.des at
+                                IIT Jodhpur</p>
+                        </div>
+                    </div>
+
+                    <p
+                        style="font-size: 1rem; line-height: 1.6; color: var(--color-text); margin-bottom: 1rem; font-weight: 400;">
+                        Hailing from
+                        Mumbai, I didn't just grow up in a city; I grew up in a masterclass of complex systems.
+                        <span id="bio-more" style="display: none;">From the dense, mixed-use clusters of Dharavi to the
+                            labyrinth of public transit, navigating Mumbai taught me to embrace massive scale rather
+                            than fear it. It forged my belief that the most complicated systems can—and must—be designed
+                            to be intuitive. Today, I use the interdisciplinary lens of an architect, an entrepreneur,
+                            and a UX designer to capture the bird’s-eye view of complex digital systems. I don't just
+                            design screens; I architect digital spaces that scale, endure, and drive real business
+                            impact.</span>
+                        <span id="bio-toggle" onclick="toggleBio()"
+                            style="color: var(--color-accent); font-weight: 500; text-decoration: underline; margin-left: 0.25rem; cursor: pointer;">Read
+                            more</span>
+                    </p>
+
+                    <script>
+                        function toggleBio() {
+                            const moreText = document.getElementById("bio-more");
+                            const toggleBtn = document.getElementById("bio-toggle");
+                            if (moreText.style.display === "none" || moreText.style.display === "") {
+                                moreText.style.display = "inline";
+                                toggleBtn.innerText = "Read less";
+                            } else {
+                                moreText.style.display = "none";
+                                toggleBtn.innerText = "Read more";
+                            }
+                        }
+                    </script>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+                        <a href="404.html" class="btn">Download CV</a>
+                        <a href="https://www.linkedin.com/in/kashish-design/" class="btn btn-secondary"
+                            target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="about-hero-image-wrapper" style="border-radius: 16px;">
+                    <img src="../images/kashish-students.jpg" alt="Kashish Singh with students"
+                        class="about-hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TL;DR Impact Stats (New) -->
+    <section style="padding: 4rem 0 6rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 4rem;">
+                <!-- Stat 1 -->
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <span
+                        style="font-size: 2rem; font-weight: 600; color: var(--color-text); line-height: 1;">$12M+</span>
+                    <span
+                        style="font-size: 0.875rem; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500;">Project
+                        Value Managed</span>
+                </div>
+                <!-- Stat 2 -->
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <span style="font-size: 2rem; font-weight: 600; color: var(--color-text); line-height: 1;">3</span>
+                    <span
+                        style="font-size: 0.875rem; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500;">Continents
+                        Delivered Across</span>
+                </div>
+                <!-- Stat 3 -->
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <span
+                        style="font-size: 2rem; font-weight: 600; color: var(--color-text); line-height: 1;">Healthcare</span>
+                    <span
+                        style="font-size: 0.875rem; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500;">&
+                        Enterprise Focus</span>
+                </div>
+                <!-- Stat 4 -->
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <span style="font-size: 2rem; font-weight: 600; color: var(--color-text); line-height: 1;">3+
+                        Years</span>
+                    <span
+                        style="font-size: 0.875rem; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500;">Architecture
+                        & Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="about-section">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+
+                <!-- Work Experiences Column -->
+                <div>
+                    <h2>Work experiences</h2>
+                    <table class="work-table">
+                        <tbody>
+                            <tr class="work-table-row" onclick="toggleRow(this)">
+                                <td class="work-table-cell" style="font-weight: 600;">UX Strategy & Clinical Systems
+                                    Design</td>
+                                <td class="work-table-cell">
+                                    <span class="work-org">AIIMS Jodhpur</span>
+                                    <span class="work-period">Jan 2026 – Present</span>
+                                </td>
+                            </tr>
+                            <tr class="work-table-details">
+                                <td colspan="2">
+                                    <div class="details-wrapper">
+                                        <div class="details-content">
+                                            <ul>
+                                                <li>Design the <strong>Post-Operative Patient Monitoring
+                                                        Dashboard</strong> and <strong>Digital Medical Charting
+                                                        System</strong> for the Cardiothoracic and Vascular Surgery
+                                                    (<strong>CTVS</strong>) ICU.</li>
+                                                <li>Conducted deep-dive <strong>ethnographic research</strong> and
+                                                    designed a <strong>Quantifiable Audit system</strong> within
+                                                    tertiary healthcare ecosystems to identify systemic bottlenecks.
+                                                </li>
+                                                <li>Translating findings into <strong>HIPAA-compliant</strong>,
+                                                    high-density interfaces that reduce cognitive load, prevent errors
+                                                    and reduce time to task.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="work-table-row" onclick="toggleRow(this)">
+                                <td class="work-table-cell" style="font-weight: 600;">Founder & Principal Architect</td>
+                                <td class="work-table-cell">
+                                    <span class="work-org">Akaasa Studio</span>
+                                    <span class="work-period">May 2022 – June 2024</span>
+                                </td>
+                            </tr>
+                            <tr class="work-table-details">
+                                <td colspan="2">
+                                    <div class="details-wrapper">
+                                        <div class="details-content">
+                                            <ul>
+                                                <li>Directed a hybrid consultancy delivering <strong>20+</strong>
+                                                    architectural and digital projects across <strong>3
+                                                        continents</strong> (Asia, Europe, USA) with a cumulative
+                                                    project value exceeding <strong>$12M (₹100+ Cr)</strong>.</li>
+                                                <li>Overlooked construction for a <strong>$1.2M (₹10+ Cr)</strong>
+                                                    industrial project in Bangalore, managing high-stake stakeholder
+                                                    coordination and technical adherence.</li>
+                                                <li>Designed and delivered <strong>UX/UI</strong> solutions for FnB and
+                                                    E-commerce platforms with a focus on pragmatic business feasibility.
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="work-table-row" onclick="toggleRow(this)">
+                                <td class="work-table-cell" style="font-weight: 600;">Assistant Vice President (AVP),
+                                    Design</td>
+                                <td class="work-table-cell">
+                                    <span class="work-org">Yunometa</span>
+                                    <span class="work-period">Jan '22 – May '22</span>
+                                </td>
+                            </tr>
+                            <tr class="work-table-details">
+                                <td colspan="2">
+                                    <div class="details-wrapper">
+                                        <div class="details-content">
+                                            <ul>
+                                                <li>Reported directly to the Founding Team (Arijit Mukherjee, Niraj
+                                                    Singh) and Rishi Narain (MD, RN Sports) for a <strong>Web3</strong>
+                                                    platform that secured <strong>$10M in Seed/Angel funding</strong>.
+                                                </li>
+                                                <li>Spearheaded the creation of <strong>Product Requirement Documents
+                                                        (PRDs)</strong> for complex <strong>Metaverse</strong> and
+                                                    <strong>Smart Contract</strong> products.
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="work-table-row" onclick="toggleRow(this)">
+                                <td class="work-table-cell" style="font-weight: 600;">Architectural Intern</td>
+                                <td class="work-table-cell">
+                                    <span class="work-org">For Young India</span>
+                                    <span class="work-period">Jan 2021 – March 2021</span>
+                                </td>
+                            </tr>
+                            <tr class="work-table-details">
+                                <td colspan="2">
+                                    <div class="details-wrapper">
+                                        <div class="details-content">
+                                            <ul>
+                                                <li>Designed interfaces for the <strong>Utec App</strong> for
+                                                    <strong>Ultratech</strong> catering to <strong>Tier 2/3 city
+                                                        residents</strong>; utilized data-driven insights from in-app
+                                                    user feedback to refine conversion funnels for a multi-million user
+                                                    base resulting in design solutions for <strong>150+</strong>
+                                                    families seeking to build their homes.
+                                                </li>
+                                                <li>Conducted rigorous <strong>Alpha and Beta usability testing</strong>
+                                                    for <strong>Infurnia</strong>, a professional <strong>BIM</strong>
+                                                    software, identifying critical UX friction points by auditing the
+                                                    platform through the lens of both a professional architect and a
+                                                    software user.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Education Column -->
+                <div>
+                    <h2>Education</h2>
+                    <table class="work-table">
+                        <tbody>
+                            <tr class="work-table-row" onclick="toggleRow(this)">
+                                <td class="work-table-cell" style="font-weight: 600;">Master of Design (M.Des)</td>
+                                <td class="work-table-cell">
+                                    <span class="work-org">IIT Jodhpur</span>
+                                    <span class="work-period">July 2024 – Present</span>
+                                </td>
+                            </tr>
+                            <tr class="work-table-details">
+                                <td colspan="2">
+                                    <div class="details-wrapper">
+                                        <div class="details-content">
+                                            <ul>
+                                                <li>Research Focus: <strong>Enterprise and Healthcare UX</strong></li>
+                                                <li>Courses Taken: <strong>Product Design</strong>, <strong>Design
+                                                        Thinking</strong>, <strong>Instructional Design</strong>,
+                                                    <strong>Prototyping</strong>, <strong>XR technologies</strong>,
+                                                    <strong>Usability engineering</strong> and <strong>Foundational
+                                                        design</strong>.
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="work-table-row" onclick="toggleRow(this)">
+                                <td class="work-table-cell" style="font-weight: 600;">Bachelor of Architecture (B.Arch)
+                                </td>
+                                <td class="work-table-cell">
+                                    <span class="work-org">Aditya College of Architecture</span>
+                                    <span class="work-period">Aug 2017 – May 2022</span>
+                                </td>
+                            </tr>
+                            <tr class="work-table-details">
+                                <td colspan="2">
+                                    <div class="details-wrapper">
+                                        <div class="details-content">
+                                            <ul>
+                                                <li>Designed a <strong>30-Bed Community Health Centre (CHC)</strong>
+                                                    focusing on sterile/non-sterile circulation in OTs and ICUs for
+                                                    architectural Thesis project.</li>
+                                                <li>Founded <strong>"Fathom. Yearn. Innovate"</strong>, an architectural
+                                                    and construction magazine distributed across <strong>980+</strong>
+                                                    architectural firms in the country, leading a team of
+                                                    <strong>40+</strong> students.
+                                                </li>
+                                                <li>Editorial Head of the Student Council; interviewed industry titans
+                                                    like <strong>Ar. Prem Nath</strong> and <strong>Ar. Brinda
+                                                        Somaya</strong> etc.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Table row toggle functionality
+        function toggleRow(row) {
+            row.classList.toggle('active');
+            let nextRow = row.nextElementSibling;
+            if (nextRow && nextRow.classList.contains('work-table-details')) {
+                nextRow.classList.toggle('active');
+            }
+        }
+    </script>
+
+
+    <!-- Certifications Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2>Certifications</h2>
+            <div class="stacks-grid">
+                <div class="stack-card">
+                    <div class="stack-icon-wrapper">
+                        <img src="../assets/images/Certification logos/microsoft-logo.png" alt="Microsoft"
+                            class="stack-icon">
+                    </div>
+                    <div class="stack-info">
+                        <h3>AI Product Management Specialization</h3>
+                        <p>Microsoft</p>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-icon-wrapper">
+                        <img src="../assets/images/Certification logos/duke-logo.jpg" alt="Duke University"
+                            class="stack-icon">
+                    </div>
+                    <div class="stack-info">
+                        <h3>Machine Learning Foundations for Product Managers</h3>
+                        <p>Duke University</p>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-icon-wrapper">
+                        <img src="../assets/images/Certification logos/powerbi-logo.png" alt="Power BI"
+                            class="stack-icon">
+                    </div>
+                    <div class="stack-info">
+                        <h3>Interactive Dashboard Fundamentals</h3>
+                        <p>Power BI</p>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-icon-wrapper">
+                        <img src="../assets/images/Certification logos/ibm-logo.png" alt="IBM" class="stack-icon">
+                    </div>
+                    <div class="stack-info">
+                        <h3>Enterprise Design Thinking</h3>
+                        <p>IBM</p>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-icon-wrapper">
+                        <img src="../assets/images/Certification logos/google-logo.jpg" alt="Google" class="stack-icon">
+                    </div>
+                    <div class="stack-info">
+                        <h3>UX Design Specialization</h3>
+                        <p>Google</p>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-icon-wrapper">
+                        <img src="../assets/images/Certification logos/gisp-logo.png" alt="GISP" class="stack-icon">
+                    </div>
+                    <div class="stack-info">
+                        <h3>Geographic Information Systems Professional (GISP)</h3>
+                        <p>GISP</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Testimonials Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2>Testimonials</h2>
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" aria-label="Previous testimonial" id="carousel-prev">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="carousel-btn next" aria-label="Next testimonial" id="carousel-next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="testimonials-carousel">
+                <div class="testimonials-track-container">
+                    <div class="testimonials-track" id="carousel-track">
+                        <div class="testimonial-slide">
+                            <div class="testimonial-card testimonial-card-featured">
+                                <p class="testimonial-text">"Kashish is an exceptional and proactive researcher and
+                                    designer. She demonstrated amazing communication skills and a remarkable depth of
+                                    subject knowledge. Her motivation and problem-solving abilities were evident
+                                    throughout our discussion, making for a productive experience. I look forward to
+                                    seeing her continued growth."</p>
+                                <div class="testimonial-author">
+                                    <strong>Kishan Salian</strong>
+                                    <span>Laerdal Bangalore</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"Working with Kashish felt like having a safety net. She is
+                                    incredibly hardworking and brought a level of rigour to the project that I rarely
+                                    see, likely from her years as an architect. Yet, she was never rigid—she was always
+                                    accommodating of our feedback and ready to pivot when needed. A wonderful designer
+                                    who you can actually rely on."</p>
+                                <div class="testimonial-author">
+                                    <strong>Aahan Bagdai</strong>
+                                    <span>Client for an Architectural Project</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"Kashish is a dependable team player who consistently
+                                    delivers quality work and keeps everyone aligned. Her patience, calm, and respectful
+                                    approach foster a positive environment. She maintains strong consistency, making her
+                                    a truly valuable member of the team."</p>
+                                <div class="testimonial-author">
+                                    <strong>Srijith D Raj</strong>
+                                    <span>Team Member in the SealSafe Project</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"An exceptionally hardworking leader with the grit to drive
+                                    projects to the finish line. Kashish gives her absolute all, inspiring others with
+                                    her commitment to quality. She rallies her team to meet high standards while
+                                    maintaining a patient, respectful environment, making her an invaluable asset."</p>
+                                <div class="testimonial-author">
+                                    <strong>Anirudh Singh</strong>
+                                    <span>Team Member in Multiple Projects</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Ribbon -->
+    <section class="tools-ribbon">
+        <div class="ribbon-track">
+            <div class="ribbon-content">
+                <!-- First complete set of all 12 tools -->
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/figma/000000" alt="Figma"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/adobephotoshop/000000"
+                        alt="Photoshop" class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/blender/000000" alt="Blender"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/notion/000000" alt="Notion"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/miro/000000" alt="Miro"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/openai/000000" alt="ChatGPT"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/sketchup/000000" alt="SketchUp"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img
+                        src="https://api.iconify.design/simple-icons/midjourney.svg?color=%23000000" alt="Midjourney"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/davinciresolve/000000"
+                        alt="DaVinci" class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img
+                        src="https://api.iconify.design/simple-icons/lumion.svg?color=%23000000" alt="Lumion"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/lottiefiles/000000"
+                        alt="LottieFiles" class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img
+                        src="https://api.iconify.design/simple-icons/googlegemini.svg?color=%23000000" alt="Gemini"
+                        class="tool-icon"></span>
+
+                <!-- Second complete set -->
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/figma/000000" alt="Figma"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/adobephotoshop/000000"
+                        alt="Photoshop" class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/blender/000000" alt="Blender"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/notion/000000" alt="Notion"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/miro/000000" alt="Miro"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/openai/000000" alt="ChatGPT"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/sketchup/000000" alt="SketchUp"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img
+                        src="https://api.iconify.design/simple-icons/midjourney.svg?color=%23000000" alt="Midjourney"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/davinciresolve/000000"
+                        alt="DaVinci" class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img
+                        src="https://api.iconify.design/simple-icons/lumion.svg?color=%23000000" alt="Lumion"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/lottiefiles/000000"
+                        alt="LottieFiles" class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img
+                        src="https://api.iconify.design/simple-icons/googlegemini.svg?color=%23000000" alt="Gemini"
+                        class="tool-icon"></span>
+
+                <!-- Third complete set -->
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/figma/000000" alt="Figma"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/adobephotoshop/000000"
+                        alt="Photoshop" class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/blender/000000" alt="Blender"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/notion/000000" alt="Notion"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/miro/000000" alt="Miro"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/openai/000000" alt="ChatGPT"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/sketchup/000000" alt="SketchUp"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img
+                        src="https://api.iconify.design/simple-icons/midjourney.svg?color=%23000000" alt="Midjourney"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/davinciresolve/000000"
+                        alt="DaVinci" class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img
+                        src="https://api.iconify.design/simple-icons/lumion.svg?color=%23000000" alt="Lumion"
+                        class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img src="https://cdn.simpleicons.org/lottiefiles/000000"
+                        alt="LottieFiles" class="tool-icon"></span>
+                <span class="tool-icon-wrapper"><img
+                        src="https://api.iconify.design/simple-icons/googlegemini.svg?color=%23000000" alt="Gemini"
+                        class="tool-icon"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-cta">
+                    <p class="footer-cta-text">
+                        <span class="footer-cta-light">Let's create something</span>
+                        <span class="footer-cta-bold">amazing together!</span>
+                    </p>
+                    <p class="footer-cta-subtext">Architecturing scalable systems for healthcare and enterprise
+                        complexity.</p>
+                </div>
+
+                <div class="footer-right">
+                    <div class="footer-nav">
+                        <ul class="footer-links">
+                            <li><a href="../index.html">Home</a></li>
+                            <li><a href="coming-soon.html">Case Studies</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="sandbox.html">Sandbox</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-social">
+                        <a href="tel:+919082944938" class="social-icon" aria-label="Phone">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="mailto:hello@itskashish.com" class="social-icon" aria-label="Email">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/kashish-design/" target="_blank" class="social-icon"
+                            aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kashish Singh. All rights reserved.</p>
+                <div class="footer-credit">Handcrafted by <span>Kashish Singh</span></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/navigation.js"></script>
+    <script>
+        // Testimonials Carousel Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('carousel-track');
+            const prevBtn = document.getElementById('carousel-prev');
+            const nextBtn = document.getElementById('carousel-next');
+            if (!track || !prevBtn || !nextBtn) return;
+
+            const slides = Array.from(track.children);
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const isMobile = window.innerWidth <= 968;
+                const slidesToShow = isMobile ? 1 : 2;
+                const maxIndex = Math.max(0, slides.length - slidesToShow);
+
+                if (currentIndex > maxIndex) currentIndex = maxIndex;
+                if (currentIndex < 0) currentIndex = 0;
+
+                const slideWidth = slides[0].getBoundingClientRect().width;
+                const gap = parseFloat(getComputedStyle(track).gap) || 32;
+
+                const offset = currentIndex * (slideWidth + gap);
+                track.style.transform = `translateX(-${offset}px)`;
+
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex >= maxIndex;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                const isMobile = window.innerWidth <= 968;
+                const slidesToShow = isMobile ? 1 : 2;
+                if (currentIndex < slides.length - slidesToShow) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            });
+
+            window.addEventListener('resize', updateCarousel);
+            updateCarousel();
+            setTimeout(updateCarousel, 300);
+        });
+    </script>
+</body>
+
+</html>

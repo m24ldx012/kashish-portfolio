@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Practo: Shifting from Sick-Care to AI-Driven Prevention — A strategic AI product case study by Kashish Singh.">
+    <title>Practo: AI Strategy Case Study | Kashish Singh</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/mona-sans@5.2.8/index.min.css" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <style>
+        /* ────────────────────────────────────────
+           Case Study Page — Global
+        ──────────────────────────────────────── */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+        }
+
+        /* ── Navbar ── */
+        .navbar {
+            background-color: var(--color-bg) !important;
+            border-bottom: 1px solid var(--color-border) !important;
+        }
+
+        .navbar .nav-logo,
+        .navbar .nav-link {
+            color: var(--color-text);
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: var(--color-text);
+        }
+
+        /* ────────────────────────────────────────
+           HERO
+        ──────────────────────────────────────── */
+
+        /* ── New Clean Hero Structure ── */
+        .cs-hero {
+            position: relative;
+            width: 100%;
+            /* Just enough height to feel substantial but let the metrics peek */
+            padding-top: 140px;
+            padding-bottom: 2rem;
+            background-color: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .cs-hero__grid {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 4.5rem;
+            align-items: center;
+        }
+
+        .cs-hero__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            z-index: 5;
+        }
+
+        .cs-hero__text-block {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .cs-hero__tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-hero__tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            padding: 0.35rem 0.9rem;
+            border: 1px solid var(--color-border);
+            border-radius: 50px;
+            background: var(--color-bg-secondary);
+        }
+
+        .cs-hero__title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .cs-hero__statement {
+            font-size: clamp(1rem, 1.25vw, 1.15rem);
+            color: var(--color-text-secondary);
+            font-weight: 400;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 90%;
+        }
+
+        .cs-hero__image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
+        }
+
+        .cs-hero__bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('../../assets/images/dialysis-app.png');
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .cs-hero__image-wrapper:hover .cs-hero__bg {
+            transform: scale(1.03);
+        }
+
+        /* ────────────────────────────────────────
+           HERO METRICS (Left Column)
+        ──────────────────────────────────────── */
+
+        .cs-hero__metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem 1rem;
+            /* vertical gap 2rem, horizontal gap 1rem */
+            margin-top: auto;
+        }
+
+        .cs-metric {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cs-metric__label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-metric__value {
+            font-size: clamp(1.5rem, 2vw, 2rem);
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .cs-metric__sub {
+            font-size: 0.8125rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.25rem;
+            line-height: 1.4;
+        }
+
+        /* ────────────────────────────────────────
+           FLOATING PAGE CARD — sits flush now
+        ──────────────────────────────────────── */
+
+        .cs-page-body {
+            position: relative;
+            z-index: 10;
+            background: var(--color-bg);
+            /* Removed negative margin pulling it up over hero */
+        }
+
+        /* ────────────────────────────────────────
+           LAYOUT
+        ──────────────────────────────────────── */
+
+        .cs-layout {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 0 2rem;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ────────────────────────────────────────
+           SIDE NAV
+        ──────────────────────────────────────── */
+
+        .cs-sidenav {
+            position: sticky;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-top: calc(50vh - 4rem);
+        }
+
+        .cs-sidenav__list {
+            list-style: none;
+            padding: 0 0.25rem 0 0.875rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .cs-sidenav__list::before {
+            content: '';
+            position: absolute;
+            left: calc(0.875rem + 4px);
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--color-border);
+        }
+
+        .cs-sidenav__item {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cs-sidenav__item>a {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            transition: color 0.2s ease;
+        }
+
+        .cs-sidenav__item>a::before {
+            content: '';
+            flex-shrink: 0;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-border);
+            background: var(--color-bg);
+            transition: all 0.25s ease;
+        }
+
+        .cs-sidenav__item>a span {
+            font-size: 0.72rem;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        .cs-sidenav__item>a:hover span,
+        .cs-sidenav__item>a.active span {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .cs-sidenav__item>a.active::before {
+            border-color: var(--color-text);
+            background: var(--color-text);
+        }
+
+        .cs-sidenav__item>a.active {
+            color: var(--color-text);
+        }
+
+        /* ────────────────────────────────────────
+           CONTENT
+        ──────────────────────────────────────── */
+
+        .cs-content {
+            padding: 3rem 0 6rem 2.5rem;
+            min-width: 0;
+        }
+
+        .cs-section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+        }
+
+        .cs-section__eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .cs-section h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+
+        .cs-section p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.25rem;
+            max-width: 68ch;
+        }
+
+        .cs-tldr {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .cs-tldr__label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .cs-callout {
+            border-left: 3px solid var(--color-text);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: var(--color-bg-secondary);
+        }
+
+        .cs-callout p {
+            font-weight: 500;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .cs-sowhat {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .cs-sowhat__label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-image {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            margin: 2rem 0;
+        }
+
+        .cs-image__placeholder {
+            height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+        }
+
+        .cs-image__caption {
+            padding: 0.75rem 1rem;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.8125rem;
+            color: var(--color-text-secondary);
+        }
+
+        .cs-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .cs-metric-card {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+        }
+
+        /* ────────────────────────────────────────
+           NEXT PROJECT
+        ──────────────────────────────────────── */
+
+        .cs-next {
+            display: block;
+            text-decoration: none;
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .cs-next__bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+            filter: brightness(0.55);
+        }
+
+        .cs-next:hover .cs-next__bg {
+            transform: scale(1.04);
+        }
+
+        .cs-next__content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            gap: 0.75rem;
+        }
+
+        .cs-next__label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .cs-next__title {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* ────────────────────────────────────────
+           MOBILE PILL NAV
+        ──────────────────────────────────────── */
+
+        .cs-mobile-nav {
+            display: none;
+            overflow-x: auto;
+            gap: 0.5rem;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 72px;
+            background: var(--color-bg);
+            z-index: 50;
+            scrollbar-width: none;
+        }
+
+        .cs-mobile-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cs-mobile-nav a {
+            flex-shrink: 0;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.9rem;
+            border: 1px solid var(--color-border);
+            border-radius: 50px;
+            transition: all 0.2s ease;
+        }
+
+        .cs-mobile-nav a.active {
+            color: var(--color-text);
+            border-color: var(--color-text);
+            background: var(--color-bg-secondary);
+        }
+
+        /* ────────────────────────────────────────
+           RESPONSIVE
+        ──────────────────────────────────────── */
+
+        @media (max-width: 1024px) {
+            .cs-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cs-sidenav {
+                display: none;
+            }
+
+            .cs-mobile-nav {
+                display: flex;
+            }
+
+            .cs-content {
+                padding: 2.5rem 0 4rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cs-hero__grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cs-hero__image-wrapper {
+                height: 340px;
+                order: -1;
+            }
+
+            .cs-hero__metrics {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .cs-metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">Kashish Singh</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li><a href="../coming-soon.html" class="nav-link">Case Studies</a></li>
+                <li><a href="../about.html" class="nav-link">About</a></li>
+                <li><a href="../sandbox.html" class="nav-link">Sandbox</a></li>
+                <li><a href="../contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="cs-hero">
+        <div class="cs-hero__grid container">
+            <div class="cs-hero__content">
+                <div class="cs-hero__text-block">
+                    <div class="cs-hero__tags">
+                        <span class="cs-hero__tag">AI Strategy</span>
+                        <span class="cs-hero__tag">Health Marketplace</span>
+                        <span class="cs-hero__tag">Lifecycle Intelligence</span>
+                        <span class="cs-hero__tag">2-Sided Market</span>
+                    </div>
+                    <h1 class="cs-hero__title">Practo: AI-Driven Prevention</h1>
+                    <p class="cs-hero__statement">Shifting the model from transactional sick-care to continuous
+                        preventative
+                        health management through a dual-pronged AI engine.</p>
+                </div>
+
+                <div class="cs-hero__metrics">
+                    <div class="cs-metric">
+                        <div class="cs-metric__label">Retention</div>
+                        <div class="cs-metric__value">45%</div>
+                        <div class="cs-metric__sub">ecosystem follow-up rate</div>
+                    </div>
+                    <div class="cs-metric">
+                        <div class="cs-metric__label">Slot Yield</div>
+                        <div class="cs-metric__value">85%</div>
+                        <div class="cs-metric__sub">average clinic utilization</div>
+                    </div>
+                    <div class="cs-metric">
+                        <div class="cs-metric__label">Engagement</div>
+                        <div class="cs-metric__value">3.2x</div>
+                        <div class="cs-metric__sub">non-booking daily actions</div>
+                    </div>
+                    <div class="cs-metric">
+                        <div class="cs-metric__label">Churn</div>
+                        <div class="cs-metric__value">-12%</div>
+                        <div class="cs-metric__sub">reduction in clinic attrition</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cs-hero__image-wrapper">
+                <div class="cs-hero__bg"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Body -->
+    <div class="cs-page-body">
+
+        <!-- Mobile Pill Nav -->
+        <nav class="cs-mobile-nav" aria-label="Page sections">
+            <a href="#problem">Problem</a>
+            <a href="#ecosystem">Ecosystem</a>
+            <a href="#segmentation">Segments</a>
+            <a href="#metrics">Metrics</a>
+            <a href="#strategy">Strategy</a>
+            <a href="#prioritization">Crucible</a>
+            <a href="#blueprint">Blueprint</a>
+            <a href="#gtm">Rollout</a>
+        </nav>
+
+        <!-- Layout -->
+        <main class="cs-layout">
+
+            <!-- Side Nav -->
+            <aside class="cs-sidenav" aria-label="Page sections">
+                <ul class="cs-sidenav__list">
+                    <li class="cs-sidenav__item">
+                        <a href="#problem"><span>01 Problem</span></a>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#ecosystem"><span>02 Ecosystem</span></a>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#segmentation"><span>03 Segments</span></a>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#metrics"><span>04 Metrics</span></a>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#strategy"><span>05 AI Strategy</span></a>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#prioritization"><span>06 PM Crucible</span></a>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#blueprint"><span>07 Blueprint</span></a>
+                    </li>
+                    <li class="cs-sidenav__item">
+                        <a href="#gtm"><span>08 Rollout</span></a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Content Area -->
+            <article class="cs-content">
+
+                <!-- TLDR -->
+                <div class="cs-tldr" id="tldr">
+                    <div class="cs-tldr__label">TLDR — Executive Summary</div>
+                    <p><strong>The Shift:</strong> Instead of a design summary, this is your investment thesis.</p>
+                    <p><strong>The Narrative:</strong> Practo is bleeding value on both sides of the marketplace.
+                        Patients treat it as a disposable booking link; clinics view it as an expensive lead generator
+                        that doesn't solve their operational chaos.</p>
+                    <p><strong>The Solution:</strong> A dual-pronged AI engine. For clinics: Predictive demand
+                        forecasting to maximize slot yield. For patients: Lifecycle intelligence that shifts the model
+                        from "sick-care booking" to "preventative health management."</p>
+                </div>
+
+                <!-- 01 PROBLEM -->
+                <section class="cs-section" id="problem">
+                    <div class="cs-section__eyebrow">01 — Problem Framing & The Business Reality</div>
+                    <h2>Why is Practo losing the ecosystem war?</h2>
+                    <p>Clinics are churning to dedicated SaaS tools because Practo only fills the top of the funnel. The
+                        booking fee model is a race to the bottom. To survive, Practo must own the clinic's operational
+                        infrastructure and the patient's continuous health data.</p>
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">The "So What?"</div>
+                        <p>The core business viability depends on moving from transactional leads to infrastructure
+                            stickiness.</p>
+                    </div>
+                </section>
+
+                <!-- 02 ECOSYSTEM -->
+                <section class="cs-section" id="ecosystem">
+                    <div class="cs-section__eyebrow">02 — Two-Sided Market & Ecosystem Mapping</div>
+                    <h2>Instead of just mapping the UI workflow, map the flow of data and money.</h2>
+
+                    <div class="cs-metrics-grid">
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Supply Side</div>
+                            <h4>Clinics & Hospitals</h4>
+                            <p>Facing high no-show rates, unpredictable daily demand, and fragmented records. They need
+                                yield management (like airlines).</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Demand Side</div>
+                            <h4>The Patients</h4>
+                            <p>High friction for follow-ups, zero post-consultation engagement, treating healthcare
+                                reactively.</p>
+                        </div>
+                    </div>
+
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">AI Ecosystem Map — EHR, Clinic, Patient Disconnect
+                            Placeholder
+                        </div>
+                        <div class="cs-image__caption">How the AI layer bridges the gap between disconnected clinical
+                            data and patient behavior.</div>
+                    </div>
+                </section>
+
+                <!-- 03 SEGMENTATION -->
+                <section class="cs-section" id="segmentation">
+                    <div class="cs-section__eyebrow">03 — Strategic User Segmentation</div>
+                    <h2>Defining the high-value segments</h2>
+
+                    <div class="cs-metrics-grid">
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Clinic Segment A</div>
+                            <h4>Solo Practitioners</h4>
+                            <p>Needs plug-and-play AI to act as their digital receptionist and recall system.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Clinic Segment B</div>
+                            <h4>Multi-specialty Polyclinics</h4>
+                            <p>Needs heavy demand forecasting to allocate staff and optimize expensive machine time
+                                (MRI/X-ray).</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Patient Segment A</div>
+                            <h4>The Chronic Patient (High LTV)</h4>
+                            <p>Needs continuous monitoring, automated prescription refills, and proactive check-ins.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Patient Segment B</div>
+                            <h4>Acute / Transactional Patient</h4>
+                            <p>Needs fast triage and outcome-based doctor matching.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 04 METRICS -->
+                <section class="cs-section" id="metrics">
+                    <div class="cs-section__eyebrow">04 — North Star & Guardrail Metrics</div>
+                    <h2>Shift from task-completion times to business viability and retention.</h2>
+
+                    <div class="cs-metrics-grid">
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">North Star</div>
+                            <h4>Ecosystem Retention Rate</h4>
+                            <p>% of patients returning to the same clinic via Practo for follow-ups/diagnostics within 6
+                                months.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Secondary (Clinic)</div>
+                            <h4>Slot Utilization Rate</h4>
+                            <p>Target: Increase from ~60% to 85% using predictive overbooking and waitlist automation.
+                            </p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Secondary (Patient)</div>
+                            <h4>Lifecycle Engagement Score</h4>
+                            <p>DAU/MAU for non-booking actions like viewing lab reports or AI health nudges.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Guardrail</div>
+                            <h4>Clinic Churn Rate</h4>
+                            <p>Ensure new AI features don't overwhelm staff or increase costs without immediate ROI.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 05 AI STRATEGY -->
+                <section class="cs-section" id="strategy">
+                    <div class="cs-section__eyebrow">05 — AI Product Strategy & Core Loops</div>
+                    <h2>Designing the algorithm's job, not just the screen.</h2>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">Feature 1: Predictive Demand</div>
+                        <p>Using historical data and seasonality to predict no-shows and automatically adjust scheduling
+                            buffers.</p>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">Feature 2: Lifecycle Engine</div>
+                        <p>Post-consultation automated workflows (e.g., pre-diabetes 3-month engagement loop with diet
+                            nudges and reminders).</p>
+                    </div>
+
+                    <div class="cs-sowhat">
+                        <div class="cs-sowhat__label">Feature 3: Outcome-Based Matching</div>
+                        <p>Shifting search from "who is available" to "who has the best historical outcomes for specific
+                            symptoms."</p>
+                    </div>
+                </section>
+
+                <!-- 06 PRIORITIZATION -->
+                <section class="cs-section" id="prioritization">
+                    <div class="cs-section__eyebrow">06 — Prioritization (The PM Crucible)</div>
+                    <h2>The Hard Choice: What are we not building?</h2>
+                    <p>Using RICE (Reach, Impact, Confidence, Effort) to separate noise from signal.</p>
+                    <div class="cs-callout">
+                        <p>"We deprioritized AI symptom checker chatbots (high legal risk, low trust) in favor of AI
+                            clinic slot optimization (immediate revenue impact, low clinical risk)."</p>
+                        <cite>— Strategic Alignment Note</cite>
+                    </div>
+                </section>
+
+                <!-- 07 BLUEPRINT -->
+                <section class="cs-section" id="blueprint">
+                    <div class="cs-section__eyebrow">07 — Service Blueprint (The Infrastructure Play)</div>
+                    <h2>Where the systems thinking shines.</h2>
+                    <div class="cs-image">
+                        <div class="cs-image__placeholder">Service Blueprint — AI Data Moat Placeholder</div>
+                        <div class="cs-image__caption">Mapping frontstage (Clinic Manager) and backstage (Internal AI
+                            engine) connecting search data to clinical calendars.</div>
+                    </div>
+                </section>
+
+                <!-- 08 GTM -->
+                <section class="cs-section" id="gtm">
+                    <div class="cs-section__eyebrow">08 — Go-to-Market & Rollout Strategy</div>
+                    <h2>Phased Launch: You don't launch AI to the whole network at once.</h2>
+
+                    <div class="cs-metrics-grid">
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Phase 1</div>
+                            <h4>Private Beta</h4>
+                            <p>High-volume pediatricians or dermatologists (high follow-up frequency) in a single Tier 1
+                                city.</p>
+                        </div>
+                        <div class="cs-metric-card">
+                            <div class="cs-metric-card__type">Growth Loop</div>
+                            <h4>The Upsell</h4>
+                            <p>Use beta clinic revenue gains as the core marketing case study to upsell the
+                                "Infrastructure Tier" across the network.</p>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <!-- Next -->
+    <a href="aiims-hms.html" class="cs-next">
+        <div class="cs-next__bg" style="background-image: url('../../assets/images/aiims.png');"></div>
+        <div class="cs-next__content container">
+            <div class="cs-next__label">Next Case Study</div>
+            <div class="cs-next__title">AIIMS HMS UX Audit</div>
+        </div>
+    </a>
+
+    <!-- Footer -->
+    
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-cta">
+          <p class="footer-cta-text">
+            <span class="footer-cta-light">Let's create something</span>
+            <span class="footer-cta-bold">amazing together!</span>
+          </p>
+          <p class="footer-cta-subtext">Architecturing scalable systems for healthcare and enterprise complexity.</p>
+        </div>
+        
+        <div class="footer-right">
+          <div class="footer-nav">
+            <ul class="footer-links">
+              <li><a href="../../index.html">Home</a></li>
+              <li><a href="../coming-soon.html">Case Studies</a></li>
+              <li><a href="../about.html">About</a></li>
+              <li><a href="../sandbox.html">Sandbox</a></li>
+              <li><a href="../contact.html">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-social">
+            <a href="tel:+919082944938" class="social-icon" aria-label="Phone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </a>
+            <a href="mailto:hello@itskashish.com" class="social-icon" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/kashish-design/" target="_blank" class="social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kashish Singh. All rights reserved.</p>
+        <div class="footer-credit">Handcrafted by <span>Kashish Singh</span></div>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/navigation.js"></script>
+    <script>
+        (function () {
+            const sectionIds = ['problem', 'ecosystem', 'segmentation', 'metrics', 'strategy', 'prioritization', 'blueprint', 'gtm'];
+            const navLinks = document.querySelectorAll('.cs-sidenav__item a, .cs-mobile-nav a');
+
+            function update() {
+                let activeId = sectionIds[0];
+                for (const id of sectionIds) {
+                    const el = document.getElementById(id);
+                    if (el && el.getBoundingClientRect().top <= 140) activeId = id;
+                }
+
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href').replace('#', '');
+                    link.classList.toggle('active', href === activeId);
+                });
+            }
+
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+        })();
+
+        // Navbar scroll logic
+        (function () {
+            const navbar = document.querySelector('.navbar');
+            const hero = document.querySelector('.cs-hero');
+            window.addEventListener('scroll', () => {
+                const threshold = hero ? hero.offsetHeight * 0.6 : 300;
+                navbar.classList.toggle('scrolled', window.scrollY > threshold);
+            }, { passive: true });
+        })();
+    </script>
+</body>
+
+</html>

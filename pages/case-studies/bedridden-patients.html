@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SealSafe Diapers | Kashish Singh</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/mona-sans@5.2.8/index.min.css" rel="stylesheet">
+    <style>
+        /* ────────────────────────────────────────
+           HERO
+        ──────────────────────────────────────── */
+
+        .cs-hero {
+            position: relative;
+            width: 100%;
+            padding-top: 140px;
+            padding-bottom: 2rem;
+            background-color: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .cs-hero__grid {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 4.5rem;
+            align-items: center;
+        }
+
+        .cs-hero__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            z-index: 5;
+        }
+
+        .cs-hero__text-block {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .cs-hero__tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-hero__tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            padding: 0.35rem 0.9rem;
+            border: 1px solid var(--color-border);
+            border-radius: 50px;
+            background: var(--color-bg-secondary);
+        }
+
+        .cs-hero__title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .cs-hero__statement {
+            font-size: clamp(1rem, 1.25vw, 1.15rem);
+            color: var(--color-text-secondary);
+            font-weight: 400;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 90%;
+        }
+
+        .cs-hero__image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
+        }
+
+        .cs-hero__bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .cs-hero__image-wrapper:hover .cs-hero__bg {
+            transform: scale(1.03);
+        }
+
+        /* ────────────────────────────────────────
+           HERO METRICS (Left Column)
+        ──────────────────────────────────────── */
+
+        .cs-hero__metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem 1rem;
+            margin-top: auto;
+        }
+
+        .cs-metric {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cs-metric__label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-metric__value {
+            font-size: clamp(1.5rem, 2vw, 2rem);
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .cs-metric__sub {
+            font-size: 0.8125rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.25rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 640px) {
+            .cs-hero__grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cs-hero__image-wrapper {
+                height: 340px;
+                order: -1;
+            }
+
+            .cs-hero__metrics {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Case Study Detail Styles - Single Column Layout mimicking Notion */
+        .cs-header {
+            padding-top: 140px;
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+
+        .cs-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            color: var(--color-text);
+        }
+
+        .cs-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        .cs-content {
+            padding-bottom: 6rem;
+            max-width: 720px;
+            /* Narrower column for reading */
+            margin: 0 auto;
+        }
+
+        .cs-section {
+            margin-bottom: 3rem;
+        }
+
+        .cs-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+            line-height: 1.3;
+        }
+
+        .cs-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .cs-section p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            /* Darker text for readability */
+            margin-bottom: 1.25rem;
+        }
+
+        .cs-section ul {
+            list-style-type: disc;
+            padding-left: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .cs-section li {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+        }
+
+        /* TL;DR Box */
+        .tldr-box {
+            background-color: var(--color-bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .tldr-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Image Placeholders */
+        .placeholder-img {
+            width: 100%;
+            height: 300px;
+            background-color: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: 500;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Action Statement styling */
+        .action-statement {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            font-weight: 500;
+            color: var(--color-text);
+            border-left: 4px solid var(--color-text);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .cs-image-full {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            /* background: var(--color-bg-secondary); Remove bg to show image clearly */
+        }
+
+        .cs-image-full img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Nav -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../../index.html" class="nav-logo">Kashish Singh</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li><a href="../coming-soon.html" class="nav-link">Case Studies</a></li>
+                <li><a href="../about.html" class="nav-link">About</a></li>
+                <li><a href="../contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+
+        <section class="cs-hero">
+            <div class="cs-hero__grid container">
+                <div class="cs-hero__content">
+                    <div class="cs-hero__text-block">
+                        <div class="cs-hero__tags">
+                            <span class="cs-hero__tag">Product Design</span>
+                            <span class="cs-hero__tag">Medical Device</span>
+                            <span class="cs-hero__tag">User Research</span>
+                        </div>
+                        <h1 class="cs-hero__title">SealSafe Diapers</h1>
+                        <p class="cs-hero__statement">Redesign of diapers for clean, discrete and dignified defecation
+                        </p>
+                    </div>
+
+                    <div class="cs-hero__metrics">
+                        <div class="cs-metric">
+                            <div class="cs-metric__label">Research Time</div>
+                            <div class="cs-metric__value">7 hrs</div>
+                            <div class="cs-metric__sub">contextual inquiry</div>
+                        </div>
+                        <div class="cs-metric">
+                            <div class="cs-metric__label">Iterations</div>
+                            <div class="cs-metric__value">100+</div>
+                            <div class="cs-metric__sub">SCAMPER concepts</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cs-hero__image-wrapper">
+                    <div class="cs-hero__bg"
+                        style="background-image: url('../../assets/images/diaper.jpeg'); background-size: contain; background-repeat: no-repeat; background-color: #f8fafc;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Content -->
+        <article class="container cs-content" style="padding-top: 4rem;">
+
+            <div class="tldr-box">
+                <h2 class="tldr-title">TL; DR</h2>
+                <p style="margin-bottom: 0;">We deep dived into core issues of bedridden patients with no mobility/
+                    conscious bowel movement regarding their experience with defecation and redesigned diapers to be
+                    self-sealing, ensuring hygiene for care givers, dignity for patients and a non-messy experience.</p>
+            </div>
+
+            <section class="cs-section">
+                <h3>My Role</h3>
+                <p>As part of the team, I wore multiple hats in the process. During the discover stage, I conducted the
+                    interviews while my peers noted. I was actively involved in generating insights, speaking to doctors
+                    from rural hospitals as well as care givers of different strata of the society. Scampered
+                    <strong>100+ iterations</strong> and <strong>8 dirty prototypes</strong>. The final presentation
+                    included the renders created by me as well as the material design.
+                </p>
+
+                <h3>Process Followed</h3>
+                <div class="placeholder-img">Image Placeholder: Process Diagram (Double Diamond / Timeline)</div>
+            </section>
+
+            <section class="cs-section">
+                <h2>Why is defecation even an issue in the case of bedridden patients with no mobility?</h2>
+                <p>Patients with faecal incontinence are <strong>22x</strong> more likely to develop <span
+                        class="highlight-bg">infections, pressure ulcers (bedsores) and fatality</span> than those
+                    without amongst bedridden patients.</p>
+
+                <h3>But.. aren’t there existing products for bedridden patients?</h3>
+                <p>Well, to find out, my team and I spent <strong>7+ hours</strong>, <strong>contextual
+                        inquiry</strong>, <strong>interviewing patients, caregivers and hospital staff</strong> at <span
+                        class="text-accent">AIIMS Jodhpur</span>, and here’s what we found out:</p>
+
+                <h3>Here’s what they told us—</h3>
+                <ul>
+                    <li>Om Prakash (46), an ICU patient</li>
+                    <li>Sumita, a caregiver to her mother (65)</li>
+                    <li>Housekeeping Staff at AIIMS Jodhpur</li>
+                    <li>Dr. Siddhant Kakan, MD Resident</li>
+                </ul>
+                <p>At an average, a patient requires change of diapers every 6 hours. But in practice, the ground
+                    reality based on our study said <strong>75% caregivers do not change diapers any more than twice
+                        every 24 hours</strong>.</p>
+            </section>
+
+            <section class="cs-section">
+                <h2>So what does it mean for the user? And why???</h2>
+                <p><strong>Affinity Mapping</strong></p>
+                <div class="placeholder-img">Image Placeholder: Affinity Mapping Board</div>
+
+                <p>To understand the gaps we pinned <strong>200+ insights</strong> across our blackboards and grouped
+                    them in order to generate 6 key insights</p>
+                <p>From there, we turned every detailed insight into actions that could be taken to mitigate the
+                    barriers/ impediments that kept from achieving the desired experience.</p>
+                <p>And through an Action Priority Matrix (Urgent Important Matrix), we concluded to the Action
+                    statement—</p>
+
+                <div class="action-statement">
+                    A product that caters to immobile/ unconscious patients to defecate with minimal contact, mitigates
+                    infection risks, promotes hygiene and aids safe disposal while intuitive on how it shall be used or
+                    disposed.
+                </div>
+
+                <p>From an informed assumption of the demographic at AIIMS Jodhpur’s ICU wards, we chose a persona to be
+                    the sixth member of our team— Our user persona <strong>Rukmini</strong>.</p>
+                <div class="placeholder-img">Image Placeholder: Persona / Empathy Map (Rukmini)</div>
+
+                <p><strong>Rationale</strong></p>
+                <p>Diapers are a direct contact product and the only existing solution for bedridden patients with no
+                    mobility/ no bowel control. In such cases, the biggest concerns are <strong>risk of infections,
+                        bedsores from constant friction and unsanitary disposal</strong>. It may involve direct contact
+                    of care givers with the fecal matter and compromise their health, as well as tends to be emotionally
+                    difficult to cope with for both the patient and care giver.</p>
+            </section>
+
+            <section class="cs-section">
+                <h2>How might we design sanitary defecation aid...</h2>
+                <p>...for innovating a product for Rukimi that caters to immobile/ unconscious patients/ patients
+                    without bowel control to defecate with minimal contact, mitigates infection risks, promotes hygiene
+                    and aids safe disposal while providing clear intuitive design on how it shall be used or disposed?
+                </p>
+            </section>
+
+            <section class="cs-section">
+                <h2>So what did we ideate from a statement to a product???</h2>
+                <p>After rapidly ideating 100+ concepts and <strong>SCAMPERed</strong> through them to see what we can
+                    substitute, combine, adapt, modify, put to another use, eliminate and reverse.</p>
+                <div class="placeholder-img">Image Placeholder: Ideation Sketches / SCAMPER</div>
+
+                <p>We followed this with making 10+ prototypes, to understand scare, ergonomics and form.</p>
+                <p><strong>What we loved but didnt go ahead with</strong></p>
+                <p>The concept was to make an adhesive stick-on that is attached to the rectal lining and has a
+                    defecation pouch attached to its outer side that can be discarded after every discharge. Pros: Cost
+                    effective, easy disposal Cons: Uncomfortable, risk of infection</p>
+            </section>
+
+            <section class="cs-section">
+                <h2>So.. WHAT DID WE CREATE?</h2>
+                <div class="placeholder-img">Image Placeholder: Final Product Renders (SealSafe Diaper)</div>
+
+                <p>We went with the prototype with least learning curve for the care giver that was sanitary, discreet
+                    and offered east disposal.</p>
+                <p>We made <strong>SealSafe</strong>, a two layered self sealing diaper that locks faecal matter in
+                    between the layers. It has a drawstring mechanism for after use to seal the contents without risk of
+                    spillage.</p>
+                <p>Its designed for hygienic disposal with a drawstring mechanism, simplifying the process for
+                    caregivers while minimizing contamination risk.</p>
+                <p>A stick-on adhesive patch near the rectal area creates a clean passage for waste, preventing it from
+                    sticking to the skin. It’s non-invasive and comfortable.</p>
+
+                <div class="placeholder-img">Image Placeholder: Mechanism Detail / Layers</div>
+
+                <p>With minimal alteration to current adult diaper design, the design is meant to ensure easy adoption
+                    and comfort. The design also ensures sealing off faecal matter away from genitals for maximum
+                    hygiene. The top absorbent layer is for genital sweat and discharge while the core pulp and liquid
+                    gel rapidly dries and locks the faecal matter. Thus ensure genital health as well as moisture
+                    control.</p>
+                <p>Post use, as the drawstring successfully seals off the faecal matter between the absorbent layers,
+                    the care giver can fold and wrap the diaper in itself without spillage and easy disposal.</p>
+
+                <h3>Our Trade-offs</h3>
+                <p>While designing the SealSafe diapers, our priority was dignity, hygiene and safe disposal. While the
+                    design would make the cost higher with an additional layer, it ensures utmost priority to the
+                    patient’s health and caregiver’s comfort.</p>
+            </section>
+
+            <section class="cs-section" style="border-top: 1px solid var(--color-border); padding-top: 2rem;">
+                <h3>End note</h3>
+                <p>The project taught me the complexity of hospital environments first hand and to empathize in the
+                    critical context.</p>
+                <p>Case Study by: Kashish Singh, Bhavika Shukla, Vishakha Gehlot, Aakarsh Borah & Srijith D Raj.</p>
+                <h2>🙏Thank You!</h2>
+                <p>If you’d like to give feedbacks, critique or would like to collaborate, please leave an <a
+                        href="mailto:work.kashishsingh@gmail.com"
+                        style="color: var(--color-accent); text-decoration: underline;">Email</a>.</p>
+            </section>
+
+        </article>
+
+    </main>
+
+    <!-- Footer -->
+    
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-cta">
+          <p class="footer-cta-text">
+            <span class="footer-cta-light">Let's create something</span>
+            <span class="footer-cta-bold">amazing together!</span>
+          </p>
+          <p class="footer-cta-subtext">Architecturing scalable systems for healthcare and enterprise complexity.</p>
+        </div>
+        
+        <div class="footer-right">
+          <div class="footer-nav">
+            <ul class="footer-links">
+              <li><a href="../../index.html">Home</a></li>
+              <li><a href="../coming-soon.html">Case Studies</a></li>
+              <li><a href="../about.html">About</a></li>
+              <li><a href="../sandbox.html">Sandbox</a></li>
+              <li><a href="../contact.html">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-social">
+            <a href="tel:+919082944938" class="social-icon" aria-label="Phone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </a>
+            <a href="mailto:hello@itskashish.com" class="social-icon" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/kashish-design/" target="_blank" class="social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kashish Singh. All rights reserved.</p>
+        <div class="footer-credit">Handcrafted by <span>Kashish Singh</span></div>
+      </div>
+    </div>
+  </footer>
+
+    <script src="../../js/navigation.js"></script>
+</body>
+
+</html>
