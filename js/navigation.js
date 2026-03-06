@@ -52,46 +52,42 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // --- Gliding Nav Indicator ---
-  const indicator = document.createElement('div');
-  indicator.classList.add('nav-indicator');
-  if (navMenu) {
+  // --- Gliding Nav Indicator (Desktop Only) ---
+  if (navMenu && window.innerWidth > 768) {
+    const indicator = document.createElement('div');
+    indicator.classList.add('nav-indicator');
+    navMenu.style.position = 'relative';
     navMenu.appendChild(indicator);
-  }
 
-  function positionIndicator(target, animate) {
-    if (!target || !navMenu) return;
-    const menuRect = navMenu.getBoundingClientRect();
-    const linkRect = target.getBoundingClientRect();
-    const left = linkRect.left - menuRect.left;
-    if (!animate) {
-      indicator.style.transition = 'none';
+    function positionIndicator(target, animate) {
+      if (!target || !navMenu) return;
+      const menuRect = navMenu.getBoundingClientRect();
+      const linkRect = target.getBoundingClientRect();
+      const left = linkRect.left - menuRect.left;
+      if (!animate) {
+        indicator.style.transition = 'none';
+      }
+      indicator.style.left = left + 'px';
+      indicator.style.width = linkRect.width + 'px';
+      if (!animate) {
+        indicator.offsetHeight;
+        indicator.style.transition = '';
+      }
     }
-    indicator.style.left = left + 'px';
-    indicator.style.width = linkRect.width + 'px';
-    if (!animate) {
-      // Force reflow, then restore transition
-      indicator.offsetHeight;
-      indicator.style.transition = '';
+
+    const activeLink = document.querySelector('.nav-link.active');
+    if (activeLink) {
+      positionIndicator(activeLink, false);
+    } else {
+      indicator.style.width = '0';
     }
-  }
 
-  // Position indicator on the active link immediately (no animation)
-  const activeLink = document.querySelector('.nav-link.active');
-  if (activeLink) {
-    positionIndicator(activeLink, false);
-  } else {
-    indicator.style.width = '0';
-  }
-
-  // Hover: glide indicator to hovered link, return to active on leave
-  navLinks.forEach(link => {
-    link.addEventListener('mouseenter', function () {
-      positionIndicator(this, true);
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', function () {
+        positionIndicator(this, true);
+      });
     });
-  });
 
-  if (navMenu) {
     navMenu.addEventListener('mouseleave', function () {
       const current = document.querySelector('.nav-link.active');
       if (current) {
@@ -99,6 +95,12 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         indicator.style.width = '0';
       }
+    });
+
+    // Handle resize to keep indicator in place
+    window.addEventListener('resize', () => {
+      const current = document.querySelector('.nav-link.active');
+      if (current) positionIndicator(current, false);
     });
   }
 
