@@ -1785,8 +1785,8 @@ a:hover {
 }
 
 .testimonial-slide {
-  flex: 0 0 calc(50% - 1rem);
-  /* 2 items on desktop */
+  flex: 0 0 calc(33.333% - 1.33rem);
+  /* 3 items on desktop (33.33% - (2*2rem)/3) */
   min-width: 0;
 }
 
