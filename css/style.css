@@ -506,21 +506,31 @@ a:hover {
   }
 
   .navbar {
-    padding: 0.35rem 0;
+    padding: 0 !important;
+    height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .nav-container {
-    min-height: 38px;
+    min-height: 44px;
+    height: 44px;
     padding: 0 var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .nav-logo {
-    font-size: 1rem;
+    font-size: 0.9375rem;
     letter-spacing: -0.01em;
   }
 
   .mobile-menu-toggle {
     display: block;
+    line-height: 1;
+    font-size: 1.25rem;
   }
 
   .grid-2,
@@ -535,8 +545,9 @@ a:hover {
   }
 
   .hero {
-    min-height: 80vh;
-    padding-top: calc(44px + 2rem);
+    min-height: auto;
+    padding-top: 44px;
+    padding-bottom: 2rem;
   }
 }
 
