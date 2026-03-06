@@ -667,40 +667,69 @@
   <!-- Testimonials Section -->
   <section class="section" style="padding: 2rem 0 8rem;">
     <div class="container">
-      <div class="services-intro" style="margin-bottom: 2rem;">
-        <h2>I believe good products are an outcome of trust, delivery and dependency</h2>
-        <p>Testimonials</p>
+      <div class="testimonials-header" style="margin-bottom: 2rem;">
+        <div class="services-intro" style="margin-bottom: 0;">
+          <h2>I believe good products are an outcome of trust, delivery and dependency</h2>
+          <p>Testimonials</p>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn prev" aria-label="Previous testimonial" id="carousel-prev">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="carousel-btn next" aria-label="Next testimonial" id="carousel-next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
       </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card testimonial-card-featured">
-          <p class="testimonial-text">"Kashish is an exceptional and proactive researcher and designer. She
-            demonstrated amazing communication skills and a remarkable depth of subject knowledge. Her motivation and
-            problem-solving abilities were evident throughout our discussion, making for a productive experience. I look
-            forward to seeing her continued growth."</p>
-          <div class="testimonial-author">
-            <strong>Kishan Salian</strong>
-            <span>Laerdal Bangalore</span>
-          </div>
-        </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">"Working with Kashish felt like having a safety net. She is incredibly
-            hardworking and brought a level of rigour to the project that I rarely see, likely from her
-            years as an architect. Yet, she was never rigid—she was always accommodating of our feedback and
-            ready to pivot when needed."</p>
-          <div class="testimonial-author">
-            <strong>Aahan Bagdai</strong>
-            <span>Architectural Client</span>
-          </div>
-        </div>
+      <div class="testimonials-carousel">
+        <div class="testimonials-track-container">
+          <div class="testimonials-track" id="carousel-track">
+            <div class="testimonial-slide">
+              <div class="testimonial-card testimonial-card-featured">
+                <p class="testimonial-text">"Kashish is an exceptional and proactive researcher and designer. She
+                  demonstrated amazing communication skills and a remarkable depth of subject knowledge. Her motivation
+                  and
+                  problem-solving abilities were evident throughout our discussion, making for a productive experience.
+                  I look
+                  forward to seeing her continued growth."</p>
+                <div class="testimonial-author">
+                  <strong>Kishan Salian</strong>
+                  <span>Laerdal Bangalore</span>
+                </div>
+              </div>
+            </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">"Kashish is a dependable team player who consistently delivers quality
-            work and keeps everyone aligned. Her patience, calm, and respectful approach foster a positive
-            environment. She maintains strong consistency, making her a truly valuable member of the team."</p>
-          <div class="testimonial-author">
-            <strong>Srijith D Raj</strong>
-            <span>SealSafe Team Member</span>
+            <div class="testimonial-slide">
+              <div class="testimonial-card">
+                <p class="testimonial-text">"Working with Kashish felt like having a safety net. She is incredibly
+                  hardworking and brought a level of rigour to the project that I rarely see, likely from her
+                  years as an architect. Yet, she was never rigid—she was always accommodating of our feedback and
+                  ready to pivot when needed."</p>
+                <div class="testimonial-author">
+                  <strong>Aahan Bagdai</strong>
+                  <span>Architectural Client</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-slide">
+              <div class="testimonial-card">
+                <p class="testimonial-text">"Kashish is a dependable team player who consistently delivers quality
+                  work and keeps everyone aligned. Her patience, calm, and respectful approach foster a positive
+                  environment. She maintains strong consistency, making her a truly valuable member of the team."</p>
+                <div class="testimonial-author">
+                  <strong>Srijith D Raj</strong>
+                  <span>SealSafe Team Member</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -784,6 +813,55 @@
       const scale = 1 + (zoomFactor * (maxZoom - 1));
 
       heroImage.style.transform = `scale(${scale})`;
+    });
+
+    // Testimonials Carousel Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const track = document.getElementById('carousel-track');
+      const prevBtn = document.getElementById('carousel-prev');
+      const nextBtn = document.getElementById('carousel-next');
+      if (!track || !prevBtn || !nextBtn) return;
+
+      const slides = Array.from(track.children);
+      let currentIndex = 0;
+
+      function updateCarousel() {
+        const isMobile = window.innerWidth <= 968;
+        const slidesToShow = isMobile ? 1 : 2;
+        const maxIndex = Math.max(0, slides.length - slidesToShow);
+
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
+        if (currentIndex < 0) currentIndex = 0;
+
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(track).gap) || 32;
+
+        const offset = currentIndex * (slideWidth + gap);
+        track.style.transform = `translateX(-${offset}px)`;
+
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= maxIndex;
+      }
+
+      nextBtn.addEventListener('click', () => {
+        const isMobile = window.innerWidth <= 968;
+        const slidesToShow = isMobile ? 1 : 2;
+        if (currentIndex < slides.length - slidesToShow) {
+          currentIndex++;
+          updateCarousel();
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateCarousel();
+        }
+      });
+
+      window.addEventListener('resize', updateCarousel);
+      updateCarousel();
+      setTimeout(updateCarousel, 300);
     });
   </script>
 </body>

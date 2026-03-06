@@ -37,10 +37,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Close mobile menu when clicking a link
+  // Close mobile menu when clicking a link (Desktop only - mobile menu is hidden on refresh anyway)
   navLinks.forEach(link => {
     link.addEventListener('click', function () {
-      navMenu.classList.remove('active');
+      if (window.innerWidth > 768) {
+        navMenu.classList.remove('active');
+      }
     });
   });
 
@@ -203,9 +205,9 @@ document.addEventListener('DOMContentLoaded', function () {
       // Allow ctrl/cmd+click to open in new tab
       if (e.metaKey || e.ctrlKey) return;
 
-      // On mobile, just allow default navigation for better reliability
+      // On mobile, let the browser handle the link naturally for maximum reliability.
+      // The menu will be closed on the next page load anyway.
       if (window.innerWidth <= 768) {
-        navMenu.classList.remove('active');
         return;
       }
 
