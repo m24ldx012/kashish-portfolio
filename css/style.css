@@ -1729,6 +1729,33 @@ a:hover {
   width: 100%;
 }
 
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 3rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-premium);
+  border: none;
+  padding: 0;
+}
+
+.dot.active {
+  background: var(--color-accent);
+  transform: scale(1.2);
+}
+
+.dot:hover:not(.active) {
+  background: var(--color-text-secondary);
+}
+
 .carousel-controls {
   display: flex;
   gap: 1rem;
