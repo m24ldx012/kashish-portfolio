@@ -190,6 +190,8 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   position: relative;
+  min-height: 50px;
+  /* Base height for all navs */
 }
 
 .nav-logo {
@@ -486,7 +488,7 @@ a:hover {
 
   .nav-menu {
     position: fixed;
-    top: 50px;
+    top: 44px;
     /* Reduced from 70px */
     left: -100%;
     flex-direction: column;
@@ -504,7 +506,17 @@ a:hover {
   }
 
   .navbar {
-    padding: 0.5rem 0;
+    padding: 0.35rem 0;
+  }
+
+  .nav-container {
+    min-height: 38px;
+    padding: 0 var(--spacing-sm);
+  }
+
+  .nav-logo {
+    font-size: 1rem;
+    letter-spacing: -0.01em;
   }
 
   .mobile-menu-toggle {
@@ -524,6 +536,7 @@ a:hover {
 
   .hero {
     min-height: 80vh;
+    padding-top: calc(44px + 2rem);
   }
 }
 
