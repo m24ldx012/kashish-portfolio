@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const indicator = document.createElement('div');
   indicator.classList.add('nav-indicator');
   if (navMenu) {
-    navMenu.style.position = 'relative';
     navMenu.appendChild(indicator);
   }
 
