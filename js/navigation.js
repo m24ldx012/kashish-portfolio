@@ -203,6 +203,12 @@ document.addEventListener('DOMContentLoaded', function () {
       // Allow ctrl/cmd+click to open in new tab
       if (e.metaKey || e.ctrlKey) return;
 
+      // On mobile, just allow default navigation for better reliability
+      if (window.innerWidth <= 768) {
+        navMenu.classList.remove('active');
+        return;
+      }
+
       e.preventDefault();
 
       // Check if this is a nav link — if so, glide the indicator first
@@ -210,7 +216,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (isNavLink) {
         // Glide indicator to the clicked link
-        positionIndicator(this, true);
+        if (typeof positionIndicator === 'function') {
+          positionIndicator(this, true);
+        }
 
         // Wait for glide, then cover and navigate
         setTimeout(() => {

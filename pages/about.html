@@ -36,8 +36,14 @@
             color: var(--color-text);
         }
 
-        .about-hero h1 .light {
-            color: var(--color-text-secondary);
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: 6.5rem 0 2rem;
+            }
+
+            .about-hero h1 {
+                margin-bottom: 2rem;
+            }
         }
 
         .about-hero-grid {
